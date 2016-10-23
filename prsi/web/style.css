@@ -1,0 +1,10 @@
+body { background: white; color: black; }
+#deck { position: relative; float: left; margin: 2em; }
+#topdeck { position: absolute; top: -2px; left: -2px; cursor: pointer; }
+#upcard { position: relative; }
+#upcard img { position: absolute; margin: 2em; }
+#upcard .suit { background-color: white; border: 1px solid gray; border-radius: 50%; }
+#hand { clear: left; }
+#hand img { cursor: pointer; margin: 2px; }
+#suits { display: none; }
+#suits img { cursor: pointer; margin: 0 10px; }
