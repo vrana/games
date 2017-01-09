@@ -19,7 +19,7 @@ class Dashboard implements MessageComponentInterface {
 			$this->games[] = $game;
 		}
 		$game->players->attach($conn);
-    $game->start();
+		$game->start();
 		$this->clients->attach($conn, $game);
 	}
 	
