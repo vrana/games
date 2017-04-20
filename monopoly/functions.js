@@ -27,16 +27,16 @@ function last(ar) {
 
 function offerSelling() {
 	var input = '<input class=price type=number step=10 min=0 value=' + this.price + '>';
-	var select = '<select class=buyer size=' + (players.length - 1) + '>';
+	var options = [];
 	// TODO: Sell to the bank for a fixed price.
-	for (var i = 0, player; player = players[i]; i++) {
-		if (player != this.owner) {
-			select += '<option value=' + i + '>' + escape(player.name);
+	for (var i = 0; i < 4; i++) {
+		var player = players[i];
+		if (player && player != this.owner) {
+			options.push('<option value=' + i + '>' + escape(player.name));
 		}
 	}
-	select += '</select>';
 	// TODO: Disable selling if there are houses with the same color.
-	ask('sell ' + this.name + ' for ' + input + ' to ' + select + '?', this.owner, function () {
+	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, function () {
 		var price = +last(document.getElementsByClassName('price')).value;
 		var buyerIndex = last(document.getElementsByClassName('buyer')).value;
 		if (!(price > 0)) { // price might be NaN.
