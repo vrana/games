@@ -60,25 +60,6 @@ for (var i = 0, field; field = fields[i]; i++) {
 	document.body.appendChild(div);
 }
 
-var players = [];
-
-players.push(new Player('Jakub', 0));
-players.push(new Player('Kryštof', 1));
-players.push(new Player('Prokop', 2));
-//~ players.push(new Player('Jana', 3));
-
-for (var playing = 0, player; player = players[playing]; playing++) {
-	var div = document.createElement('div');
-	div.textContent = '👤';
-	div.className = 'player player' + playing;
-	player.figure = div;
-	player.moveFigure();
-	document.body.appendChild(div);
-	
-	document.getElementById('name' + playing).textContent = player.name;
-	player.refreshStats();
-}
-
 function rollDice(id) {
 	var diced = Math.floor(Math.random() * 6) + 1;
 	var dice = document.getElementById(id);
@@ -91,13 +72,35 @@ document.body.onbeforeunload = function () {
 	return 'Are you sure to exit?';
 };
 
+var players = [];
 var playing = -1;
 
 function play() {
+	if (!players.length) {
+		for (playing = 0; playing < 4; playing++) {
+			var name = document.getElementById('name' + playing).getElementsByTagName('input')[0].value;
+			if (name) {
+				players[playing] = new Player(name, playing);
+			}
+		}
+		if (players.length) {
+			for (playing = 0; playing < 4; playing++) {
+				document.getElementById('name' + playing).textContent = players[playing] ? players[playing].name : '';
+			}
+			playing = -1;
+		}
+		return false;
+	}
+	
 	questions = [];
 	document.getElementById('message').textContent = '';
-	playing = (playing + 1) % players.length;
-	var player = players[playing];
+	
+	var player;
+	do {
+		playing = (playing + 1) % players.length;
+		player = players[playing];
+	} while (!player);
+	
 	if (player.jailed) {
 		player.jailed = false;
 		var dice1 = rollDice('dice1');
@@ -110,6 +113,7 @@ function play() {
 		}
 		return false;
 	}
+	
 	for (var rolls = 1; ; rolls++) {
 		var dice1 = rollDice('dice1');
 		var dice2 = rollDice('dice2');

@@ -3,6 +3,13 @@ function Player(name, index) {
 	this.name = name;
 	this.index = index;
 	this.position = 0;
+	
+	this.figure = document.createElement('div');
+	this.figure.textContent = '👤';
+	this.figure.className = 'player player' + index;
+	document.body.appendChild(this.figure);
+	this.moveFigure();
+	this.refreshStats();
 }
 
 Player.prototype.pay = function (amount, player) {
