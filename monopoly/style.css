@@ -1,0 +1,22 @@
+body { font: 15px sans-serif; }
+p { margin: 0; }
+div, a { position: absolute; }
+.field { width: 115px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
+.dice { font-size: 48px; }
+.owned { cursor: pointer; }
+.owner0 { border-left-color: navy; }
+.owner1 { border-left-color: orange; }
+.owner2 { border-left-color: lime; }
+.owner3 { border-left-color: yellow; }
+.player { transition: top 1s, left 1s; }
+.player0 { color: white; background: navy; }
+.player1 { background: orange; }
+.player2 { background: lime; }
+.player3 { background: yellow; }
+.price { width: 50px; }
+.buyer { vertical-align: middle; }
+#score { position: absolute; top: 100px; left: 150px; }
+#playLink { top: 250px; width: 1340px; text-align: center; font-size: 32px; text-decoration: none; }
+#dice1 { top: 300px; left: 610px; }
+#dice2 { top: 300px; left: 700px; }
+#message { top: 370px; width: 1340px; height: 280px; overflow-y: auto; text-align: center; }
