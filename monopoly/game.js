@@ -77,17 +77,16 @@ var playing = -1;
 
 function play() {
 	if (!players.length) {
-		for (playing = 0; playing < 4; playing++) {
-			var name = document.getElementById('name' + playing).getElementsByTagName('input')[0].value;
+		for (var i = 0; i < 4; i++) {
+			var name = document.getElementById('name' + i).getElementsByTagName('input')[0].value;
 			if (name) {
-				players[playing] = new Player(name, playing);
+				players[i] = new Player(name, i);
 			}
 		}
 		if (players.length) {
-			for (playing = 0; playing < 4; playing++) {
-				document.getElementById('name' + playing).textContent = players[playing] ? players[playing].name : '';
+			for (var i = 0; i < 4; i++) {
+				document.getElementById('name' + i).textContent = players[i] ? players[i].name : '';
 			}
-			playing = -1;
 		}
 		return false;
 	}
