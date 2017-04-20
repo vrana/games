@@ -1,7 +1,7 @@
 body { font: 15px sans-serif; }
 p { margin: 0; }
 div, a { position: absolute; }
-.field { width: 115px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
+.field { width: 113px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
 .dice { font-size: 48px; }
 .owned { cursor: pointer; }
 .owner0 { border-left-color: navy; }
