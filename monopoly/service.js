@@ -12,6 +12,6 @@ Service.prototype.getEarns = function () {
 };
 
 Service.prototype.updateEarns = function () {
-	fields[12].div.getElementsByClassName('earns')[0].textContent = fields[12].getEarns(); // Energetické závody
-	fields[28].div.getElementsByClassName('earns')[0].textContent = fields[28].getEarns(); // Vodárna
+	fields[12].div.querySelector('.earns').textContent = fields[12].getEarns(); // Energetické závody
+	fields[28].div.querySelector('.earns').textContent = fields[28].getEarns(); // Vodárna
 };

@@ -26,7 +26,7 @@ Place.prototype.visit = function (player) {
 			} else {
 				player.pay(this.housePrice);
 				this.houses++;
-				this.div.getElementsByClassName('earns')[0].textContent = this.getEarns();
+				this.div.querySelector('.earns').textContent = this.getEarns();
 			}
 		}.bind(this));
 	}

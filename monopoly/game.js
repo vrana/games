@@ -78,7 +78,7 @@ var playing = -1;
 function play() {
 	if (!players.length) {
 		for (var i = 0; i < 4; i++) {
-			var name = document.getElementById('name' + i).getElementsByTagName('input')[0].value;
+			var name = document.querySelector('#name' + i + ' input').value;
 			if (name) {
 				players[i] = new Player(name, i);
 			}

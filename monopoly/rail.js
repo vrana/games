@@ -15,8 +15,8 @@ Rail.prototype.getEarns = function () {
 };
 
 Rail.prototype.updateEarns = function () {
-	fields[5].div.getElementsByClassName('earns')[0].textContent = fields[5].getEarns();
-	fields[15].div.getElementsByClassName('earns')[0].textContent = fields[15].getEarns();
-	fields[25].div.getElementsByClassName('earns')[0].textContent = fields[25].getEarns();
-	fields[35].div.getElementsByClassName('earns')[0].textContent = fields[35].getEarns();
+	fields[5].div.querySelector('.earns').textContent = fields[5].getEarns();
+	fields[15].div.querySelector('.earns').textContent = fields[15].getEarns();
+	fields[25].div.querySelector('.earns').textContent = fields[25].getEarns();
+	fields[35].div.querySelector('.earns').textContent = fields[35].getEarns();
 };
