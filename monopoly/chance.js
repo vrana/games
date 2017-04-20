@@ -1,6 +1,6 @@
 function goToNearestRail(player) {
 	var behindRail = (player.position + 5) % 10; // E.g. (17 + 5) % 10 = 2 behind rail.
-	moveForward(10 - behindRail, player); // E.g. from 17, move  to 17 + 10 - 2 = 25.
+	moveForward(10 - behindRail, player); // E.g. from 17, move to 17 + 10 - 2 = 25.
 }
 
 var chance = new Cards('Chance', [
