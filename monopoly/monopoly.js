@@ -29,6 +29,7 @@ var chance = new Cards('Chance', [
 	moveForward.bind(this, -3),
 ]);
 
+
 var finance = new Cards('Finance', [
 	earn.bind(this, 200),
 	earn.bind(this, -50),
@@ -56,6 +57,7 @@ var finance = new Cards('Finance', [
 	
 	// TODO: Get out of jail card.
 ]);
+
 
 var fields = [
 	start,
