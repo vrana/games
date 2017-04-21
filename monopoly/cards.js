@@ -12,6 +12,11 @@ function payForHouseAndHotel(housePrice, hotelPrice, player) {
 	player.pay(pay);
 }
 
+function goToNearestRail(player) {
+	var behindRail = (player.position + 5) % 10; // E.g. (17 + 5) % 10 = 2 behind rail.
+	moveForward(10 - behindRail, player); // E.g. from 17, move to 17 + 10 - 2 = 25.
+}
+
 function Cards(name, cards) {
 	this.name = name;
 	this.cards = cards;
@@ -24,31 +29,3 @@ Cards.prototype.visit = function (player, diced) {
 	var card = this.cards[Math.floor(Math.random() * this.cards.length)]; // TODO: Shuffle cards instead.
 	card(player, diced);
 };
-
-var finance = new Cards('Finance', [
-	earn.bind(this, 200),
-	earn.bind(this, -50),
-	earn.bind(this, 100),
-	earn.bind(this, 20),
-	earn.bind(this, 100),
-	earn.bind(this, 50),
-	earn.bind(this, -50),
-	earn.bind(this, 100),
-	earn.bind(this, -100),
-	earn.bind(this, 10),
-	earn.bind(this, 25),
-	goToJail,
-	payForHouseAndHotel.bind(this, 40, 115),
-	
-	function get10FromEveryone(player) {
-		for (var i = 0; i < players.length; i++) {
-			if (players[i] != player) {
-				players[i].pay(10, player);
-			}
-		}
-	},
-	
-	goTo.bind(this, 0), // Go to start.
-	
-	// TODO: Get out of jail card.
-]);
