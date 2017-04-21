@@ -45,7 +45,7 @@ function play() {
 				document.getElementById('name' + i).textContent = players[i] ? players[i].name : '';
 			}
 		}
-		return false;
+		return;
 	}
 	
 	questions = [];
@@ -67,7 +67,7 @@ function play() {
 			playing--;
 			say('you get out of jail.', player);
 		}
-		return false;
+		return;
 	}
 	
 	for (var rolls = 1; ; rolls++) {
@@ -83,7 +83,7 @@ function play() {
 			break;
 		//~ }
 	}
-	return false;
+	return;
 }
 
 function doConfirm() {
@@ -110,12 +110,14 @@ var questions = [];
 document.body.onkeydown = function (event) {
 	switch (event.keyCode) {
 		case Keys.SPACE:
-			if (!(event.target instanceof HTMLInputElement)) {
+			if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement)) {
 				play();
 			}
 			break;
 		case Keys.ENTER:
-			doConfirm();
+			if (!(event.target instanceof HTMLButtonElement)) {
+				doConfirm();
+			}
 			break;
 		case Keys.ESC:
 			if (questions.length > 1) {
@@ -127,5 +129,12 @@ document.body.onkeydown = function (event) {
 	}
 };
 
-document.querySelector('#playLink a').onclick = play;
-document.querySelector('#playLink button').onclick = doConfirm;
+document.querySelector('#playLink a').onclick = function () {
+	this.blur();
+	play();
+	return false;
+};
+document.querySelector('#playLink button').onclick = function () {
+	this.blur();
+	doConfirm();
+};
