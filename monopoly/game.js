@@ -129,6 +129,19 @@ function play() {
 	return false;
 }
 
+function doConfirm() {
+	var question = last(questions);
+	if (!question) {
+		play();
+	} else if (question.callback() !== false) {
+		questions.pop();
+		var question = last(questions);
+		if (question) {
+			say(question.message, question.player);
+		}
+	}
+}
+
 var Keys = {
 	ENTER: 13,
 	SPACE: 32,
@@ -145,16 +158,7 @@ document.body.onkeydown = function (event) {
 			}
 			break;
 		case Keys.ENTER:
-			var question = last(questions);
-			if (!question) {
-				play();
-			} else if (question.callback() !== false) {
-				questions.pop();
-				var question = last(questions);
-				if (question) {
-					say(question.message, question.player);
-				}
-			}
+			doConfirm();
 			break;
 		case Keys.ESC:
 			if (questions.length > 1) {
@@ -166,4 +170,5 @@ document.body.onkeydown = function (event) {
 	}
 };
 
-document.getElementById('playLink').onclick = play;
+document.querySelector('#playLink a').onclick = play;
+document.querySelector('#playLink button').onclick = doConfirm;
