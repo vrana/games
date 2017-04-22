@@ -59,24 +59,6 @@ function offerSelling() {
 	}.bind(this));
 }
 
-function visitRailOrService(amounts, player) {
-	if (!this.owner) {
-		offerBuying.call(this, player);
-	} else if (this.owner != player) {
-		player.pay(amounts[getOwns.call(this) - 1], this.owner);
-	}
-}
-
-function getOwns() {
-	var owns = 0;
-	for (var i = 0, field; field = fields[i]; i++) {
-		if (field.owner && field.owner == this.owner && field instanceof this.constructor) {
-			owns++;
-		}
-	}
-	return owns;
-}
-
 function goTo(position, player, diced) {
 	player.position = position;
 	player.moveFigure();
