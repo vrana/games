@@ -2,6 +2,7 @@ function offerBuying(player) {
 	ask('buy ' + this.name + ' for ' + this.price + '?', player, function () {
 		if (player.money < this.price) {
 			say('you do not have enough money to buy ' + this.name + ' for ' + this.price + '.', player);
+			return false;
 		} else {
 			player.pay(this.price);
 			changeOwner.call(this, player);
