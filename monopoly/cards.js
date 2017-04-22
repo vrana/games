@@ -19,7 +19,7 @@ function moveToNearestRail(player) {
 
 function earnFromEveryone(amount, player) {
 	for (var i = 0; i < players.length; i++) {
-		if (players[i] != player) {
+		if (players[i] && players[i] != player) {
 			players[i].pay(amount, player);
 		}
 	}
