@@ -21,4 +21,4 @@ button { margin-left: 1em; }
 #playLink a { font-size: 24px; text-decoration: none; }
 #dice1 { top: 300px; left: 650px; }
 #dice2 { top: 300px; left: 740px; }
-#message { top: 370px; width: 1408px; height: 280px; overflow-y: auto; text-align: center; }
+#message { top: 370px; margin-left: 138px; width: 1132px; height: 280px; overflow-y: auto; text-align: center; }
