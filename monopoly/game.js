@@ -33,6 +33,7 @@ var players = [];
 var playing = -1;
 
 function play() {
+	document.activeElement.blur();
 	if (!players.length) {
 		for (var i = 0; i < 4; i++) {
 			var name = document.querySelector('#name' + i + ' input').value;
@@ -81,6 +82,7 @@ function doConfirm() {
 	if (!question) {
 		play();
 	} else if (question.callback() !== false) {
+		document.activeElement.blur();
 		questions.pop();
 		var question = last(questions);
 		if (question) {
@@ -120,12 +122,8 @@ document.body.onkeydown = function (event) {
 };
 
 document.querySelector('#playLink a').onclick = function () {
-	this.blur();
 	play();
 	return false;
 };
 
-document.querySelector('#playLink button').onclick = function () {
-	this.blur();
-	doConfirm();
-};
+document.querySelector('#playLink button').onclick = doConfirm;
