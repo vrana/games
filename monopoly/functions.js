@@ -1,5 +1,5 @@
 function offerBuying(player) {
-	ask('do you want to buy ' + this.name + ' for ' + this.price + '?', player, function () {
+	ask('buy ' + this.name + ' for ' + this.price + '?', player, function () {
 		if (player.money < this.price) {
 			say('you do not have enough money to buy ' + this.name + ' for ' + this.price + '.', player);
 		} else {

@@ -20,7 +20,7 @@ Place.prototype.visit = function (player) {
 				}
 			}
 		}
-		ask('do you want to buy a house at ' + this.name + ' for ' + this.housePrice + '?', player, function () {
+		ask('buy a house at ' + this.name + ' for ' + this.housePrice + '?', player, function () {
 			if (player.money < this.housePrice) {
 				say('you do not have enough money to buy a house at ' + this.name + ' for ' + this.housePrice + '.', player);
 			} else {
