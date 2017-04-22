@@ -8,12 +8,12 @@ button { margin-left: 1em; }
 .owner0 { border-left-color: navy; }
 .owner1 { border-left-color: orange; }
 .owner2 { border-left-color: lime; }
-.owner3 { border-left-color: yellow; }
+.owner3 { border-left-color: fuchsia; }
 .player { transition: top 1s, left 1s; }
 .player0 { color: white; background: navy; }
 .player1 { background: orange; }
 .player2 { background: lime; }
-.player3 { background: yellow; }
+.player3 { background: fuchsia; }
 .price { width: 50px; }
 .buyer { vertical-align: middle; }
 #score { position: absolute; top: 100px; left: 150px; }
