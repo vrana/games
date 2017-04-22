@@ -17,6 +17,14 @@ function goToNearestRail(player) {
 	moveForward(10 - behindRail, player); // E.g. from 17, move to 17 + 10 - 2 = 25.
 }
 
+function getFromEveryone(amount, player) {
+	for (var i = 0; i < players.length; i++) {
+		if (players[i] != player) {
+			players[i].pay(amount, player);
+		}
+	}
+}
+
 function Cards(name, cards) {
 	this.name = name;
 	this.cards = cards;

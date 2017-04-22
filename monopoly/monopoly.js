@@ -11,22 +11,14 @@ var chance = new Cards('Chance', [
 	earn.bind(this, 150),
 	earn.bind(this, -15),
 	payForHouseAndHotel.bind(this, 40, 100),
+	getFromEveryone.bind(this, 50),
+	moveForward.bind(this, -3),
 	// TODO: Get out of jail card.
 	
 	function goToNearestService(player, diced) {
 		var nearestService = player.position > 12 && player.position <= 28 ? 28 : 12;
 		goTo(nearestService, player, diced);
 	},
-
-	function get50FromEveryone(player) {
-		for (var i = 0; i < players.length; i++) {
-			if (players[i] != player) {
-				players[i].pay(50, player);
-			}
-		}
-	},
-	
-	moveForward.bind(this, -3),
 ]);
 
 
@@ -44,15 +36,7 @@ var finance = new Cards('Finance', [
 	earn.bind(this, 25),
 	goToJail,
 	payForHouseAndHotel.bind(this, 40, 115),
-	
-	function get10FromEveryone(player) {
-		for (var i = 0; i < players.length; i++) {
-			if (players[i] != player) {
-				players[i].pay(10, player);
-			}
-		}
-	},
-	
+	getFromEveryone.bind(this, 10),
 	goTo.bind(this, 0), // Go to start.
 	
 	// TODO: Get out of jail card.
