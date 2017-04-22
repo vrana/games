@@ -70,20 +70,10 @@ function play() {
 		return;
 	}
 	
-	for (var rolls = 1; ; rolls++) {
-		var dice1 = rollDice('dice1');
-		var dice2 = rollDice('dice2');
-		// TODO: Make asynchronous.
-		//~ if (rolls == 3 && dice1 == dice2) {
-			//~ goToJail(player);
-			//~ break;
-		//~ }
-		moveForward(dice1 + dice2, player);
-		//~ if (dice1 != dice2) {
-			break;
-		//~ }
-	}
-	return;
+	var dice1 = rollDice('dice1');
+	var dice2 = rollDice('dice2');
+	moveForward(dice1 + dice2, player);
+	// TODO: Roll again if dice1 == dice2, go to jail after three rolls.
 }
 
 function doConfirm() {
