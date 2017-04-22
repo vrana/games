@@ -1,6 +1,6 @@
 var chance = new Cards('Chance', [
-	goToNearestRail,
-	goToNearestRail,
+	moveToNearestRail,
+	moveToNearestRail,
 	goToJail,
 	goTo.bind(this, 11), // Go to Rašínovo nábřeží.
 	goTo.bind(this, 0), // Go to start.
