@@ -134,6 +134,7 @@ document.querySelector('#playLink a').onclick = function () {
 	play();
 	return false;
 };
+
 document.querySelector('#playLink button').onclick = function () {
 	this.blur();
 	doConfirm();
