@@ -2,10 +2,10 @@ function payForHouseAndHotel(housePrice, hotelPrice, player) {
 	var pay = 0;
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.owner == player) {
-			if (place.houses == 5) {
+			if (field.houses == 5) {
 				pay += hotelPrice;
-			} else if (place.houses) {
-				pay += housePrice * place.houses;
+			} else if (field.houses) {
+				pay += housePrice * field.houses;
 			}
 		}
 	}
