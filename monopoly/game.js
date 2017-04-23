@@ -58,10 +58,11 @@ function play() {
 		player = players[playing];
 	} while (!player);
 	
+	var dice1 = rollDice('dice1');
+	var dice2 = rollDice('dice2');
+	
 	if (player.jailed) {
 		player.jailed = false;
-		var dice1 = rollDice('dice1');
-		var dice2 = rollDice('dice2');
 		if (dice1 != dice2) {
 			say('you get out of jail next turn.', player);
 		} else {
@@ -71,8 +72,6 @@ function play() {
 		return;
 	}
 	
-	var dice1 = rollDice('dice1');
-	var dice2 = rollDice('dice2');
 	moveForward(dice1 + dice2, player);
 	// TODO: Roll again if dice1 == dice2, go to jail after three rolls.
 }
