@@ -27,10 +27,7 @@ function updateEarnsRailOrService() {
 
 function Rail(name) {
 	this.name = name;
-	this.price = 200;
 }
-
-Rail.prototype.amounts = [25, 50, 100, 200];
 
 Rail.prototype.visit = function (player) {
 	visitRailOrService.call(this, this.amounts, player);
@@ -46,15 +43,14 @@ Rail.prototype.updateEarns = updateEarnsRailOrService;
 
 function Service(name) {
 	this.name = name;
-	this.price = 150;
 }
 
 Service.prototype.visit = function (player, diced) {
-	visitRailOrService.call(this, [4 * diced, 10 * diced], player);
+	visitRailOrService.call(this, [this.amounts[0] * diced, this.amounts[1] * diced], player);
 };
 
 Service.prototype.getEarns = function () {
-	return getOwns.call(this) == 2 ? '10*' : '4*';
+	return this.amounts[getOwns.call(this) == 2 ? 1 : 0] + '*';
 };
 
 Service.prototype.updateEarns = updateEarnsRailOrService;

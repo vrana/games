@@ -44,6 +44,10 @@ var finance = new Cards('Finance', [
 
 
 start.amount = 200;
+Rail.prototype.price = 200;
+Rail.prototype.amounts = [25, 50, 100, 200];
+Service.prototype.price = 150;
+Service.prototype.amounts = [4, 10];
 
 
 var fields = [
