@@ -1,4 +1,4 @@
-var chance = new Cards('Chance', [
+var chance = new Cards('Šance', [
 	moveToNearestRail,
 	moveToNearestRail,
 	goToJail,
@@ -22,7 +22,7 @@ var chance = new Cards('Chance', [
 ]);
 
 
-var finance = new Cards('Finance', [
+var finance = new Cards('Pokladna', [
 	earn.bind(this, 200),
 	earn.bind(this, -50),
 	earn.bind(this, 100),
