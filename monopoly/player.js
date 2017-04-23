@@ -1,5 +1,4 @@
 function Player(name, index) {
-	this.money = 1500;
 	this.name = name;
 	this.index = index;
 	this.position = 0;

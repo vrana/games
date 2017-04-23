@@ -44,6 +44,7 @@ var finance = new Cards('Pokladna', [
 
 
 start.earns = 200;
+Player.prototype.money = 1500;
 Rail.prototype.price = 200;
 Rail.prototype.amounts = [25, 50, 100, 200];
 Service.prototype.price = 150;
