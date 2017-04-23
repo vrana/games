@@ -55,7 +55,7 @@ var fields = [
 	new Place('Klimentská ulice', 'maroon', 60, [2, 10, 30, 90, 160, 250], 50),
 	finance,
 	new Place('Revoluční ulice', 'maroon', 60, [4, 20, 60, 180, 320, 450], 50),
-	new Tax(200),
+	new Tax('Daň z příjmu', 200),
 	new Rail('Wilsonovo nádraží'),
 	new Place('Panská ulice', 'aqua', 100, [6, 30, 90, 270, 400, 550], 50),
 	chance,
@@ -89,6 +89,6 @@ var fields = [
 	new Rail('Masarykovo nádraží'),
 	chance,
 	new Place('Staroměstské náměstí', 'navy', 350, [35, 175, 500, 1100, 1300, 1500], 200),
-	new Tax(100),
+	new Tax('Jednorázová daň', 100),
 	new Place('Václavské náměstí', 'navy', 400, [50, 200, 600, 1400, 1700, 2000], 200),
 ];

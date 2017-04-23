@@ -1,5 +1,5 @@
-function Tax(price) {
-	this.name = 'Tax';
+function Tax(name, price) {
+	this.name = name;
 	this.price = price;
 }
 
