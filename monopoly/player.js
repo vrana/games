@@ -12,15 +12,15 @@ function Player(name, index) {
 }
 
 Player.prototype.pay = function (amount, player) {
-	if (amount < 0) {
+	if (player) {
+		say('you paid ' + amount + ' to ' + player.name + '.', this);
+		player.money += amount;
+		player.refreshStats();
+	} else if (amount < 0) {
 		say('you earned ' + (-amount) + '.', this);
 	} else {
-		say('you paid ' + amount + (player ? ' to ' + player.name : '') + '.', this);
+		say('you paid ' + amount + '.', this);
 		// TODO: Check if enough.
-		if (player) {
-			player.money += amount;
-			player.refreshStats();
-		}
 	}
 	this.money -= amount;
 	this.refreshStats();
@@ -35,3 +35,12 @@ Player.prototype.moveFigure = function () {
 Player.prototype.refreshStats = function () {
 	document.getElementById('money' + this.index).textContent = this.money;
 };
+
+Player.prototype.ownsPlaceWith3Houses = function () {
+	for (var i = 0, field; field = fields[i]; i++) {
+		if (field.owner == this && field.houses >= 3) {
+			return true;
+		}
+	}
+	return false;
+}

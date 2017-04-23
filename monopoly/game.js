@@ -55,11 +55,8 @@ function play() {
 	questions = [];
 	document.getElementById('message').textContent = '';
 	
-	var player;
-	do {
-		playing = (playing + 1) % players.length;
-		player = players[playing];
-	} while (!player);
+	playing = getNextPlayerIndex();
+	var player = players[playing];
 	
 	if (player.paused) {
 		player.paused--;
@@ -96,6 +93,22 @@ function play() {
 	
 	moveForward(dice1 + dice2, player);
 	// TODO: Roll again if dice1 == dice2, go to jail after three rolls.
+	
+	setTimeout(function () {
+		for (var i = 0, field; field = fields[i]; i++) {
+			if (field.betted) {
+				field.betted = 0;
+			}
+		}
+	}, 0);
+}
+
+function getNextPlayerIndex() {
+	var i = playing;
+	do {
+		i = (i + 1) % players.length;
+	} while (!players[i]);
+	return i;
 }
 
 function doConfirm() {

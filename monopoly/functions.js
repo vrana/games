@@ -58,6 +58,27 @@ function offerSelling() {
 			changeOwner.call(this, buyer);
 		}
 	}.bind(this));
+	
+	if (this.bettable && this.houses >= 3) {
+		var player = players[getNextPlayerIndex()];
+		if (player.ownsPlaceWith3Houses()) {
+			var input = '<input class=price type=number step=10 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(100, player.money) + '>';
+			ask('bet ' + input + ' on ' + this.name + '?', player, function () {
+				var price = +last(document.getElementsByClassName('price')).value;
+				if (!(price >= -this.betted)) { // price might be NaN.
+					say('input a valid amount.', player);
+					return false;
+				}
+				if (player.money < price) {
+					say('you do not have enough money to bet ' + price + ' on ' + this.name + '.', player);
+					return false;
+				} else {
+					player.pay(price, this.owner);
+					this.betted = this.betted + price;
+				}
+			}.bind(this));
+		}
+	}
 }
 
 function goTo(position, player, diced) {

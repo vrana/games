@@ -48,6 +48,8 @@ var finance = new Cards('Finance', [
 
 
 start.earns = 4000;
+Place.prototype.bettable = true;
+Place.prototype.betted = 0;
 Player.prototype.money = 30000;
 Rail.prototype.price = 4000;
 Rail.prototype.amounts = [1000, 2000, 3000, 4000];
@@ -112,6 +114,3 @@ var fields = [
 	new Tax('Veterinární vyšetření', -1000),
 	new Place('Napoli', 'navy', 8000, [1000, 4000, 12000, 28000, 34000, 40000], 4000),
 ];
-
-
-// TODO: Bets.

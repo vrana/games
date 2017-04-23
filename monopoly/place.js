@@ -13,6 +13,9 @@ Place.prototype.visit = function (player) {
 		offerBuying.call(this, player);
 	} else if (this.owner != player) {
 		player.pay(this.amounts[this.houses], this.owner);
+		if (this.betted) {
+			this.owner.pay(10 * this.betted, player);
+		}
 	} else if (this.houses < 5) {
 		for (var i = 0, field; field = fields[i]; i++) {
 			if (field instanceof Place && field.color == this.color) {
