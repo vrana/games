@@ -6,7 +6,3 @@ function Tax(name, earns) {
 Tax.prototype.visit = function (player) {
 	earn(this.earns, player);
 };
-
-Tax.prototype.getEarns = function (player) {
-	return this.earns;
-};

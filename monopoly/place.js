@@ -35,10 +35,6 @@ Place.prototype.visit = function (player) {
 	}
 }
 
-Place.prototype.getEarns = function () {
-	return this.earns;
-};
-
 Place.prototype.updateEarns = function () {
 	this.div.querySelector('.earns').textContent = this.earns;
 };

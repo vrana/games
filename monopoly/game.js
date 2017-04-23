@@ -8,7 +8,7 @@ function position(i) {
 for (var i = 0, field; field = fields[i]; i++) {
 	var div = document.createElement('div');
 	div.className = 'field';
-	div.innerHTML = field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : '') + '</span>';
+	div.innerHTML = field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>';
 	div.style.borderTop = '10px solid ' + (field.color || 'silver');
 	var pos = position(i);
 	div.style.top = pos.top + 'px';
