@@ -75,6 +75,7 @@ function offerSelling() {
 				} else {
 					player.pay(price, this.owner);
 					this.betted = this.betted + price;
+					this.updateEarns();
 				}
 			}.bind(this));
 		}

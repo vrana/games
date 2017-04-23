@@ -49,7 +49,6 @@ var finance = new Cards('Finance', [
 
 start.earns = 4000;
 Place.prototype.bettable = true;
-Place.prototype.betted = 0;
 Player.prototype.money = 30000;
 Rail.prototype.price = 4000;
 Rail.prototype.amounts = [1000, 2000, 3000, 4000];

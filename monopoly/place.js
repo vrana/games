@@ -6,6 +6,7 @@ function Place(name, color, price, amounts, housePrice) {
 	this.housePrice = housePrice;
 	this.houses = 0;
 	this.earns = amounts[this.houses];
+	this.betted = 0;
 }
 
 Place.prototype.visit = function (player) {
@@ -39,5 +40,5 @@ Place.prototype.visit = function (player) {
 }
 
 Place.prototype.updateEarns = function () {
-	this.div.querySelector('.earns').textContent = this.earns;
+	this.div.querySelector('.earns').textContent = this.earns - 10 * this.betted;
 };

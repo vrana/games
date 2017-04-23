@@ -98,6 +98,7 @@ function play() {
 		for (var i = 0, field; field = fields[i]; i++) {
 			if (field.betted) {
 				field.betted = 0;
+				field.updateEarns();
 			}
 		}
 	}, 0);
