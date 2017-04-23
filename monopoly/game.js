@@ -18,10 +18,13 @@ for (var i = 0, field; field = fields[i]; i++) {
 }
 
 function rollDice(id) {
-	var diced = Math.floor(Math.random() * 6) + 1;
 	var dice = document.getElementById(id);
+	if (!dice) {
+		return 0;
+	}
+	var diced = Math.floor(Math.random() * 6) + 1;
 	dice.textContent = String.fromCharCode('⚀'.charCodeAt(0) - 1 + diced);
-	dice.style.transform = 'rotate(' + ((Math.random() * 30) - 15) + 'deg)';
+	dice.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg)';
 	return diced;
 }
 
@@ -63,7 +66,7 @@ function play() {
 	
 	if (player.jailed) {
 		player.jailed = false;
-		if (dice1 != dice2) {
+		if (dice1 != dice2 || 6) {
 			say('you get out of jail next turn.', player);
 		} else {
 			playing--;
