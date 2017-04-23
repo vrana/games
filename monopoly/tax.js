@@ -1,8 +1,12 @@
-function Tax(name, price) {
+function Tax(name, earns) {
 	this.name = name;
-	this.price = price;
+	this.earns = earns;
 }
 
 Tax.prototype.visit = function (player) {
-	player.pay(this.price);
+	earn(this.earns, player);
+};
+
+Tax.prototype.getEarns = function (player) {
+	return this.earns;
 };
