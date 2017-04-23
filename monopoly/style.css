@@ -3,7 +3,6 @@ p { margin: 0; }
 div { position: absolute; }
 button { margin-left: 1em; }
 .field { width: 113px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
-.dice { font-size: 48px; }
 .owned { cursor: pointer; }
 .owner0 { border-left-color: navy; }
 .owner1 { border-left-color: orange; }
@@ -19,6 +18,6 @@ button { margin-left: 1em; }
 #score { position: absolute; top: 100px; left: 150px; }
 #playLink { top: 250px; width: 1408px; text-align: center; }
 #playLink a { font-size: 24px; text-decoration: none; }
-#dice1 { top: 300px; left: 650px; }
-#dice2 { top: 300px; left: 740px; }
+#dice { top: 300px; width: 208px; padding: 0 600px; display: flex; text-align: center; font-size: 48px; }
+#dice span { display: block; flex: auto; }
 #message { top: 370px; margin-left: 138px; width: 1132px; height: 280px; overflow-y: auto; text-align: center; }
