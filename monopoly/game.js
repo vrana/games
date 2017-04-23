@@ -61,6 +61,16 @@ function play() {
 		player = players[playing];
 	} while (!player);
 	
+	if (player.paused) {
+		player.paused--;
+		if (player.paused) {
+			say('wait ' + player.paused + ' more turn.', player);
+		} else {
+			say('you play next turn.', player);
+		}
+		return;
+	}
+	
 	var dice1 = rollDice('dice1');
 	var dice2 = rollDice('dice2');
 	
@@ -73,6 +83,15 @@ function play() {
 			say('you get out of jail.', player);
 		}
 		return;
+	}
+	
+	if (player.position == 10 || player.position == 30) {
+		for (var i = 0, field; field = fields[i]; i++) {
+			if (field instanceof Place && field.owner == player) {
+				field.earns = field.amounts[field.houses];
+				field.updateEarns();
+			}
+		}
 	}
 	
 	moveForward(dice1 + dice2, player);
