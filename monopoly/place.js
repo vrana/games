@@ -21,9 +21,9 @@ Place.prototype.visit = function (player) {
 				}
 			}
 		}
-		ask('buy a house at ' + this.name + ' for ' + this.housePrice + '?', player, function () {
+		ask('upgrade ' + this.name + ' for ' + this.housePrice + '?', player, function () {
 			if (player.money < this.housePrice) {
-				say('you do not have enough money to buy a house at ' + this.name + ' for ' + this.housePrice + '.', player);
+				say('you do not have enough money to upgrade ' + this.name + ' for ' + this.housePrice + '.', player);
 				return false;
 			} else {
 				player.pay(this.housePrice);
