@@ -5,6 +5,7 @@ function Place(name, color, price, amounts, housePrice) {
 	this.amounts = amounts;
 	this.housePrice = housePrice;
 	this.houses = 0;
+	this.earns = amounts[this.houses];
 }
 
 Place.prototype.visit = function (player) {
@@ -27,14 +28,15 @@ Place.prototype.visit = function (player) {
 			} else {
 				player.pay(this.housePrice);
 				this.houses++;
-				this.div.querySelector('.earns').textContent = this.getEarns();
+				this.earns = this.amounts[this.houses];
+				this.div.querySelector('.earns').textContent = this.earns;
 			}
 		}.bind(this));
 	}
 }
 
 Place.prototype.getEarns = function () {
-	return this.amounts[this.houses];
+	return this.earns;
 };
 
 Place.prototype.updateEarns = function () {
