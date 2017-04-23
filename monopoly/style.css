@@ -15,6 +15,7 @@ button { margin-left: 1em; }
 .player3 { background: fuchsia; }
 .price { width: 50px; }
 .buyer { vertical-align: middle; }
+.money { text-align: right; }
 #score { position: absolute; top: 100px; left: 150px; }
 #playLink { top: 250px; width: 1408px; text-align: center; }
 #playLink a { font-size: 24px; text-decoration: none; }
