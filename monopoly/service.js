@@ -8,7 +8,7 @@ function getOwns() {
 	return owns;
 }
 
-function visitRailOrService(amounts, player) {
+function visitService(amounts, player) {
 	if (!this.owner) {
 		offerBuying.call(this, player);
 	} else if (this.owner != player) {
@@ -16,7 +16,7 @@ function visitRailOrService(amounts, player) {
 	}
 }
 
-function updateEarnsRailOrService() {
+function updateEarnsService() {
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.constructor == this.constructor) {
 			field.div.querySelector('.earns').textContent = field.getEarns();
@@ -30,7 +30,7 @@ function Rail(name) {
 }
 
 Rail.prototype.visit = function (player) {
-	visitRailOrService.call(this, this.amounts, player);
+	visitService.call(this, this.amounts, player);
 };
 
 Rail.prototype.getEarns = function () {
@@ -38,7 +38,7 @@ Rail.prototype.getEarns = function () {
 	return this.amounts[owns && owns - 1];
 };
 
-Rail.prototype.updateEarns = updateEarnsRailOrService;
+Rail.prototype.updateEarns = updateEarnsService;
 
 
 function Service(name) {
@@ -46,11 +46,11 @@ function Service(name) {
 }
 
 Service.prototype.visit = function (player, diced) {
-	visitRailOrService.call(this, [this.amounts[0] * diced, this.amounts[1] * diced], player);
+	visitService.call(this, [this.amounts[0] * diced, this.amounts[1] * diced], player);
 };
 
 Service.prototype.getEarns = function () {
 	return this.amounts[getOwns.call(this) == 2 ? 1 : 0] + '*';
 };
 
-Service.prototype.updateEarns = updateEarnsRailOrService;
+Service.prototype.updateEarns = updateEarnsService;
