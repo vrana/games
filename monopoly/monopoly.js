@@ -43,6 +43,9 @@ var finance = new Cards('Finance', [
 ]);
 
 
+start.amount = 200;
+
+
 var fields = [
 	start,
 	new Place('Klimentská ulice', 'maroon', 60, [2, 10, 30, 90, 160, 250], 50),
