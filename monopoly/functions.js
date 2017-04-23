@@ -120,5 +120,6 @@ function ask(message, player, callback) {
 	if (!questions.length || last(questions).message != question) {
 		say(question, player);
 		questions.push({message: question, player: player, callback: callback});
+		document.querySelector('.cancel').disabled = questions.length < 2;
 	}
 }

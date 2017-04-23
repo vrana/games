@@ -53,6 +53,7 @@ function play() {
 	}
 	
 	questions = [];
+	document.querySelector('.cancel').disabled = true;
 	document.getElementById('message').textContent = '';
 	
 	playing = getNextPlayerIndex();
@@ -119,6 +120,7 @@ function doConfirm() {
 	} else if (question.callback() !== false) {
 		document.activeElement.blur();
 		questions.pop();
+		document.querySelector('.cancel').disabled = questions.length < 2;
 		var question = last(questions);
 		if (question) {
 			say(question.message, question.player);
@@ -130,6 +132,7 @@ function cancel() {
 	document.activeElement.blur();
 	if (questions.length > 1) {
 		questions.pop();
+		document.querySelector('.cancel').disabled = questions.length < 2;
 		var question = last(questions);
 		say(question.message, question.player);
 	}
