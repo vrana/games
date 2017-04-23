@@ -43,7 +43,7 @@ var finance = new Cards('Pokladna', [
 ]);
 
 
-start.amount = 200;
+start.price = 200;
 Rail.prototype.price = 200;
 Rail.prototype.amounts = [25, 50, 100, 200];
 Service.prototype.price = 150;
