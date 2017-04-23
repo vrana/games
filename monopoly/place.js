@@ -29,7 +29,7 @@ Place.prototype.visit = function (player) {
 				player.pay(this.housePrice);
 				this.houses++;
 				this.earns = this.amounts[this.houses];
-				this.div.querySelector('.earns').textContent = this.earns;
+				this.updateEarns();
 			}
 		}.bind(this));
 	}
@@ -40,4 +40,5 @@ Place.prototype.getEarns = function () {
 };
 
 Place.prototype.updateEarns = function () {
+	this.div.querySelector('.earns').textContent = this.earns;
 };
