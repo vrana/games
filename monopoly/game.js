@@ -77,10 +77,10 @@ function play() {
 	if (player.jailed) {
 		player.jailed = false;
 		if (dice1 != dice2 || 6) {
-			say('you get out of jail next turn.', player);
+			say('you play next turn.', player);
 		} else {
 			playing--;
-			say('you get out of jail.', player);
+			say('you play.', player);
 		}
 		return;
 	}
