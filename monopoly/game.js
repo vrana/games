@@ -126,6 +126,15 @@ function doConfirm() {
 	}
 }
 
+function cancel() {
+	document.activeElement.blur();
+	if (questions.length > 1) {
+		questions.pop();
+		var question = last(questions);
+		say(question.message, question.player);
+	}
+}
+
 var Keys = {
 	ENTER: 13,
 	SPACE: 32,
@@ -147,11 +156,7 @@ document.body.onkeydown = function (event) {
 			}
 			break;
 		case Keys.ESC:
-			if (questions.length > 1) {
-				questions.pop();
-				var question = last(questions);
-				say(question.message, question.player);
-			}
+			cancel();
 			break;
 	}
 };
@@ -161,4 +166,6 @@ document.querySelector('#playLink a').onclick = function () {
 	return false;
 };
 
-document.querySelector('#playLink button').onclick = doConfirm;
+document.querySelector('.confirm').onclick = doConfirm;
+
+document.querySelector('.cancel').onclick = cancel;
