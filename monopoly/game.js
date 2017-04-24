@@ -58,7 +58,7 @@ function play() {
 	document.querySelector('.cancel').disabled = true;
 	document.getElementById('message').textContent = '';
 	
-	playing = getNextPlayerIndex();
+	changePlaying(getNextPlayerIndex());
 	var player = players[playing];
 	
 	if (player.paused) {
@@ -103,6 +103,11 @@ function play() {
 			field.updateEarns();
 		}
 	}
+}
+
+function changePlaying(value) {
+	playing = value;
+	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
 }
 
 function getNextPlayerIndex() {
@@ -164,11 +169,6 @@ document.body.onkeydown = function (event) {
 	}
 };
 
-document.querySelector('#playLink').onclick = function () {
-	play();
-	return false;
-};
-
+document.querySelector('#playLink button').onclick = play;
 document.querySelector('.confirm').onclick = doConfirm;
-
 document.querySelector('.cancel').onclick = cancel;

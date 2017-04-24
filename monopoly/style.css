@@ -19,8 +19,7 @@ select { vertical-align: middle; }
 .money { text-align: right; }
 .buttons { top: 250px; width: 1408px; text-align: center; }
 #score { position: absolute; top: 100px; left: 150px; }
-#score td { padding: 0 10px; }
-#playLink { text-decoration: none; }
+#score td { padding: 0 10px; height: 22px; }
 #dice { top: 300px; width: 208px; padding: 0 600px; display: flex; text-align: center; font-size: 48px; }
 #dice span { display: block; flex: auto; }
 #message { top: 370px; margin-left: 138px; width: 1132px; height: 280px; overflow-y: auto; text-align: center; }

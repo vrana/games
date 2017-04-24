@@ -2,8 +2,6 @@
 
 
 function load(state) {
-	playing = state.playing || -1;
-	
 	for (var i = 0; i < 4; i++) {
 		var player = players[i];
 		if (player) {
@@ -27,6 +25,8 @@ function load(state) {
 		}
 		document.getElementById('name' + i).textContent = player ? player.name : '';
 	}
+	
+	changePlaying(state.playing || -1);
 	
 	for (var i = 0, field; field = fields[i]; i++) {
 		var stateField = (state.fields && state.fields[i]) || {};
