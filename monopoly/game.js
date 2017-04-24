@@ -95,7 +95,7 @@ function play() {
 	}
 	
 	moveForward(dice1 + dice2, player);
-	// TODO: Roll again if dice1 == dice2, go to jail after three rolls.
+	// TODO: Roll again if dice1 == (dice2 || 6), go to jail after three rolls.
 	
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.betted) {
