@@ -1,3 +1,4 @@
+/** @this {Rail|Service} */
 function getOwns() {
 	var owns = 0;
 	for (var i = 0, field; field = fields[i]; i++) {
@@ -8,6 +9,7 @@ function getOwns() {
 	return owns;
 }
 
+/** @this {Rail|Service} */
 function visitService(amounts, player) {
 	if (!this.owner) {
 		offerBuying.call(this, player);
@@ -16,6 +18,7 @@ function visitService(amounts, player) {
 	}
 }
 
+/** @this {Rail|Service} */
 function updateEarnsService() {
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.constructor == this.constructor) {

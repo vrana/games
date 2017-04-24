@@ -1,7 +1,9 @@
+/** @this {Place|Rail|Service} */
 function offerBuying(player) {
 	ask('buy ' + this.name + ' for ' + this.price + '?', player, buy.bind(this));
 }
 
+/** @this {Place|Rail|Service} */
 function buy(player) {
 	if (!player.tryPaying(this.price)) {
 		return false;
@@ -9,6 +11,7 @@ function buy(player) {
 	changeOwner.call(this, player);
 }
 
+/** @this {Place|Rail|Service} */
 function changeOwner(owner) {
 	if (this.owner) {
 		this.div.classList.remove('owner' + this.owner.index);
@@ -35,6 +38,7 @@ function last(ar) {
 	return ar[ar.length - 1];
 }
 
+/** @this {Place|Rail|Service} */
 function offerSelling() {
 	var input = '<input class=price type=number step=10 min=0 value=' + this.price + '>';
 	var options = [];
@@ -57,6 +61,7 @@ function offerSelling() {
 	}
 }
 
+/** @this {Place|Rail|Service} */
 function sell() {
 	var price = +last(document.getElementsByClassName('price')).value;
 	var buyerIndex = last(document.getElementsByClassName('buyer')).value;
@@ -75,6 +80,7 @@ function sell() {
 	changeOwner.call(this, buyer);
 }
 
+/** @this {Place} */
 function bet(player) {
 	var price = +last(document.getElementsByClassName('price')).value;
 	if (!(price >= -this.betted)) { // price might be NaN.
