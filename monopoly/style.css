@@ -3,6 +3,7 @@ p { margin: 0; }
 div { position: absolute; }
 button { margin-left: 1em; }
 select { vertical-align: middle; }
+a { text-decoration: none; }
 .field { width: 113px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
 .owned { cursor: pointer; }
 .owner0 { border-left-color: navy; }

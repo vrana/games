@@ -108,6 +108,11 @@ function play() {
 function changePlaying(value) {
 	playing = value;
 	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
+	for (var i = 0, field; field = fields[i]; i++) {
+		if (field.bettable) {
+			field.updateEarns();
+		}
+	}
 }
 
 function getNextPlayerIndex() {

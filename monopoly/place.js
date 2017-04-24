@@ -57,4 +57,34 @@ Place.prototype.upgrade = function (upgrades, player) {
 
 Place.prototype.updateEarns = function () {
 	this.div.querySelector('.earns').textContent = this.earns - 10 * this.betted;
+	var player = players[getNextPlayerIndex()];
+	if (this.bettable && this.upgrades >= 3 && player.money > 0 && this.owner != player && player.canBet()) {
+		var betLink = document.createElement('a');
+		betLink.href = '';
+		betLink.textContent = 'bet';
+		betLink.onclick = this.offerBetting.bind(this);
+		this.div.querySelector('.earns').appendChild(document.createTextNode(' - '));
+		this.div.querySelector('.earns').appendChild(betLink);
+	}
 };
+
+Place.prototype.offerBetting = function (event) {
+	var player = players[getNextPlayerIndex()];
+	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10, player.money) + '>';
+	ask('bet ' + input + ' on ' + this.name + '?', player, this.bet.bind(this));
+	event.cancelBubble = true;
+	return false;
+};
+
+Place.prototype.bet = function (player) {
+	var price = +last(document.getElementsByClassName('price')).value;
+	if (!(price >= -this.betted)) { // price might be NaN.
+		say('input a valid amount.', player);
+		return false;
+	}
+	if (!player.tryPaying(price, this.owner)) {
+		return false;
+	}
+	this.betted = this.betted + price;
+	this.updateEarns();
+}
