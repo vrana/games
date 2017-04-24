@@ -110,7 +110,7 @@ function earn(amount, player) {
 
 function say(message, player) {
 	var p = document.createElement('p');
-	p.innerHTML = escape(player.name) + ', ' + message;
+	p.innerHTML = (player ? escape(player.name) + ', ' : '') + message;
 	document.getElementById('message').appendChild(p);
 }
 
