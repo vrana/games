@@ -42,6 +42,8 @@ function play() {
 			var name = document.querySelector('#name' + i + ' input').value;
 			if (name) {
 				players[i] = new Player(name, i);
+				players[i].moveFigure();
+				players[i].refreshStats();
 			}
 		}
 		if (players.length) {

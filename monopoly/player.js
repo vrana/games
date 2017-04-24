@@ -7,8 +7,6 @@ function Player(name, index) {
 	this.figure.textContent = '👤';
 	this.figure.className = 'player player' + index;
 	document.body.appendChild(this.figure);
-	this.moveFigure();
-	this.refreshStats();
 }
 
 Player.prototype.pay = function (amount, player) {
