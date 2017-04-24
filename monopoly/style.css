@@ -17,9 +17,10 @@ select { vertical-align: middle; }
 .price { width: 60px; }
 .houses { text-align: right; }
 .money { text-align: right; }
+.buttons { top: 250px; width: 1408px; text-align: center; }
 #score { position: absolute; top: 100px; left: 150px; }
-#playLink { top: 250px; width: 1408px; text-align: center; }
-#playLink a { font-size: 24px; text-decoration: none; }
+#score td { padding: 0 10px; }
+#playLink { text-decoration: none; }
 #dice { top: 300px; width: 208px; padding: 0 600px; display: flex; text-align: center; font-size: 48px; }
 #dice span { display: block; flex: auto; }
 #message { top: 370px; margin-left: 138px; width: 1132px; height: 280px; overflow-y: auto; text-align: center; }

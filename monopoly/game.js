@@ -164,7 +164,7 @@ document.body.onkeydown = function (event) {
 	}
 };
 
-document.querySelector('#playLink a').onclick = function () {
+document.querySelector('#playLink').onclick = function () {
 	play();
 	return false;
 };
