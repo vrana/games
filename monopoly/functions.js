@@ -7,8 +7,6 @@ function buy(player) {
 		return false;
 	}
 	changeOwner.call(this, player);
-	this.div.classList.add('owned');
-	this.div.onclick = offerSelling.bind(this);
 }
 
 function changeOwner(owner) {
@@ -18,8 +16,15 @@ function changeOwner(owner) {
 	this.owner = owner;
 	if (owner) {
 		this.div.classList.add('owner' + owner.index);
+		this.div.classList.add('owned');
+		this.div.onclick = offerSelling.bind(this);
+	} else {
+		this.div.classList.remove('owned');
+		this.div.onclick = undefined;
 	}
-	this.updateEarns && this.updateEarns();
+	if (this.updateEarns) {
+		this.updateEarns();
+	}
 }
 
 function escape(s) {
