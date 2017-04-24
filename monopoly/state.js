@@ -18,6 +18,8 @@ function load(state) {
 			players[i] = new Player(player.name, i);
 			players[i].money = player.money;
 			players[i].position = player.position;
+			players[i].jailed = player.jailed;
+			players[i].paused = player.paused;
 			players[i].moveFigure();
 			players[i].refreshStats();
 		}
@@ -47,7 +49,7 @@ function save() {
 	for (var i = 0; i < 4; i++) {
 		var player = players[i];
 		if (player) {
-			state.players[i] = { name: player.name, money: player.money, position: player.position };
+			state.players[i] = { name: player.name, money: player.money, position: player.position, jailed: player.jailed, paused: player.paused };
 		}
 	}
 	
