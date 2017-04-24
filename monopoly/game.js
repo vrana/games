@@ -76,7 +76,7 @@ function play() {
 	
 	if (player.jailed) {
 		player.jailed = false;
-		if (dice1 != dice2 || 6) {
+		if (dice1 != (dice2 || 6)) {
 			say('you play next turn.', player);
 		} else {
 			playing--;
