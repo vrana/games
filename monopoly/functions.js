@@ -54,7 +54,7 @@ function offerSelling() {
 	
 	if (this.bettable && this.upgrades >= 3) {
 		var player = players[getNextPlayerIndex()];
-		if (this.owner != player && player.ownsPlaceWith3Upgrades()) {
+		if (this.owner != player && player.canBet()) {
 			var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(Math.round(this.earns / 10), player.money) + '>';
 			ask('bet ' + input + ' on ' + this.name + '?', player, bet.bind(this));
 		}

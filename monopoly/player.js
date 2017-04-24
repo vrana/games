@@ -43,7 +43,7 @@ Player.prototype.refreshStats = function () {
 	document.getElementById('money' + this.index).textContent = this.money;
 };
 
-Player.prototype.ownsPlaceWith3Upgrades = function () {
+Player.prototype.canBet = function () {
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.owner == this && field.upgrades >= 3) {
 			return true;
