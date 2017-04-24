@@ -54,6 +54,7 @@ Rail.prototype.price = 4000;
 Rail.prototype.amounts = [1000, 2000, 3000, 4000];
 Service.prototype.price = 3000;
 Service.prototype.amounts = [400, 1000];
+// TODO: Allow buying more houses at once.
 
 
 function jailed(paused, player) {
