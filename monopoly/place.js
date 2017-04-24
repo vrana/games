@@ -27,8 +27,8 @@ Place.prototype.visit = function (player) {
 		}
 		if (this.multiUpgrades && this.houses < 3) {
 			var options = [];
-			for (var i = this.houses + 1; i <= 4; i++) {
-				options.push('<option value=' + i + (i == this.houses + 1 ? ' selected' : '') + '>' + this.amounts[i]);
+			for (var i = 1; i <= 4 - this.houses; i++) {
+				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.houses + i]);
 			}
 			var select = '<select class=houses size=' + options.length + '>' + options.join('') + '</select>';
 			ask('increase earns to ' + select + ' at ' + this.name + ' for ' + this.housePrice + ' each?', player, function (player) {
