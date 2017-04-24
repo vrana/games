@@ -6,7 +6,7 @@ function backToFinance(player) {
 
 
 function pause(rounds, player) {
-	say('wait ' + rounds + ' turns.', player);
+	say('wait ' + rounds + ' ' + (rounds == 1 ? 'turn' : 'turns') + '.', player);
 	player.paused = rounds;
 }
 
