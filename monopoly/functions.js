@@ -106,7 +106,6 @@ function say(message, player) {
 
 function ask(message, player, callback) {
 	var question = '<b>' + message + '</b>';
-	// TODO: Do not repeat the sell+bet double question.
 	if (!questions.length || last(questions).message != question) {
 		say(question, player);
 		questions.push({message: question, player: player, callback: callback});
