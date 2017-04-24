@@ -30,8 +30,8 @@ Place.prototype.visit = function (player) {
 			for (var i = 1; i <= 4 - this.upgrades; i++) {
 				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.upgrades + i]);
 			}
-			var select = '<select class=upgrades size=' + options.length + '>' + options.join('') + '</select>';
-			ask('increase earns to ' + select + ' at ' + this.name + ' for ' + this.upgradePrice + ' each?', player, function (player) {
+			var select = '<select class=upgrades size=' + options.length + ' onchange="upgradesChange.call(this, ' + this.upgradePrice + ');">' + options.join('') + '</select>';
+			ask('increase earns to ' + select + ' at ' + this.name + ' for <span class=upgradePrice>' + this.upgradePrice + '</span>?', player, function (player) {
 				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
 				return this.upgrade(upgrades, player);
 			}.bind(this));
@@ -39,6 +39,11 @@ Place.prototype.visit = function (player) {
 			ask('increase earns to ' + this.amounts[this.upgrades + 1] + ' at ' + this.name + ' for ' + this.upgradePrice + '?', player, this.upgrade.bind(this, 1));
 		}
 	}
+}
+
+/** @this {HTMLSelectElement} */
+function upgradesChange(upgradePrice) {
+	this.parentNode.querySelector('.upgradePrice').textContent = this.value * upgradePrice;
 }
 
 Place.prototype.upgrade = function (upgrades, player) {
