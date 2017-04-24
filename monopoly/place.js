@@ -1,11 +1,11 @@
-function Place(name, color, price, amounts, housePrice) {
+function Place(name, color, price, amounts, upgradePrice) {
 	this.name = name;
 	this.color = color;
 	this.price = price;
 	this.amounts = amounts;
-	this.housePrice = housePrice;
-	this.houses = 0;
-	this.earns = amounts[this.houses];
+	this.upgradePrice = upgradePrice;
+	this.upgrades = 0;
+	this.earns = amounts[this.upgrades];
 	this.betted = 0;
 }
 
@@ -17,7 +17,7 @@ Place.prototype.visit = function (player) {
 		if (this.betted) {
 			this.owner.pay(10 * this.betted, player);
 		}
-	} else if (this.houses < 5) {
+	} else if (this.upgrades < 5) {
 		for (var i = 0, field; field = fields[i]; i++) {
 			if (field instanceof Place && field.color == this.color) {
 				if (field.owner != player) {
@@ -25,28 +25,28 @@ Place.prototype.visit = function (player) {
 				}
 			}
 		}
-		if (this.multiUpgrades && this.houses < 3) {
+		if (this.multiUpgrades && this.upgrades < 3) {
 			var options = [];
-			for (var i = 1; i <= 4 - this.houses; i++) {
-				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.houses + i]);
+			for (var i = 1; i <= 4 - this.upgrades; i++) {
+				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.upgrades + i]);
 			}
-			var select = '<select class=houses size=' + options.length + '>' + options.join('') + '</select>';
-			ask('increase earns to ' + select + ' at ' + this.name + ' for ' + this.housePrice + ' each?', player, function (player) {
-				var houses = +last(document.getElementsByClassName('houses')).value;
-				return this.upgrade(houses, player);
+			var select = '<select class=upgrades size=' + options.length + '>' + options.join('') + '</select>';
+			ask('increase earns to ' + select + ' at ' + this.name + ' for ' + this.upgradePrice + ' each?', player, function (player) {
+				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
+				return this.upgrade(upgrades, player);
 			}.bind(this));
 		} else {
-			ask('increase earns to ' + this.amounts[this.houses + 1] + ' at ' + this.name + ' for ' + this.housePrice + '?', player, this.upgrade.bind(this, 1));
+			ask('increase earns to ' + this.amounts[this.upgrades + 1] + ' at ' + this.name + ' for ' + this.upgradePrice + '?', player, this.upgrade.bind(this, 1));
 		}
 	}
 }
 
-Place.prototype.upgrade = function (houses, player) {
-	if (!player.tryPaying(this.housePrice * houses)) {
+Place.prototype.upgrade = function (upgrades, player) {
+	if (!player.tryPaying(this.upgradePrice * upgrades)) {
 		return false;
 	}
-	this.houses += houses;
-	this.earns = this.amounts[this.houses];
+	this.upgrades += upgrades;
+	this.earns = this.amounts[this.upgrades];
 	this.updateEarns();
 };
 

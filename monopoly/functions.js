@@ -49,12 +49,12 @@ function offerSelling() {
 			options.push('<option value=' + i + '>' + escape(player.name));
 		}
 	}
-	// TODO: Disable selling if there are houses with the same color.
+	// TODO: Disable selling if there are upgrades with the same color.
 	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
 	
-	if (this.bettable && this.houses >= 3) {
+	if (this.bettable && this.upgrades >= 3) {
 		var player = players[getNextPlayerIndex()];
-		if (this.owner != player && player.ownsPlaceWith3Houses()) {
+		if (this.owner != player && player.ownsPlaceWith3Upgrades()) {
 			var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(Math.round(this.earns / 10), player.money) + '>';
 			ask('bet ' + input + ' on ' + this.name + '?', player, bet.bind(this));
 		}

@@ -42,8 +42,8 @@ var finance = new Cards('Finance', [
 	earn.bind(this, -2000),
 	earn.bind(this, -100),
 	earnFromEveryone.bind(this, 200),
-	payForHouseAndHotel.bind(this, 800, 2300),
-	payForHouseAndHotel.bind(this, 500, 500),
+	payForUpgrades.bind(this, 800, 2300),
+	payForUpgrades.bind(this, 500, 500),
 ]);
 
 
@@ -55,7 +55,6 @@ Rail.prototype.price = 4000;
 Rail.prototype.amounts = [1000, 2000, 3000, 4000];
 Service.prototype.price = 3000;
 Service.prototype.amounts = [400, 1000];
-// TODO: Allow buying more houses at once.
 
 
 function jailed(paused, player) {

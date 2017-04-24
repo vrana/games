@@ -1,11 +1,11 @@
-function payForHouseAndHotel(housePrice, hotelPrice, player) {
+function payForUpgrades(amount, lastAmount, player) {
 	var pay = 0;
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.owner == player) {
-			if (field.houses == 5) {
-				pay += hotelPrice;
-			} else if (field.houses) {
-				pay += housePrice * field.houses;
+			if (field.upgrades == 5) {
+				pay += lastAmount;
+			} else if (field.upgrades) {
+				pay += amount * field.upgrades;
 			}
 		}
 	}

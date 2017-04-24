@@ -88,7 +88,7 @@ function play() {
 	if (player.position == 10 || player.position == 30) {
 		for (var i = 0, field; field = fields[i]; i++) {
 			if (field instanceof Place && field.owner == player) {
-				field.earns = field.amounts[field.houses];
+				field.earns = field.amounts[field.upgrades];
 				field.updateEarns();
 			}
 		}

@@ -15,7 +15,7 @@ select { vertical-align: middle; }
 .player2 { background: lime; }
 .player3 { background: fuchsia; }
 .price { width: 60px; }
-.houses { text-align: right; }
+.upgrades { text-align: right; }
 .money { text-align: right; }
 .buttons { top: 250px; width: 1408px; text-align: center; }
 #score { position: absolute; top: 100px; left: 150px; }

@@ -43,9 +43,9 @@ Player.prototype.refreshStats = function () {
 	document.getElementById('money' + this.index).textContent = this.money;
 };
 
-Player.prototype.ownsPlaceWith3Houses = function () {
+Player.prototype.ownsPlaceWith3Upgrades = function () {
 	for (var i = 0, field; field = fields[i]; i++) {
-		if (field.owner == this && field.houses >= 3) {
+		if (field.owner == this && field.upgrades >= 3) {
 			return true;
 		}
 	}

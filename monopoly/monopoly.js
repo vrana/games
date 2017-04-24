@@ -10,7 +10,7 @@ var chance = new Cards('Šance', [
 	earn.bind(this, 50),
 	earn.bind(this, 150),
 	earn.bind(this, -15),
-	payForHouseAndHotel.bind(this, 40, 100),
+	payForUpgrades.bind(this, 40, 100),
 	earnFromEveryone.bind(this, 50),
 	moveForward.bind(this, -3),
 	// TODO: Get out of jail card.
@@ -35,7 +35,7 @@ var finance = new Cards('Pokladna', [
 	earn.bind(this, 10),
 	earn.bind(this, 25),
 	goToJail,
-	payForHouseAndHotel.bind(this, 40, 115),
+	payForUpgrades.bind(this, 40, 115),
 	earnFromEveryone.bind(this, 10),
 	goTo.bind(this, 0), // Go to start.
 	

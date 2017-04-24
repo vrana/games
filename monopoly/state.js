@@ -33,8 +33,8 @@ function load(state) {
 		changeOwner.call(field, players[stateField.ownerIndex]);
 		if (field instanceof Place) {
 			field.betted = 0;
-			field.houses = stateField.houses || 0;
-			field.earns = stateField.earns || field.amounts[field.houses];
+			field.upgrades = stateField.upgrades || 0;
+			field.earns = stateField.earns || field.amounts[field.upgrades];
 			field.updateEarns();
 		}
 	}
@@ -63,8 +63,8 @@ function save() {
 		if (field.earns) {
 			stateField.earns = field.earns;
 		}
-		if (field.houses) {
-			stateField.houses = field.houses;
+		if (field.upgrades) {
+			stateField.upgrades = field.upgrades;
 		}
 		state.fields[i] = stateField;
 	}
