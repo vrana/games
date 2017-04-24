@@ -25,19 +25,21 @@ Place.prototype.visit = function (player) {
 				}
 			}
 		}
-		ask('upgrade ' + this.name + ' for ' + this.housePrice + '?', player, function () {
-			if (player.money < this.housePrice) {
-				say('you do not have enough money to upgrade ' + this.name + ' for ' + this.housePrice + '.', player);
-				return false;
-			} else {
-				player.pay(this.housePrice);
-				this.houses++;
-				this.earns = this.amounts[this.houses];
-				this.updateEarns();
-			}
-		}.bind(this));
+		ask('upgrade ' + this.name + ' for ' + this.housePrice + '?', player, this.upgrade.bind(this));
 	}
 }
+
+Place.prototype.upgrade = function (player) {
+	if (player.money < this.housePrice) {
+		say('you do not have enough money to upgrade ' + this.name + ' for ' + this.housePrice + '.', player);
+		return false;
+	} else {
+		player.pay(this.housePrice);
+		this.houses++;
+		this.earns = this.amounts[this.houses];
+		this.updateEarns();
+	}
+};
 
 Place.prototype.updateEarns = function () {
 	this.div.querySelector('.earns').textContent = this.earns - 10 * this.betted;

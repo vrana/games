@@ -1,15 +1,17 @@
 function offerBuying(player) {
-	ask('buy ' + this.name + ' for ' + this.price + '?', player, function () {
-		if (player.money < this.price) {
-			say('you do not have enough money to buy ' + this.name + ' for ' + this.price + '.', player);
-			return false;
-		} else {
-			player.pay(this.price);
-			changeOwner.call(this, player);
-			this.div.classList.add('owned');
-			this.div.onclick = offerSelling.bind(this);
-		}
-	}.bind(this));
+	ask('buy ' + this.name + ' for ' + this.price + '?', player, buy.bind(this));
+}
+
+function buy(player) {
+	if (player.money < this.price) {
+		say('you do not have enough money to buy ' + this.name + ' for ' + this.price + '.', player);
+		return false;
+	} else {
+		player.pay(this.price);
+		changeOwner.call(this, player);
+		this.div.classList.add('owned');
+		this.div.onclick = offerSelling.bind(this);
+	}
 }
 
 function changeOwner(owner) {
@@ -37,48 +39,52 @@ function offerSelling() {
 		}
 	}
 	// TODO: Disable selling if there are houses with the same color.
-	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, function () {
-		var price = +last(document.getElementsByClassName('price')).value;
-		var buyerIndex = last(document.getElementsByClassName('buyer')).value;
-		if (!(price > 0)) { // price might be NaN.
-			say('input a valid price.', this.owner);
-			return false;
-		}
-		if (!buyerIndex) {
-			say('select a buyer.', this.owner);
-			return false;
-		}
-		var buyer = players[buyerIndex];
-		if (buyer.money < price) {
-			say('you do not have enough money to buy ' + this.name + ' for ' + price + '.', buyer);
-			return false;
-		} else {
-			buyer.pay(price, this.owner);
-			this.div.classList.remove('owner' + this.owner.index);
-			changeOwner.call(this, buyer);
-		}
-	}.bind(this));
+	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
 	
 	if (this.bettable && this.houses >= 3) {
 		var player = players[getNextPlayerIndex()];
 		if (player.ownsPlaceWith3Houses()) {
 			var input = '<input class=price type=number step=10 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(100, player.money) + '>';
-			ask('bet ' + input + ' on ' + this.name + '?', player, function () {
-				var price = +last(document.getElementsByClassName('price')).value;
-				if (!(price >= -this.betted)) { // price might be NaN.
-					say('input a valid amount.', player);
-					return false;
-				}
-				if (player.money < price) {
-					say('you do not have enough money to bet ' + price + ' on ' + this.name + '.', player);
-					return false;
-				} else {
-					player.pay(price, this.owner);
-					this.betted = this.betted + price;
-					this.updateEarns();
-				}
-			}.bind(this));
+			ask('bet ' + input + ' on ' + this.name + '?', player, bet.bind(this));
 		}
+	}
+}
+
+function sell() {
+	var price = +last(document.getElementsByClassName('price')).value;
+	var buyerIndex = last(document.getElementsByClassName('buyer')).value;
+	if (!(price > 0)) { // price might be NaN.
+		say('input a valid price.', this.owner);
+		return false;
+	}
+	if (!buyerIndex) {
+		say('select a buyer.', this.owner);
+		return false;
+	}
+	var buyer = players[buyerIndex];
+	if (buyer.money < price) {
+		say('you do not have enough money to buy ' + this.name + ' for ' + price + '.', buyer);
+		return false;
+	} else {
+		buyer.pay(price, this.owner);
+		this.div.classList.remove('owner' + this.owner.index);
+		changeOwner.call(this, buyer);
+	}
+}
+
+function bet(player) {
+	var price = +last(document.getElementsByClassName('price')).value;
+	if (!(price >= -this.betted)) { // price might be NaN.
+		say('input a valid amount.', player);
+		return false;
+	}
+	if (player.money < price) {
+		say('you do not have enough money to bet ' + price + ' on ' + this.name + '.', player);
+		return false;
+	} else {
+		player.pay(price, this.owner);
+		this.betted = this.betted + price;
+		this.updateEarns();
 	}
 }
 

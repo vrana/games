@@ -117,7 +117,7 @@ function doConfirm() {
 	var question = last(questions);
 	if (!question) {
 		play();
-	} else if (question.callback() !== false) {
+	} else if (question.callback(question.player) !== false) {
 		document.activeElement.blur();
 		questions.pop();
 		document.querySelector('.cancel').disabled = questions.length < 2;
