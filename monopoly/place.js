@@ -13,7 +13,7 @@ Place.prototype.visit = function (player) {
 	if (!this.owner) {
 		offerBuying.call(this, player);
 	} else if (this.owner != player) {
-		player.pay(this.amounts[this.houses], this.owner);
+		player.pay(this.earns, this.owner);
 		if (this.betted) {
 			this.owner.pay(10 * this.betted, player);
 		}
