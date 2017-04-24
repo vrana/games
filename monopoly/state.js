@@ -61,14 +61,12 @@ function save() {
 			stateField.ownerIndex = field.owner.index;
 		}
 		if (field.earns) {
-			stateField.earns = earns;
+			stateField.earns = field.earns;
 		}
 		if (field.houses) {
-			stateField.houses = houses;
+			stateField.houses = field.houses;
 		}
-		if (Object.keys(stateField).length) {
-			state.fields[i] = stateField;
-		}
+		state.fields[i] = stateField;
 	}
 	
 	return state;
