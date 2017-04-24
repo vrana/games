@@ -16,8 +16,10 @@ function load(state) {
 		var player = state.players && state.players[i];
 		if (player) {
 			players[i] = new Player(player.name, i);
-			players[i].money = player.money;
-			players[i].position = player.position;
+			if (player.money !== undefined) {
+				players[i].money = player.money;
+			}
+			players[i].position = player.position || 0;
 			players[i].jailed = player.jailed;
 			players[i].paused = player.paused;
 			players[i].moveFigure();
