@@ -12,9 +12,14 @@ function buy(player) {
 }
 
 function changeOwner(owner) {
+	if (this.owner) {
+		this.div.classList.remove('owner' + this.owner.index);
+	}
 	this.owner = owner;
-	this.div.classList.add('owner' + owner.index);
-	this.updateEarns();
+	if (owner) {
+		this.div.classList.add('owner' + owner.index);
+	}
+	this.updateEarns && this.updateEarns();
 }
 
 function escape(s) {
@@ -62,7 +67,6 @@ function sell() {
 	if (!buyer.tryPaying(price, this.owner)) {
 		return false;
 	}
-	this.div.classList.remove('owner' + this.owner.index);
 	changeOwner.call(this, buyer);
 }
 

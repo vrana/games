@@ -30,7 +30,7 @@ function load(state) {
 	
 	for (var i = 0, field; field = fields[i]; i++) {
 		var stateField = (state.fields && state.fields[i]) || {};
-		field.owner = players[stateField.ownerIndex] || undefined;
+		changeOwner.call(field, players[stateField.ownerIndex]);
 		if (field instanceof Place) {
 			field.betted = 0;
 			field.houses = stateField.houses || 0;
