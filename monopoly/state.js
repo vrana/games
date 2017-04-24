@@ -40,6 +40,7 @@ function load(state) {
 	}
 	
 	questions = [];
+	document.querySelector('.cancel').disabled = true;
 	document.getElementById('message').textContent = '';
 	say('State loaded.');
 }
