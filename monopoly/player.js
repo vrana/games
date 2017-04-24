@@ -24,6 +24,15 @@ Player.prototype.pay = function (amount, player) {
 	this.refreshStats();
 };
 
+Player.prototype.tryPaying = function (amount, player) {
+	if (this.money < amount) {
+		say('you do not have ' + amount + ' money.', this);
+		return false;
+	}
+	this.pay(amount, player);
+	return true;
+};
+
 Player.prototype.moveFigure = function () {
 	var pos = position(this.position);
 	this.figure.style.top = (pos.top + 45) + 'px';

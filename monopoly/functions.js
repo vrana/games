@@ -3,15 +3,12 @@ function offerBuying(player) {
 }
 
 function buy(player) {
-	if (player.money < this.price) {
-		say('you do not have enough money to buy ' + this.name + ' for ' + this.price + '.', player);
+	if (!player.tryPaying(this.price)) {
 		return false;
-	} else {
-		player.pay(this.price);
-		changeOwner.call(this, player);
-		this.div.classList.add('owned');
-		this.div.onclick = offerSelling.bind(this);
 	}
+	changeOwner.call(this, player);
+	this.div.classList.add('owned');
+	this.div.onclick = offerSelling.bind(this);
 }
 
 function changeOwner(owner) {
@@ -62,14 +59,11 @@ function sell() {
 		return false;
 	}
 	var buyer = players[buyerIndex];
-	if (buyer.money < price) {
-		say('you do not have enough money to buy ' + this.name + ' for ' + price + '.', buyer);
+	if (!buyer.tryPaying(price, this.owner)) {
 		return false;
-	} else {
-		buyer.pay(price, this.owner);
-		this.div.classList.remove('owner' + this.owner.index);
-		changeOwner.call(this, buyer);
 	}
+	this.div.classList.remove('owner' + this.owner.index);
+	changeOwner.call(this, buyer);
 }
 
 function bet(player) {
@@ -78,14 +72,11 @@ function bet(player) {
 		say('input a valid amount.', player);
 		return false;
 	}
-	if (player.money < price) {
-		say('you do not have enough money to bet ' + price + ' on ' + this.name + '.', player);
+	if (!player.tryPaying(price, this.owner)) {
 		return false;
-	} else {
-		player.pay(price, this.owner);
-		this.betted = this.betted + price;
-		this.updateEarns();
 	}
+	this.betted = this.betted + price;
+	this.updateEarns();
 }
 
 function goTo(position, player, diced) {

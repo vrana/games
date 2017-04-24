@@ -44,15 +44,12 @@ Place.prototype.upgrade = function (player) {
 	if (houses > maxHouses) {
 		say('you could not buy more than ' + maxHouses + ' upgrades.', this.owner);
 		return false;
-	} else if (player.money < this.housePrice * houses) {
-		say('you do not have enough money to upgrade ' + this.name + ' for ' + (this.housePrice * houses) + '.', player);
+	} else if (!player.tryPaying(this.housePrice * houses)) {
 		return false;
-	} else {
-		player.pay(this.housePrice * houses);
-		this.houses += houses;
-		this.earns = this.amounts[this.houses];
-		this.updateEarns();
 	}
+	this.houses += houses;
+	this.earns = this.amounts[this.houses];
+	this.updateEarns();
 };
 
 Place.prototype.updateEarns = function () {
