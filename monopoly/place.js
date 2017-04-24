@@ -26,25 +26,23 @@ Place.prototype.visit = function (player) {
 			}
 		}
 		if (this.multiUpgrades && this.houses < 3) {
-			var input = '<input class=houses type=number value=1 min=1 max=' + (4 - this.houses) + '>';
-			ask('buy ' + input + ' upgrades of ' + this.name + ' for ' + this.housePrice + ' each?', player, this.upgrade.bind(this));
+			var options = [];
+			for (var i = this.houses + 1; i <= 4; i++) {
+				options.push('<option value=' + i + (i == this.houses + 1 ? ' selected' : '') + '>' + this.amounts[i]);
+			}
+			var select = '<select class=houses size=' + options.length + '>' + options.join('') + '</select>';
+			ask('increase earns to ' + select + ' at ' + this.name + ' for ' + this.housePrice + ' each?', player, function (player) {
+				var houses = +last(document.getElementsByClassName('houses')).value;
+				return this.upgrade(houses, player);
+			}.bind(this));
 		} else {
-			ask('upgrade <input type=hidden value=1>' + this.name + ' for ' + this.housePrice + '?', player, this.upgrade.bind(this));
+			ask('increase earns to ' + this.amounts[this.houses + 1] + ' at ' + this.name + ' for ' + this.housePrice + '?', player, this.upgrade.bind(this, 1));
 		}
 	}
 }
 
-Place.prototype.upgrade = function (player) {
-	var houses = +last(document.getElementsByTagName('input')).value;
-	if (!(houses > 0)) { // price might be NaN.
-		say('input a valid number.', this.owner);
-		return false;
-	}
-	var maxHouses = (this.houses < 3 ? 4 - this.houses : 1);
-	if (houses > maxHouses) {
-		say('you could not buy more than ' + maxHouses + ' upgrades.', this.owner);
-		return false;
-	} else if (!player.tryPaying(this.housePrice * houses)) {
+Place.prototype.upgrade = function (houses, player) {
+	if (!player.tryPaying(this.housePrice * houses)) {
 		return false;
 	}
 	this.houses += houses;
