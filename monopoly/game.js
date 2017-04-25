@@ -28,12 +28,13 @@ function rollDice(id) {
 	return diced;
 }
 
-document.body.onbeforeunload = function () {
-	return 'Are you sure to exit?';
-};
-
 var players = [];
 var playing = -1;
+
+function playAndSave() {
+	play();
+	saveToStorage();
+}
 
 function play() {
 	document.activeElement.blur();
@@ -129,11 +130,12 @@ function getNextPlayerIndex() {
 function doConfirm() {
 	var question = last(questions);
 	if (!question) {
-		play();
+		playAndSave();
 	} else if (question.callback(question.player) !== false) {
 		document.activeElement.blur();
 		questions.pop();
 		document.querySelector('.cancel').disabled = questions.length < 2;
+		saveToStorage();
 		var question = last(questions);
 		if (question) {
 			say(question.message, question.player);
@@ -163,7 +165,7 @@ document.body.onkeydown = function (event) {
 	switch (event.keyCode) {
 		case Keys.SPACE:
 			if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement)) {
-				play();
+				playAndSave();
 			}
 			break;
 		case Keys.ENTER:
@@ -177,6 +179,15 @@ document.body.onkeydown = function (event) {
 	}
 };
 
-document.querySelector('#playLink button').onclick = play;
+document.querySelector('#playLink button').onclick = playAndSave;
 document.querySelector('.confirm').onclick = doConfirm;
 document.querySelector('.cancel').onclick = cancel;
+
+document.querySelector('#restart').onclick = function () {
+	if (confirm('Are you sure?')) {
+		clearStorage();
+		location.reload();
+	}
+};
+
+loadFromStorage();

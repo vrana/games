@@ -1,6 +1,3 @@
-// TODO: Use.
-
-
 function load(state) {
 	for (var i = 0; i < 4; i++) {
 		var player = players[i];
@@ -23,7 +20,7 @@ function load(state) {
 			players[i].moveFigure();
 			players[i].refreshStats();
 		}
-		document.getElementById('name' + i).textContent = player ? player.name : '';
+		document.getElementById('name' + i).innerHTML = state.playing > -1 ? player ? escape(player.name) : '' : '<input size=10>';
 	}
 	
 	changePlaying(state.playing || -1);
@@ -71,4 +68,22 @@ function save() {
 	}
 	
 	return state;
+}
+
+
+function loadFromStorage() {
+	var saved = localStorage.getItem(location.pathname);
+	if (saved) {
+		load(JSON.parse(saved));
+	}
+}
+
+
+function saveToStorage() {
+	localStorage.setItem(location.pathname, JSON.stringify(save()));
+}
+
+
+function clearStorage() {
+	localStorage.removeItem(location.pathname);
 }

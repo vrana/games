@@ -24,3 +24,4 @@ a { text-decoration: none; }
 #dice { top: 300px; width: 208px; padding: 0 600px; display: flex; text-align: center; font-size: 48px; }
 #dice span { display: block; flex: auto; }
 #message { top: 370px; margin-left: 138px; width: 1132px; height: 280px; overflow-y: auto; text-align: center; }
+#restart { position: absolute; top: 100px; left: 1190px; }
