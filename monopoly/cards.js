@@ -28,12 +28,9 @@ function earnFromEveryone(amount, player) {
 function Cards(name, cards) {
 	this.name = name;
 	this.cards = cards;
-	//~ this.position = 0;
 }
 
 Cards.prototype.visit = function (player, diced) {
-	//~ this.position++;
-	//~ var card = this.cards[this.position % this.cards.length];
 	var card = this.cards[Math.floor(Math.random() * this.cards.length)]; // TODO: Shuffle cards instead.
 	card(player, diced);
 };
