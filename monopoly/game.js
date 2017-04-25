@@ -87,15 +87,6 @@ function play() {
 		return;
 	}
 	
-	if (player.position == 10 || player.position == 30) {
-		for (var i = 0, field; field = fields[i]; i++) {
-			if (field instanceof Place && field.owner == player) {
-				field.earns = field.amounts[field.upgrades];
-				field.updateEarns();
-			}
-		}
-	}
-	
 	moveForward(dice1 + dice2, player);
 	// TODO: Roll again if dice1 == (dice2 || 6), go to jail after three rolls.
 	

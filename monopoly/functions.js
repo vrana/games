@@ -82,6 +82,15 @@ function goTo(position, player, diced) {
 }
 
 function moveForward(number, player) {
+	if (player.position == 10 || player.position == 30) {
+		for (var i = 0, field; field = fields[i]; i++) {
+			if (field instanceof Place && field.owner == player) {
+				field.earns = field.amounts[field.upgrades];
+				field.updateEarns();
+			}
+		}
+	}
+	
 	if (player.position + number > fields.length) {
 		say('you passed Start.', player);
 		start.visit(player);
