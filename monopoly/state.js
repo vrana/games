@@ -23,7 +23,7 @@ function load(state) {
 		document.getElementById('name' + i).innerHTML = state.playing > -1 ? player ? escape(player.name) : '' : '<input size=10>';
 	}
 	
-	changePlaying(state.playing || -1);
+	changePlaying(state.playing !== undefined ? state.playing : -1);
 	
 	for (var i = 0, field; field = fields[i]; i++) {
 		var stateField = (state.fields && state.fields[i]) || {};
