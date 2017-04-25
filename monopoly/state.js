@@ -30,13 +30,12 @@ function load(state) {
 	
 	for (var i = 0, field; field = fields[i]; i++) {
 		var stateField = (state.fields && state.fields[i]) || {};
-		changeOwner.call(field, players[stateField.ownerIndex]);
 		if (field instanceof Place) {
 			field.betted = stateField.betted || 0;
 			field.upgrades = stateField.upgrades || 0;
 			field.earns = stateField.earns || field.amounts[field.upgrades];
-			field.updateEarns();
 		}
+		changeOwner.call(field, players[stateField.ownerIndex]);
 	}
 	
 	questions = [];
