@@ -51,6 +51,7 @@ function play() {
 			for (var i = 0; i < 4; i++) {
 				document.getElementById('name' + i).textContent = players[i] ? players[i].name : '';
 			}
+			changePlaying(-1);
 		}
 		return;
 	}
