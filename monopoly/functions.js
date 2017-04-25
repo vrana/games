@@ -102,6 +102,7 @@ function say(message, player) {
 	var p = document.createElement('p');
 	p.innerHTML = (player ? escape(player.name) + ', ' : '') + message;
 	document.getElementById('message').appendChild(p);
+	p.scrollIntoView();
 }
 
 function ask(message, player, callback) {
