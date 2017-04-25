@@ -116,6 +116,9 @@ function changePlaying(value) {
 }
 
 function getNextPlayerIndex() {
+	if (!players.length) {
+		return 0;
+	}
 	var i = playing;
 	do {
 		i = (i + 1) % players.length;
