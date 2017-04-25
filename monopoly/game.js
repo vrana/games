@@ -119,7 +119,7 @@ function changePlaying(value) {
 
 function getNextPlayerIndex() {
 	if (!players.length) {
-		return 0;
+		return 3;
 	}
 	var i = playing;
 	do {
