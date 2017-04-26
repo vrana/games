@@ -44,6 +44,9 @@ Player.prototype.refreshStats = function () {
 };
 
 Player.prototype.canBet = function () {
+	if (this.money <= 0 || this.jailed || this.paused) {
+		return false;
+	}
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.owner == this && field.upgrades >= 3) {
 			return true;

@@ -59,7 +59,7 @@ Place.prototype.upgrade = function (upgrades) {
 Place.prototype.updateEarns = function () {
 	this.div.querySelector('.earns').textContent = this.earns - 10 * this.betted;
 	var player = players[getNextPlayerIndex()];
-	if (this.bettable && this.upgrades >= 3 && player.money > 0 && this.owner != player && player.canBet()) {
+	if (this.bettable && this.upgrades >= 3 && this.owner != player && player.canBet()) {
 		var betLink = document.createElement('a');
 		betLink.href = '';
 		betLink.textContent = 'bet';
