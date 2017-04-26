@@ -75,7 +75,7 @@ Place.prototype.updateEarns = function () {
 
 Place.prototype.offerBetting = function (event) {
 	var player = players[getNextPlayerIndex()];
-	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10, player.money) + '>';
+	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10 - this.betted, player.money) + '>';
 	ask('bet ' + input + ' on ' + this.name + '?', player, this.bet.bind(this));
 	last(document.getElementsByClassName('price')).focus();
 	event.cancelBubble = true;
