@@ -51,6 +51,7 @@ function offerSelling() {
 	}
 	// TODO: Disable selling if there are upgrades with the same color.
 	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
+	last(document.getElementsByClassName('price')).focus();
 }
 
 /** @this {Place|Rail|Service} */
