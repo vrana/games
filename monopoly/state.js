@@ -37,6 +37,11 @@ function load(state) {
 		}
 		changeOwner.call(field, players[stateField.ownerIndex]);
 	}
+	for (var i = 0, field; field = fields[i]; i++) {
+		if (field instanceof Place) {
+			field.updateEarns();
+		}
+	}
 	
 	questions = [];
 	document.querySelector('.cancel').disabled = true;
