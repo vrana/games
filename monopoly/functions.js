@@ -40,7 +40,7 @@ function last(ar) {
 
 /** @this {Place|Rail|Service} */
 function offerSelling() {
-	var input = '<input class=price type=number step=10 min=0 value=' + (this.price + this.upgrades * this.upgradePrice) + '>';
+	var input = '<input class=price type=number step=10 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
 	var options = [];
 	// TODO: Sell to the bank for a fixed price.
 	for (var i = 0; i < 4; i++) {
