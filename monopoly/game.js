@@ -6,6 +6,7 @@ function position(i) {
 }
 
 for (var i = 0, field; field = fields[i]; i++) {
+	field.index = i;
 	var div = document.createElement('div');
 	div.className = 'field';
 	div.innerHTML = field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>';

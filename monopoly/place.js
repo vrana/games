@@ -63,6 +63,8 @@ Place.prototype.updateEarns = function () {
 		var betLink = document.createElement('a');
 		betLink.href = '';
 		betLink.textContent = 'bet';
+		var distance = (this.index + fields.length - player.position) % fields.length;
+		betLink.className = (distance > 0 && distance <= 6 ? 'closeBet' : '');
 		betLink.onclick = this.offerBetting.bind(this);
 		this.div.querySelector('.earns').appendChild(document.createTextNode(' - '));
 		this.div.querySelector('.earns').appendChild(betLink);
