@@ -1,9 +1,9 @@
-body { font: 15px sans-serif; margin: 10px; }
+body { font: 15px sans-serif; margin: 10px; background: white; color: black; }
 p { margin: 0; }
 div { position: absolute; }
 button { margin-left: 1em; }
 select { vertical-align: middle; }
-a { text-decoration: none; }
+a { text-decoration: none; color: blue; }
 .field { width: 113px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
 .owned { cursor: pointer; }
 .owner0 { border-left-color: navy; }
