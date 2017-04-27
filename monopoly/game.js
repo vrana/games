@@ -160,7 +160,7 @@ for (var i = 0, field; field = fields[i]; i++) {
 	field.div = createDom('div', {
 		className: 'field',
 		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
-		style: 'border-top: 10px solid ' + (field.color || 'silver') + '; top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+		style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
 	});
 	document.getElementById('board').appendChild(field.div);
 }

@@ -5,7 +5,7 @@ button { margin-left: 1em; }
 select { vertical-align: middle; }
 a { text-decoration: none; color: blue; }
 .closeBet { color: white; background: blue; padding: 0px 5px; }
-.field { width: 113px; height: 51px; border: 1px solid silver; border-left: 10px solid silver; padding: 2px; }
+.field { width: 113px; height: 51px; border: 1px solid silver; border-width: 10px 1px 1px 10px; padding: 2px; }
 .owned { cursor: pointer; }
 .owner0 { border-left-color: navy; }
 .owner1 { border-left-color: orange; }
