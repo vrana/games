@@ -154,7 +154,7 @@ for (var i = 0, field; field = fields[i]; i++) {
 	div.style.top = pos.top + 'px';
 	div.style.left = pos.left + 'px';
 	field.div = div;
-	document.body.appendChild(div);
+	document.getElementById('board').appendChild(div);
 }
 
 var players = [];
