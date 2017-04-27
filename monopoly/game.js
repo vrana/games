@@ -121,7 +121,8 @@ function createDom(tag, attributes, content) {
 	for (var key in attributes || {}) {
 		el[key] = attributes[key];
 	}
-	if (content) {
+	var contents = (content instanceof Array ? content : [content]);
+	for (var i = 0; content = contents[i]; i++) {
 		el.appendChild(typeof content == 'string' ? document.createTextNode(content) : content);
 	}
 	return el;
