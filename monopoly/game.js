@@ -159,8 +159,8 @@ for (var i = 0, field; field = fields[i]; i++) {
 	var pos = position(i);
 	field.div = createDom('div', {
 		className: 'field',
-		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
 		style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
 	});
 	document.getElementById('board').appendChild(field.div);
 }
