@@ -75,6 +75,24 @@ function offerSelling() {
 	// TODO: Disable selling if there are upgrades with the same color.
 	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
 	last(document.getElementsByClassName('price')).focus();
+	if (this.owner.money < 0) {
+		var element = last(document.getElementsByClassName('buyer'));
+		element.onchange = buyerChange.bind(element, (this.price + (this.upgrades * this.upgradePrice / 2 || 0)));
+	}
+}
+
+/** @this {HTMLSelectElement} */
+function buyerChange(bankPrice) {
+	var element = this.parentNode.querySelector('.price');
+	if (element.disabled != (this.value == -1)) {
+		element.disabled = (this.value == -1);
+		if (this.value == -1) {
+			element.lastValue = element.value;
+			element.value = bankPrice;
+		} else if (element.lastValue) {
+			element.value = element.lastValue;
+		}
+	}
 }
 
 /** @this {Place|Rail|Service} */
