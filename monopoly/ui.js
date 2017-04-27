@@ -89,7 +89,7 @@ function doConfirm() {
 		questions.pop();
 		document.querySelector('.cancel').disabled = questions.length < 2;
 		saveToStorage();
-		var question = last(questions);
+		question = last(questions);
 		if (question) {
 			say(question.message, question.player);
 		}

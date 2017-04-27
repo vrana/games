@@ -2,7 +2,7 @@ function backToFinance(player) {
 	for (var i = player.position - 1; fields[i] != finance; i = (i - 1 + fields.length) % fields.length) {
 	}
 	goTo(i, player);
-};
+}
 
 
 function pause(rounds, player) {

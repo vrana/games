@@ -42,7 +42,7 @@ Place.prototype.visit = function (player) {
 			ask('increase earns to ' + this.amounts[this.upgrades + 1] + ' at ' + this.name + ' for ' + this.upgradePrice + '?', player, this.upgrade.bind(this, 1));
 		}
 	}
-}
+};
 
 /** @this {HTMLSelectElement} */
 function upgradesChange(upgradePrice) {
@@ -93,4 +93,4 @@ Place.prototype.bet = function (player) {
 	}
 	this.betted = this.betted + price;
 	this.updateEarns();
-}
+};

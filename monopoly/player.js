@@ -53,4 +53,4 @@ Player.prototype.canBet = function () {
 		}
 	}
 	return false;
-}
+};
