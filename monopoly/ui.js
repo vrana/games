@@ -112,7 +112,7 @@ var Keys = {
 	ESC: 27
 };
 
-document.body.onkeydown = function (event) {
+window.onkeydown = function (event) {
 	switch (event.keyCode) {
 		case Keys.SPACE:
 			if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement)) {
