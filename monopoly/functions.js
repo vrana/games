@@ -42,7 +42,9 @@ function last(ar) {
 function offerSelling() {
 	var input = '<input class=price type=number step=10 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
 	var options = [];
-	// TODO: Sell to the bank for a fixed price.
+	if (this.owner.money < 0) {
+		options.push('<option value=-1>bank');
+	}
 	for (var i = 0; i < 4; i++) {
 		var player = players[i];
 		if (player && player != this.owner) {
@@ -71,7 +73,9 @@ function sell() {
 		return false;
 	}
 	var buyer = players[buyerIndex];
-	if (!buyer.tryPaying(price, this.owner)) {
+	if (!buyer) {
+		earn(price, this.owner);
+	} else if (!buyer.tryPaying(price, this.owner)) {
 		return false;
 	}
 	changeOwner.call(this, buyer);
