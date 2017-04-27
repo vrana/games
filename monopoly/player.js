@@ -3,9 +3,7 @@ function Player(name, index) {
 	this.index = index;
 	this.position = 0;
 	
-	this.figure = document.createElement('div');
-	this.figure.textContent = '👤';
-	this.figure.className = 'player player' + index;
+	this.figure = createDom('div', {className: 'player player' + index}, '👤');
 	document.getElementById('board').appendChild(this.figure);
 }
 

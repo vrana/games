@@ -116,13 +116,23 @@ function sell() {
 	changeOwner.call(this, buyer);
 }
 
+function createDom(tag, attributes, content) {
+	var el = document.createElement(tag);
+	for (var key in attributes || {}) {
+		el[key] = attributes[key];
+	}
+	if (content) {
+		el.appendChild(typeof content == 'string' ? document.createTextNode(content) : content);
+	}
+	return el;
+}
+
 function escape(s) {
 	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 }
 
 function say(message, player) {
-	var p = document.createElement('p');
-	p.innerHTML = (player ? escape(player.name) + ', ' : '') + message;
+	var p = createDom('p', {innerHTML: (player ? escape(player.name) + ', ' : '') + message});
 	document.getElementById('message').appendChild(p);
 	p.scrollIntoView();
 }
@@ -146,15 +156,13 @@ function position(i) {
 
 for (var i = 0, field; field = fields[i]; i++) {
 	field.index = i;
-	var div = document.createElement('div');
-	div.className = 'field';
-	div.innerHTML = field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>';
-	div.style.borderTop = '10px solid ' + (field.color || 'silver');
 	var pos = position(i);
-	div.style.top = pos.top + 'px';
-	div.style.left = pos.left + 'px';
-	field.div = div;
-	document.getElementById('board').appendChild(div);
+	field.div = createDom('div', {
+		className: 'field',
+		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
+		style: 'border-top: 10px solid ' + (field.color || 'silver') + '; top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+	});
+	document.getElementById('board').appendChild(field.div);
 }
 
 var players = [];

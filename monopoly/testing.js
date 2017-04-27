@@ -3,14 +3,10 @@ function runTests(tests) {
 		try {
 			setUp();
 			test();
-			var p = document.createElement('p');
-			p.style.color = 'green';
-			p.textContent = test.name + ' passed.';
+			var p = createDom('p', {style: 'color: green'}, test.name + ' passed.');
 			document.getElementById('tests').appendChild(p);
 		} catch (ex) {
-			var pre = document.createElement('pre');
-			pre.style.color = 'red';
-			pre.textContent = ex.stack;
+			var pre = createDom('pre', {style: 'color: red'}, ex.stack);
 			document.getElementById('tests').appendChild(pre);
 			console.log(ex);
 		}
