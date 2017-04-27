@@ -49,6 +49,10 @@ function offerSelling() {
 			options.push('<option value=' + i + '>' + escape(player.name));
 		}
 	}
+	if (!options.length) {
+		say('nobody to sell to.', this.owner);
+		return;
+	}
 	// TODO: Disable selling if there are upgrades with the same color.
 	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
 	last(document.getElementsByClassName('price')).focus();
