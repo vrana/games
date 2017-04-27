@@ -166,6 +166,33 @@ for (var i = 0, field; field = fields[i]; i++) {
 	document.getElementById('board').appendChild(field.div);
 }
 
+function createScoreRow(index, name) {
+	return createDom('tr', {}, [
+		createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),
+		createDom('td', {id: 'name' + index}, createDom('input', {size: 10, value: name})),
+		createDom('td', {id: 'money' + index, className: 'money'}),
+		createDom('td', {id: 'playLink' + index}),
+	]);
+}
+
+document.getElementById('board').appendChild(createDom('table', {id: 'score'}, [
+	createScoreRow(0, 'Jakub'),
+	createScoreRow(1, 'Kryštof'),
+	createScoreRow(2, 'Prokop'),
+	createScoreRow(3, ''),
+]));
+document.getElementById('playLink3').appendChild(createDom('span', {id: 'playLink'}, [
+	createDom('button', {}, 'Play'), ' [Space]',
+]));
+
+document.getElementById('board').appendChild(createDom('button', {id: 'restart'}, 'Restart'));
+document.getElementById('board').appendChild(createDom('div', {className: 'buttons'}, [
+	createDom('button', {className: 'confirm'}, 'Confirm'), ' [Enter]',
+	createDom('button', {className: 'cancel'}, 'Cancel'), ' [Esc]',
+]));
+document.getElementById('board').appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
+document.getElementById('board').appendChild(createDom('div', {id: 'message'}));
+
 var players = [];
 var playing = -1;
 var questions = [];

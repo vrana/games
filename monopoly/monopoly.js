@@ -93,3 +93,8 @@ var fields = [
 	new Tax('Jednorázová daň', -100),
 	new Place('Václavské náměstí', 'navy', 400, [50, 200, 600, 1400, 1700, 2000], 200),
 ];
+
+
+setTimeout(function () {
+	document.getElementById('dice').appendChild(createDom('span', {id: 'dice2'}));
+}, 0);
