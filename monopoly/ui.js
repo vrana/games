@@ -112,8 +112,6 @@ var Keys = {
 	ESC: 27
 };
 
-var questions = [];
-
 document.body.onkeydown = function (event) {
 	switch (event.keyCode) {
 		case Keys.SPACE:

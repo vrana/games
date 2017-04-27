@@ -159,3 +159,4 @@ for (var i = 0, field; field = fields[i]; i++) {
 
 var players = [];
 var playing = -1;
+var questions = [];
