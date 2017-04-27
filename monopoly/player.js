@@ -9,13 +9,13 @@ function Player(name, index) {
 
 Player.prototype.pay = function (amount, player) {
 	if (player) {
-		say('you paid ' + amount + ' to ' + player.name + '.', this);
+		say(translate('you paid {$amount} to {$name}.', {amount: amount, name: player.name}), this);
 		player.money += amount;
 		player.refreshStats();
 	} else if (amount < 0) {
-		say('you earned ' + (-amount) + '.', this);
+		say(translate('you earned {$amount}.', {amount: -amount}), this);
 	} else {
-		say('you paid ' + amount + '.', this);
+		say(translate('you paid {$amount}.', {amount: amount}), this);
 		// TODO: Check if enough.
 	}
 	this.money -= amount;
@@ -24,7 +24,7 @@ Player.prototype.pay = function (amount, player) {
 
 Player.prototype.tryPaying = function (amount, player) {
 	if (this.money < amount) {
-		say('you do not have ' + amount + ' money.', this);
+		say(translate('you do not have {$amount} money.', {amount: amount}), this);
 		return false;
 	}
 	this.pay(amount, player);

@@ -1,7 +1,7 @@
 function goTo(position, player, diced) {
 	player.position = position;
 	player.moveFigure();
-	say('you went to ' + fields[position].name + '.', player);
+	say(translate('you went to {$name}.', {name: fields[position].name}), player);
 	if (fields[position].visit) {
 		fields[position].visit(player, diced || 0);
 	}
@@ -18,7 +18,7 @@ function moveForward(number, player) {
 	}
 	
 	if (player.position + number > fields.length) {
-		say('you passed Start.', player);
+		say(translate('you passed Start.'), player);
 		start.visit(player);
 	}
 	goTo((player.position + number + fields.length) % fields.length, player, number); // + fields.length - number might be negative.

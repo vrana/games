@@ -2,6 +2,15 @@ function last(ar) {
 	return ar[ar.length - 1];
 }
 
+function translate(msg, variables) {
+	if (!variables) {
+		return msg;
+	}
+	return msg.replace(/\{\$([^}]+)}/g, function(match, key) {
+		return (key in variables ? variables[key] : match);
+	});
+}
+
 function changePlaying(value) {
 	playing = value;
 	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
@@ -25,7 +34,7 @@ function getNextPlayerIndex() {
 
 /** @this {Place|Rail|Service} */
 function offerBuying(player) {
-	ask('buy ' + this.name + ' for ' + this.price + '?', player, buy.bind(this));
+	ask(translate('buy {$name} for {$price}?', {name: this.name, price: this.price}), player, buy.bind(this));
 }
 
 /** @this {Place|Rail|Service} */
@@ -69,11 +78,12 @@ function offerSelling() {
 		}
 	}
 	if (!options.length) {
-		say('nobody to sell to.', this.owner);
+		say(translate('nobody to sell to.'), this.owner);
 		return;
 	}
 	// TODO: Disable selling if there are upgrades with the same color.
-	ask('sell ' + this.name + ' for ' + input + ' to <select class=buyer size=' + options.length + '>' + options.join('') + '</select>?', this.owner, sell.bind(this));
+	var select = '<select class=buyer size=' + options.length + '>' + options.join('') + '</select>';
+	ask(translate('sell {$name} for {$price} to {$buyer}?', {name: this.name, price: input, buyer: select}), this.owner, sell.bind(this));
 	last(document.getElementsByClassName('price')).focus();
 	if (this.owner.money < 0) {
 		var element = last(document.getElementsByClassName('buyer'));
@@ -100,11 +110,11 @@ function sell() {
 	var price = +last(document.getElementsByClassName('price')).value;
 	var buyerIndex = last(document.getElementsByClassName('buyer')).value;
 	if (!price || price < 0) { // price might be NaN.
-		say('input a valid price.', this.owner);
+		say(translate('input a valid price.'), this.owner);
 		return false;
 	}
 	if (!buyerIndex) {
-		say('select a buyer.', this.owner);
+		say(translate('select a buyer.'), this.owner);
 		return false;
 	}
 	var buyer = players[buyerIndex];
@@ -182,13 +192,13 @@ document.getElementById('board').appendChild(createDom('table', {id: 'score'}, [
 	createScoreRow(3, ''),
 ]));
 document.getElementById('playLink3').appendChild(createDom('span', {id: 'playLink'}, [
-	createDom('button', {}, 'Play'), ' [Space]',
+	createDom('button', {}, translate('Play')), ' [Space]',
 ]));
 
-document.getElementById('board').appendChild(createDom('button', {id: 'restart'}, 'Restart'));
+document.getElementById('board').appendChild(createDom('button', {id: 'restart'}, translate('Restart')));
 document.getElementById('board').appendChild(createDom('div', {className: 'buttons'}, [
-	createDom('button', {className: 'confirm'}, 'Confirm'), ' [Enter]',
-	createDom('button', {className: 'cancel'}, 'Cancel'), ' [Esc]',
+	createDom('button', {className: 'confirm'}, translate('Confirm')), ' [Enter]',
+	createDom('button', {className: 'cancel'}, translate('Cancel')), ' [Esc]',
 ]));
 document.getElementById('board').appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
 document.getElementById('board').appendChild(createDom('div', {id: 'message'}));

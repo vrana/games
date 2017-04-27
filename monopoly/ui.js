@@ -44,9 +44,9 @@ function play() {
 	if (player.paused) {
 		player.paused--;
 		if (player.paused) {
-			say('wait ' + player.paused + ' more turn.', player);
+			say(translate('wait {$turns} more turn.', {turns: player.paused}), player);
 		} else {
-			say('you play next turn.', player);
+			say(translate('you play next turn.'), player);
 		}
 		return;
 	}
@@ -57,10 +57,10 @@ function play() {
 	if (player.jailed) {
 		player.jailed = false;
 		if (dice1 != (dice2 || 6)) {
-			say('you play next turn.', player);
+			say(translate('you play next turn.'), player);
 		} else {
 			playing--;
-			say('you play.', player);
+			say(translate('you play.'), player);
 		}
 		return;
 	}
@@ -135,7 +135,7 @@ document.querySelector('.confirm').onclick = doConfirm;
 document.querySelector('.cancel').onclick = cancel;
 
 document.querySelector('#restart').onclick = function () {
-	if (confirm('Are you sure?')) {
+	if (confirm(translate('Are you sure?'))) {
 		clearStorage();
 		location.reload();
 	}

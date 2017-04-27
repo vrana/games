@@ -31,7 +31,8 @@ Place.prototype.visit = function (player) {
 				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.upgrades + i]);
 			}
 			var select = '<select class=upgrades size=' + options.length + '>' + options.join('') + '</select>';
-			ask('increase earns to ' + select + ' at ' + this.name + ' for <span class=upgradePrice>' + this.upgradePrice + '</span>?', player, function () {
+			var span = '<span class=upgradePrice>' + this.upgradePrice + '</span>';
+			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: select, name: this.name, price: span}), player, function () {
 				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
 				return this.upgrade(upgrades);
 			}.bind(this));
@@ -39,7 +40,7 @@ Place.prototype.visit = function (player) {
 			element.focus();
 			element.onchange = upgradesChange.bind(element, this.upgradePrice);
 		} else {
-			ask('increase earns to ' + this.amounts[this.upgrades + 1] + ' at ' + this.name + ' for ' + this.upgradePrice + '?', player, this.upgrade.bind(this, 1));
+			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: this.amounts[this.upgrades + 1], name: this.name, price: this.upgradePrice}), player, this.upgrade.bind(this, 1));
 		}
 	}
 };
@@ -67,7 +68,7 @@ Place.prototype.updateEarns = function () {
 			href: '',
 			className: (distance > 0 && distance <= 6 ? 'closeBet' : ''),
 			onclick: this.offerBetting.bind(this)
-		}, 'bet');
+		}, translate('bet'));
 		this.div.querySelector('.earns').appendChild(document.createTextNode(' - '));
 		this.div.querySelector('.earns').appendChild(betLink);
 	}
@@ -76,7 +77,7 @@ Place.prototype.updateEarns = function () {
 Place.prototype.offerBetting = function (event) {
 	var player = players[getNextPlayerIndex()];
 	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10 - this.betted, player.money) + '>';
-	ask('bet ' + input + ' on ' + this.name + '?', player, this.bet.bind(this));
+	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.bet.bind(this));
 	last(document.getElementsByClassName('price')).focus();
 	event.cancelBubble = true;
 	return false;
@@ -85,7 +86,7 @@ Place.prototype.offerBetting = function (event) {
 Place.prototype.bet = function (player) {
 	var price = +last(document.getElementsByClassName('price')).value;
 	if (!price || price < -this.betted) {
-		say('input a valid amount.', player);
+		say(translate('input a valid amount.'), player);
 		return false;
 	}
 	if (!player.tryPaying(price, this.owner)) {
