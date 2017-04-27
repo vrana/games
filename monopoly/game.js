@@ -57,7 +57,7 @@ function changeOwner(owner) {
 
 /** @this {Place|Rail|Service} */
 function offerSelling() {
-	var input = '<input class=price type=number step=10 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
+	var input = '<input class=price type=number step=100 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
 	var options = [];
 	if (this.owner.money < 0) {
 		options.push('<option value=-1>bank');
