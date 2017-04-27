@@ -52,7 +52,7 @@ function load(state) {
 		dice2.textContent = '';
 	}
 	
-	say('State loaded.');
+	say(translate('State loaded.'));
 }
 
 
