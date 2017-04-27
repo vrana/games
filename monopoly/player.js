@@ -42,7 +42,7 @@ Player.prototype.refreshStats = function () {
 };
 
 Player.prototype.canBet = function () {
-	if (this.money <= 0 || this.jailed || this.paused) {
+	if (this.jailed || this.paused) {
 		return false;
 	}
 	for (var i = 0, field; field = fields[i]; i++) {
