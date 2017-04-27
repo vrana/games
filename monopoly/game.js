@@ -1,3 +1,24 @@
+function changePlaying(value) {
+	playing = value;
+	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
+	for (var i = 0, field; field = fields[i]; i++) {
+		if (field.bettable) {
+			field.updateEarns();
+		}
+	}
+}
+
+function getNextPlayerIndex() {
+	if (!players.length) {
+		return 3;
+	}
+	var i = playing;
+	do {
+		i = (i + 1) % players.length;
+	} while (!players[i]);
+	return i;
+}
+
 /** @this {Place|Rail|Service} */
 function offerBuying(player) {
 	ask('buy ' + this.name + ' for ' + this.price + '?', player, buy.bind(this));
@@ -97,3 +118,26 @@ function ask(message, player, callback) {
 		document.querySelector('.cancel').disabled = questions.length < 2;
 	}
 }
+
+function position(i) {
+	return {
+		top: 10 + 66 * (i < 10 ? 10 - i : i < 20 ? 0 : i < 30 ? i - 20 : 10),
+		left: 10 + 128 * (i < 10 ? 0 : i < 20 ? i - 10 : i < 30 ? 10 : 40 - i)
+	};
+}
+
+for (var i = 0, field; field = fields[i]; i++) {
+	field.index = i;
+	var div = document.createElement('div');
+	div.className = 'field';
+	div.innerHTML = field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>';
+	div.style.borderTop = '10px solid ' + (field.color || 'silver');
+	var pos = position(i);
+	div.style.top = pos.top + 'px';
+	div.style.left = pos.left + 'px';
+	field.div = div;
+	document.body.appendChild(div);
+}
+
+var players = [];
+var playing = -1;
