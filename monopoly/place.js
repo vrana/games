@@ -84,7 +84,7 @@ Place.prototype.offerBetting = function (event) {
 
 Place.prototype.bet = function (player) {
 	var price = +last(document.getElementsByClassName('price')).value;
-	if (!(price >= -this.betted)) { // price might be NaN.
+	if (!price || price < -this.betted) {
 		say('input a valid amount.', player);
 		return false;
 	}

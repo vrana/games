@@ -81,7 +81,7 @@ function offerSelling() {
 function sell() {
 	var price = +last(document.getElementsByClassName('price')).value;
 	var buyerIndex = last(document.getElementsByClassName('buyer')).value;
-	if (!(price > 0)) { // price might be NaN.
+	if (!price || price < 0) { // price might be NaN.
 		say('input a valid price.', this.owner);
 		return false;
 	}
