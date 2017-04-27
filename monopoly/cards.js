@@ -1,3 +1,38 @@
+function goTo(position, player, diced) {
+	player.position = position;
+	player.moveFigure();
+	say('you went to ' + fields[position].name + '.', player);
+	if (fields[position].visit) {
+		fields[position].visit(player, diced || 0);
+	}
+}
+
+function moveForward(number, player) {
+	if (player.position == 10 || player.position == 30) {
+		for (var i = 0, field; field = fields[i]; i++) {
+			if (field instanceof Place && field.owner == player) {
+				field.earns = field.amounts[field.upgrades];
+				field.updateEarns();
+			}
+		}
+	}
+	
+	if (player.position + number > fields.length) {
+		say('you passed Start.', player);
+		start.visit(player);
+	}
+	goTo((player.position + number + fields.length) % fields.length, player, number); // + fields.length - number might be negative.
+}
+
+function goToJail(player) {
+	goTo(10, player);
+	player.jailed = true;
+}
+
+function earn(amount, player) {
+	player.pay(-amount);
+}
+
 function payForUpgrades(amount, lastAmount, player) {
 	var pay = 0;
 	for (var i = 0, field; field = fields[i]; i++) {
