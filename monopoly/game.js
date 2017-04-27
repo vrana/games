@@ -1,3 +1,7 @@
+function last(ar) {
+	return ar[ar.length - 1];
+}
+
 function changePlaying(value) {
 	playing = value;
 	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
@@ -51,14 +55,6 @@ function changeOwner(owner) {
 	}
 }
 
-function escape(s) {
-	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-}
-
-function last(ar) {
-	return ar[ar.length - 1];
-}
-
 /** @this {Place|Rail|Service} */
 function offerSelling() {
 	var input = '<input class=price type=number step=10 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
@@ -100,6 +96,10 @@ function sell() {
 		return false;
 	}
 	changeOwner.call(this, buyer);
+}
+
+function escape(s) {
+	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 }
 
 function say(message, player) {
