@@ -165,17 +165,6 @@ function position(i) {
 	};
 }
 
-for (var i = 0, field; field = fields[i]; i++) {
-	field.index = i;
-	var pos = position(i);
-	field.div = createDom('div', {
-		className: 'field',
-		style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
-		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
-	});
-	document.getElementById('board').appendChild(field.div);
-}
-
 function createScoreRow(index, name) {
 	return createDom('tr', {}, [
 		createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),
@@ -202,6 +191,17 @@ document.getElementById('board').appendChild(createDom('div', {className: 'butto
 ]));
 document.getElementById('board').appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
 document.getElementById('board').appendChild(createDom('div', {id: 'message'}));
+
+for (var i = 0, field; field = fields[i]; i++) {
+	field.index = i;
+	var pos = position(i);
+	field.div = createDom('div', {
+		className: 'field',
+		style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
+	});
+	document.getElementById('board').appendChild(field.div);
+}
 
 var players = [];
 var playing = -1;
