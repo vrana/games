@@ -87,6 +87,7 @@ function doConfirm() {
 	} else if (question.callback(question.player) !== false) {
 		document.activeElement.blur();
 		questions.pop();
+		disableOldQuestions();
 		document.querySelector('.cancel').disabled = questions.length < 2;
 		saveToStorage();
 		question = last(questions);

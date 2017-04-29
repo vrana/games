@@ -153,10 +153,18 @@ function say(message, player) {
 function ask(message, player, callback) {
 	var question = '<b>' + message + '</b>';
 	if (!questions.length || last(questions).message != question) {
+		disableOldQuestions();
 		say(question, player);
 		var index = questions.length && questions[0].primary ? 1 : 0;
 		questions[index] = {message: question, player: player, callback: callback};
 		document.querySelector('.cancel').disabled = questions.length < 2;
+	}
+}
+
+function disableOldQuestions() {
+	var inputs = document.getElementById('message').querySelectorAll('select, input');
+	for (var i = 0, input; input = inputs[i]; i++) {
+		input.disabled = true;
 	}
 }
 
