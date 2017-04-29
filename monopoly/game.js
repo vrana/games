@@ -99,9 +99,10 @@ function offerSelling() {
 /** @this {HTMLSelectElement} */
 function buyerChange(bankPrice) {
 	var element = this.parentNode.querySelector('.price');
-	if (element.disabled != (this.value == -1)) {
-		element.disabled = (this.value == -1);
-		if (this.value == -1) {
+	var isBank = (this.value == -1);
+	if (element.disabled != isBank) {
+		element.disabled = isBank;
+		if (isBank) {
 			element.lastValue = element.value;
 			element.value = bankPrice;
 		} else if (element.lastValue) {
