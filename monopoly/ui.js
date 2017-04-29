@@ -59,7 +59,7 @@ function play() {
 		if (dice1 != (dice2 || 6)) {
 			say(translate('you play next turn.'), player);
 		} else {
-			playing--;
+			changePlaying(playing - 1);
 			say(translate('you play.'), player);
 		}
 		return;
