@@ -84,7 +84,9 @@ function offerSelling() {
 	// TODO: Disable selling if there are upgrades with the same color.
 	var select = '<select class=buyer size=' + options.length + '>' + options.join('') + '</select>';
 	ask(translate('sell {$name} for {$price} to {$buyer}?', {name: this.name, price: input, buyer: select}), this.owner, sell.bind(this));
-	last(document.getElementsByClassName('price')).focus();
+	var element = last(document.getElementsByClassName('price'));
+	element.focus();
+	element.select();
 	if (this.owner.money < 0) {
 		var element = last(document.getElementsByClassName('buyer'));
 		element.onchange = buyerChange.bind(element, (this.price + (this.upgrades * this.upgradePrice / 2 || 0)));
