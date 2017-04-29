@@ -8,20 +8,20 @@ function goTo(position, player, diced) {
 }
 
 function moveForward(number, player) {
-	if (player.position == 10 || player.position == 30) {
-		for (var i = 0, field; field = fields[i]; i++) {
-			if (field instanceof Place && field.owner == player) {
-				field.earns = field.amounts[field.upgrades];
-				field.updateEarns();
-			}
-		}
-	}
-	
+	var position = player.position;
 	if (player.position + number > fields.length) {
 		say(translate('you passed Start.'), player);
 		start.visit(player);
 	}
 	goTo((player.position + number + fields.length) % fields.length, player, number); // + fields.length - number might be negative.
+	
+	if (position == 10 || position == 30) {
+		for (var i = 0, field; field = fields[i]; i++) {
+			if (field instanceof Place && field.owner == player) {
+				field.updateEarns();
+			}
+		}
+	}
 }
 
 function goToJail(player) {

@@ -33,7 +33,6 @@ function load(state) {
 		if (field instanceof Place) {
 			field.betted = stateField.betted || 0;
 			field.upgrades = stateField.upgrades || 0;
-			field.earns = stateField.earns || field.amounts[field.upgrades];
 		}
 		changeOwner.call(field, players[stateField.ownerIndex]);
 	}

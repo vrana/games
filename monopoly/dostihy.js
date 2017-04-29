@@ -65,7 +65,6 @@ function jailed(paused, player) {
 	}
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field instanceof Place && field.owner == player) {
-			field.earns = field.amounts[0];
 			field.updateEarns();
 		}
 	}

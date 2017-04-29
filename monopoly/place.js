@@ -5,7 +5,6 @@ function Place(name, color, price, amounts, upgradePrice) {
 	this.amounts = amounts;
 	this.upgradePrice = upgradePrice;
 	this.upgrades = 0;
-	this.earns = amounts[this.upgrades];
 	this.betted = 0;
 }
 
@@ -13,7 +12,7 @@ Place.prototype.visit = function (player) {
 	if (!this.owner) {
 		offerBuying.call(this, player);
 	} else if (this.owner != player) {
-		player.pay(this.earns, this.owner);
+		player.pay(this.getEarns(), this.owner);
 		if (this.betted) {
 			this.owner.pay(10 * this.betted, player);
 		}
@@ -63,12 +62,16 @@ Place.prototype.upgrade = function (upgrades, player) {
 		return false;
 	}
 	this.upgrades += upgrades;
-	this.earns = this.amounts[this.upgrades];
 	this.updateEarns();
 };
 
+Place.prototype.getEarns = function () {
+	var jailed = (this.owner && (this.owner.position == 10 || this.owner.position == 30));
+	return this.amounts[jailed && this.bettable ? 0 : this.upgrades];
+};
+
 Place.prototype.updateEarns = function () {
-	this.div.querySelector('.earns').textContent = this.earns - 10 * this.betted;
+	this.div.querySelector('.earns').textContent = this.getEarns() - 10 * this.betted;
 	var player = players[getNextPlayerIndex()];
 	if (this.bettable && this.upgrades >= 3 && this.owner != player && player.canBet()) {
 		var distance = (this.index + fields.length - player.position) % fields.length;
@@ -84,7 +87,7 @@ Place.prototype.updateEarns = function () {
 
 Place.prototype.offerBetting = function (event) {
 	var player = players[getNextPlayerIndex()];
-	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10 - this.betted, player.money) + '>';
+	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.getEarns() / 10 - this.betted, player.money) + '>';
 	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.bet.bind(this));
 	event.cancelBubble = true;
 	return false;
