@@ -78,7 +78,7 @@ function offerSelling() {
 	var input = '<input class=price type=number step=100 min=0 value=' + (this.price + (this.upgrades * this.upgradePrice || 0)) + '>';
 	var options = [];
 	if (this.owner.money < 0) {
-		options.push('<option value=-1>bank');
+		options.push('<option value=-1>' + translate('bank'));
 	}
 	for (var i = 0; i < 4; i++) {
 		var player = players[i];
