@@ -181,8 +181,8 @@ function disableOldQuestions() {
 
 function position(i) {
 	return {
-		top: 10 + 66 * (i < 10 ? 10 - i : i < 20 ? 0 : i < 30 ? i - 20 : 10),
-		left: 10 + 128 * (i < 10 ? 0 : i < 20 ? i - 10 : i < 30 ? 10 : 40 - i)
+		top: 10 + 66 * (i < 10 ? 0 : i < 20 ? i - 10 : i < 30 ? 10 : 40 - i),
+		left: 10 + 128 * (i < 10 ? i : i < 20 ? 10 : i < 30 ? 30 - i : 0)
 	};
 }
 
