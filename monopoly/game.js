@@ -219,7 +219,7 @@ document.getElementById('playLink3').appendChild(createDom('span', {id: 'playLin
 board.appendChild(createDom('button', {id: 'restart'}, translate('Restart')));
 board.appendChild(createDom('div', {className: 'buttons'}, [
 	createDom('button', {className: 'confirm'}, translate('Confirm')), ' [Enter]',
-	createDom('button', {className: 'cancel'}, translate('Cancel')), ' [Esc]',
+	createDom('button', {className: 'cancel', disabled: true}, translate('Cancel')), ' [Esc]',
 ]));
 board.appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
 board.appendChild(createDom('div', {id: 'message'}));
