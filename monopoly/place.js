@@ -18,12 +18,8 @@ Place.prototype.visit = function (player) {
 			this.owner.pay(10 * this.betted, player);
 		}
 	} else if (this.upgrades < 5) {
-		for (var i = 0, field; field = fields[i]; i++) {
-			if (field instanceof Place && field.color == this.color) {
-				if (field.owner != player) {
-					return;
-				}
-			}
+		if (!this.ownsAllOfColor()) {
+			return;
 		}
 		if (this.multiUpgrades && this.upgrades < 3) {
 			var options = [];
@@ -34,7 +30,7 @@ Place.prototype.visit = function (player) {
 			var span = '<span class=upgradePrice>' + this.upgradePrice + '</span>';
 			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: select, name: this.name, price: span}), player, function () {
 				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
-				return this.upgrade(upgrades);
+				return this.upgrade(upgrades, player);
 			}.bind(this));
 		} else {
 			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: this.amounts[this.upgrades + 1], name: this.name, price: this.upgradePrice}), player, this.upgrade.bind(this, 1));
@@ -42,12 +38,27 @@ Place.prototype.visit = function (player) {
 	}
 };
 
+Place.prototype.ownsAllOfColor = function () {
+	for (var i = 0, field; field = fields[i]; i++) {
+		if (field instanceof Place && field.color == this.color) {
+			if (field.owner != this.owner) {
+				return false;
+			}
+		}
+	}
+	return true;
+};
+
 /** @this {HTMLSelectElement} */
 function upgradesChange(upgradePrice) {
 	this.parentNode.querySelector('.upgradePrice').textContent = this.value * upgradePrice;
 }
 
-Place.prototype.upgrade = function (upgrades) {
+Place.prototype.upgrade = function (upgrades, player) {
+	if (player != this.owner || !this.ownsAllOfColor()) {
+		say(translate('you need to own all of this color.'), player);
+		return false;
+	}
 	if (!this.owner.tryPaying(this.upgradePrice * upgrades)) {
 		return false;
 	}
