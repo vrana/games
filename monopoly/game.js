@@ -82,15 +82,12 @@ function offerSelling() {
 		return;
 	}
 	// TODO: Disable selling if there are upgrades with the same color.
-	var select = '<select class=buyer size=' + options.length + '>' + options.join('') + '</select>';
+	var onchange = (this.owner.money < 0 ? ' onchange="buyerChange.call(this, ' + (this.price + (this.upgrades * this.upgradePrice / 2 || 0)) + ');"' : '');
+	var select = '<select class=buyer size=' + options.length + onchange + '>' + options.join('') + '</select>';
 	ask(translate('sell {$name} for {$price} to {$buyer}?', {name: this.name, price: input, buyer: select}), this.owner, sell.bind(this));
 	var element = last(document.getElementsByClassName('price'));
 	element.focus();
 	element.select();
-	if (this.owner.money < 0) {
-		var element = last(document.getElementsByClassName('buyer'));
-		element.onchange = buyerChange.bind(element, (this.price + (this.upgrades * this.upgradePrice / 2 || 0)));
-	}
 }
 
 /** @this {HTMLSelectElement} */

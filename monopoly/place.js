@@ -30,15 +30,13 @@ Place.prototype.visit = function (player) {
 			for (var i = 1; i <= 4 - this.upgrades; i++) {
 				options.push('<option value=' + i + (i == 1 ? ' selected' : '') + '>' + this.amounts[this.upgrades + i]);
 			}
-			var select = '<select class=upgrades size=' + options.length + '>' + options.join('') + '</select>';
+			var select = '<select class=upgrades size=' + options.length + ' onchange="upgradesChange.call(this, ' + this.upgradePrice + ');">' + options.join('') + '</select>';
 			var span = '<span class=upgradePrice>' + this.upgradePrice + '</span>';
 			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: select, name: this.name, price: span}), player, function () {
 				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
 				return this.upgrade(upgrades);
 			}.bind(this));
-			var element = last(document.getElementsByClassName('upgrades'));
-			element.focus();
-			element.onchange = upgradesChange.bind(element, this.upgradePrice);
+			last(document.getElementsByClassName('upgrades')).focus();
 		} else {
 			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: this.amounts[this.upgrades + 1], name: this.name, price: this.upgradePrice}), player, this.upgrade.bind(this, 1));
 		}
