@@ -186,6 +186,15 @@ function position(i) {
 	};
 }
 
+function clearDice() {
+	for (var i = 1; i <= 2; i++) {
+		var element = document.getElementById('dice' + i);
+		if (element) {
+			element.textContent = '';
+		}
+	}
+}
+
 function createScoreRow(index, name) {
 	return createDom('tr', {}, [
 		createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),

@@ -48,6 +48,7 @@ function play() {
 	var player = players[playing];
 	
 	if (player.paused) {
+		clearDice();
 		player.paused--;
 		if (player.paused) {
 			say(translate('wait {$turns} more turn.', {turns: player.paused}), player);

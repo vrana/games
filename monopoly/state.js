@@ -45,11 +45,7 @@ function load(state) {
 	questions = [];
 	document.querySelector('.cancel').disabled = true;
 	document.getElementById('message').textContent = '';
-	document.getElementById('dice1').textContent = '';
-	var dice2 = document.getElementById('dice2');
-	if (dice2) {
-		dice2.textContent = '';
-	}
+	clearDice();
 	
 	say(translate('State loaded.'));
 }
