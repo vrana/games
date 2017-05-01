@@ -36,7 +36,6 @@ Place.prototype.visit = function (player) {
 				var upgrades = +last(document.getElementsByClassName('upgrades')).value;
 				return this.upgrade(upgrades);
 			}.bind(this));
-			last(document.getElementsByClassName('upgrades')).focus();
 		} else {
 			ask(translate('increase earns at {$name} to {$amount} for {$price}?', {amount: this.amounts[this.upgrades + 1], name: this.name, price: this.upgradePrice}), player, this.upgrade.bind(this, 1));
 		}
@@ -76,9 +75,6 @@ Place.prototype.offerBetting = function (event) {
 	var player = players[getNextPlayerIndex()];
 	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + Math.min(this.earns / 10 - this.betted, player.money) + '>';
 	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.bet.bind(this));
-	var element = last(document.getElementsByClassName('price'));
-	element.focus();
-	element.select();
 	event.cancelBubble = true;
 	return false;
 };
