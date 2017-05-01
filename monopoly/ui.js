@@ -17,19 +17,25 @@ function playAndSave() {
 function play() {
 	document.activeElement.blur();
 	if (!players.length) {
+		var numPlayers = 0;
 		for (var i = 0; i < 4; i++) {
 			var name = document.querySelector('#name' + i + ' input').value;
 			if (name) {
 				players[i] = new Player(name, i);
 				players[i].moveFigure();
 				players[i].refreshStats();
+				numPlayers++;
 			}
 		}
 		if (players.length) {
+			var starting = Math.floor(Math.random() * numPlayers);
 			for (var i = 0; i < 4; i++) {
+				if (!players[i] && i <= starting) {
+					starting++;
+				}
 				document.getElementById('name' + i).textContent = players[i] ? players[i].name : '';
 			}
-			changePlaying(-1);
+			changePlaying(starting - 1);
 		}
 		return;
 	}
