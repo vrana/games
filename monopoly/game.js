@@ -2,10 +2,19 @@ function last(ar) {
 	return ar[ar.length - 1];
 }
 
-function translate(msg, variables) {
-	if (!variables) {
-		return msg;
+var translations = {
+	'wait {$number} turn(s).': ['wait {$number} turn.', 'wait {$number} turns.'],
+};
+
+function pickPlural(msgs, variables) {
+	if (msgs instanceof Array) {
+		return (variables.number == 1 ? msgs[0] : msgs[1]);
 	}
+	return msgs;
+}
+
+function translate(msg, variables) {
+	msg = pickPlural(translations[msg] || msg, variables);
 	return msg.replace(/\{\$([^}]+)}/g, function(match, key) {
 		return (key in variables ? variables[key] : match);
 	});

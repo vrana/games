@@ -6,7 +6,7 @@ function backToFinance(player) {
 
 
 function pause(rounds, player) {
-	say(translate('wait {$rounds} turn(s).', {rounds: rounds}), player);
+	say(translate('wait {$number} turn(s).', {number: rounds}), player);
 	player.paused = rounds;
 }
 
