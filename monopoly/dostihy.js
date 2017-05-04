@@ -54,7 +54,7 @@ Player.prototype.money = 30000;
 Rail.prototype.price = 4000;
 Rail.prototype.amounts = [1000, 2000, 3000, 4000];
 Service.prototype.price = 3000;
-Service.prototype.amounts = [400, 1000];
+Service.prototype.amounts = [300, 600];
 
 
 function jailed(paused, player) {
