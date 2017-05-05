@@ -29,12 +29,13 @@ runTests([
 	
 	function upgradeEarnsMore() {
 		buy.call(fields[1], players[0]);
-		fields[1].upgrade(1);
+		fields[3].owner = players[0];
+		fields[1].upgrade(1, players[0]);
 		assertEquals(30000 - 1200 - 1000, players[0].money);
 		fields[1].visit(players[1]);
 		assertEquals(30000 - 1200 - 1000 + 200, players[0].money);
 		assertEquals(30000 - 200, players[1].money);
-		fields[1].upgrade(3);
+		fields[1].upgrade(3, players[0]);
 		assertEquals(30000 - 1200 - 1000 + 200 - 3000, players[0].money);
 		fields[1].visit(players[1]);
 		assertEquals(30000 - 1200 - 1000 + 200 - 3000 + 3200, players[0].money);
@@ -60,20 +61,21 @@ runTests([
 		buy.call(fields[12], players[0]);
 		assertEquals(30000 - 3000, players[0].money);
 		fields[12].visit(players[1], 3);
-		assertEquals(30000 - 3000 + 3 * 400, players[0].money);
-		assertEquals(30000 - 3 * 400, players[1].money);
+		assertEquals(30000 - 3000 + 3 * 300, players[0].money);
+		assertEquals(30000 - 3 * 300, players[1].money);
 		buy.call(fields[28], players[0]);
 		fields[28].visit(players[1], 5);
-		assertEquals(30000 - 3000 + 3 * 400 - 3000 + 5 * 1000, players[0].money);
-		assertEquals(30000 - 3 * 400 - 5 * 1000, players[1].money);
+		assertEquals(30000 - 3000 + 3 * 300 - 3000 + 5 * 600, players[0].money);
+		assertEquals(30000 - 3 * 300 - 5 * 600, players[1].money);
 		fields[12].visit(players[1], 1);
-		assertEquals(30000 - 3000 + 3 * 400 - 3000 + 5 * 1000 + 1 * 1000, players[0].money);
-		assertEquals(30000 - 3 * 400 - 5 * 1000 - 1 * 1000, players[1].money);
+		assertEquals(30000 - 3000 + 3 * 300 - 3000 + 5 * 600 + 1 * 600, players[0].money);
+		assertEquals(30000 - 3 * 300 - 5 * 600 - 1 * 600, players[1].money);
 	},
 	
 	function distancEarnsLess() {
 		buy.call(fields[1], players[0]);
-		fields[1].upgrade(1);
+		fields[3].owner = players[0];
+		fields[1].upgrade(1, players[0]);
 		goTo(10, players[0]);
 		fields[1].visit(players[1]);
 		assertEquals(30000 - 1200 - 1000 + 40, players[0].money);
@@ -86,7 +88,8 @@ runTests([
 	
 	function dopingEarnsLess() {
 		buy.call(fields[1], players[0]);
-		fields[1].upgrade(1);
+		fields[3].owner = players[0];
+		fields[1].upgrade(1, players[0]);
 		goTo(30, players[0]);
 		fields[1].visit(players[1]);
 		assertEquals(30000 - 1200 - 1000 + 40, players[0].money);
