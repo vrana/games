@@ -6,7 +6,9 @@ function runTests(tests) {
 			var p = createDom('p', {style: 'color: green'}, test.name + ' passed.');
 			document.getElementById('tests').appendChild(p);
 		} catch (ex) {
-			var pre = createDom('pre', {style: 'color: red'}, ex.stack);
+			var p = createDom('p', {style: 'color: red'}, test.name + ' failed:');
+			document.getElementById('tests').appendChild(p);
+			var pre = createDom('pre', {}, ex.stack);
 			document.getElementById('tests').appendChild(pre);
 			console.log(ex);
 		}
