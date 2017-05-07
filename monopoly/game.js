@@ -126,6 +126,9 @@ function sell() {
 	var buyer = players[buyerIndex];
 	if (!buyer) {
 		earn(price, this.owner);
+		if (this.upgrades) {
+			this.upgrades = 0;
+		}
 	} else if (!buyer.tryPaying(price, this.owner)) {
 		return false;
 	}
