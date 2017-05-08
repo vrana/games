@@ -34,7 +34,7 @@ Player.prototype.tryPaying = function (amount, player) {
 Player.prototype.moveFigure = function () {
 	var pos = position(this.position);
 	this.figure.style.top = (pos.top + 45) + 'px';
-	this.figure.style.left = (pos.left + 79 + 12 * this.index) + 'px';
+	this.figure.style.left = (pos.left + 55 + 12 * this.index) + 'px';
 };
 
 Player.prototype.refreshStats = function () {

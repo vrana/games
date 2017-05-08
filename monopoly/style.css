@@ -11,11 +11,15 @@ a { text-decoration: none; color: blue; }
 .owner1 { border-left-color: orange; }
 .owner2 { border-left-color: lime; }
 .owner3 { border-left-color: fuchsia; }
+.owner4 { border-left-color: cyan; }
+.owner5 { border-left-color: yellow; }
 .player { transition: top 1s, left 1s; }
 .player0 { color: white; background: navy; }
 .player1 { background: orange; }
 .player2 { background: lime; }
 .player3 { background: fuchsia; }
+.player4 { background: cyan; }
+.player5 { background: yellow; }
 .price { width: 60px; }
 .upgrades { text-align: right; }
 .money { text-align: right; }

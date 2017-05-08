@@ -207,7 +207,7 @@ function createScoreRow(index, name) {
 	]);
 }
 
-var maxPlayers = 4;
+var maxPlayers = 6;
 var players = [];
 var playing = -1;
 var questions = [];
