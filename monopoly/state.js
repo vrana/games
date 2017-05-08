@@ -1,5 +1,5 @@
 function load(state) {
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < maxPlayers; i++) {
 		var player = players[i];
 		if (player) {
 			player.figure.parentNode.removeChild(player.figure);
@@ -7,7 +7,7 @@ function load(state) {
 	}
 	
 	players = [];
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < maxPlayers; i++) {
 		var player = state.players && state.players[i];
 		if (player) {
 			players[i] = new Player(player.name, i);
@@ -21,7 +21,7 @@ function load(state) {
 			players[i].refreshStats();
 		}
 	}
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < maxPlayers; i++) {
 		var player = players[i];
 		document.getElementById('name' + i).innerHTML = players.length ? player ? escape(player.name) : '' : '<input size=10>';
 	}
@@ -54,7 +54,7 @@ function load(state) {
 function save() {
 	var state = { playing: playing, players: [], fields: [] };
 	
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < maxPlayers; i++) {
 		var player = players[i];
 		if (player) {
 			state.players[i] = { name: player.name, money: player.money, position: player.position, jailed: player.jailed, paused: player.paused };

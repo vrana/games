@@ -32,7 +32,7 @@ function changePlaying(value) {
 
 function getNextPlayerIndex() {
 	if (!players.length) {
-		return 3;
+		return maxPlayers - 1;
 	}
 	var i = playing;
 	do {
@@ -80,7 +80,7 @@ function offerSelling() {
 	if (this.owner.money < 0) {
 		options.push('<option value=-1>' + translate('bank'));
 	}
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < maxPlayers; i++) {
 		var player = players[i];
 		if (player && player != this.owner) {
 			options.push('<option value=' + i + '>' + escape(player.name));
@@ -201,21 +201,25 @@ function clearDice() {
 function createScoreRow(index, name) {
 	return createDom('tr', {}, [
 		createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),
-		createDom('td', {id: 'name' + index}, createDom('input', {size: 10, value: name})),
+		createDom('td', {id: 'name' + index}, createDom('input', {size: 10, value: name || ''})),
 		createDom('td', {id: 'money' + index, className: 'money'}),
 		createDom('td', {id: 'playLink' + index}),
 	]);
 }
 
+var maxPlayers = 4;
+var players = [];
+var playing = -1;
+var questions = [];
+
 var board = document.body.appendChild(createDom('div', {id: 'board'}));
 
-board.appendChild(createDom('table', {id: 'score'}, [
-	createScoreRow(0, 'Jakub'),
-	createScoreRow(1, 'Kryštof'),
-	createScoreRow(2, 'Prokop'),
-	createScoreRow(3, ''),
-]));
-document.getElementById('playLink3').appendChild(createDom('span', {id: 'playLink'}, [
+var scoreTable = board.appendChild(createDom('table', {id: 'score'}));
+var defaultNames = ['Jakub', 'Kryštof', 'Prokop'];
+for (var i = 0; i < maxPlayers; i++) {
+	scoreTable.appendChild(createScoreRow(i, defaultNames[i]));
+}
+document.getElementById('playLink' + (maxPlayers - 1)).appendChild(createDom('span', {id: 'playLink'}, [
 	createDom('button', {}, translate('Play')), ' [Space]',
 ]));
 
@@ -237,7 +241,3 @@ for (var i = 0, field; field = fields[i]; i++) {
 	});
 	board.appendChild(field.div);
 }
-
-var players = [];
-var playing = -1;
-var questions = [];

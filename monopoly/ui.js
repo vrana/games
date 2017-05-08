@@ -18,7 +18,7 @@ function play() {
 	document.activeElement.blur();
 	if (!players.length) {
 		var numPlayers = 0;
-		for (var i = 0; i < 4; i++) {
+		for (var i = 0; i < maxPlayers; i++) {
 			var name = document.querySelector('#name' + i + ' input').value;
 			if (name) {
 				players[i] = new Player(name, i);
@@ -29,7 +29,7 @@ function play() {
 		}
 		if (players.length) {
 			var starting = Math.floor(Math.random() * numPlayers);
-			for (var i = 0; i < 4; i++) {
+			for (var i = 0; i < maxPlayers; i++) {
 				if (!players[i] && i <= starting) {
 					starting++;
 				}
