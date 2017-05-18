@@ -198,46 +198,48 @@ function clearDice() {
 	}
 }
 
-function createScoreRow(index, name) {
-	return createDom('tr', {}, [
-		createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),
-		createDom('td', {id: 'name' + index}, createDom('input', {size: 10, value: name || ''})),
-		createDom('td', {id: 'money' + index, className: 'money'}),
-		createDom('td', {id: 'playLink' + index}),
-	]);
-}
-
 var maxPlayers = 6;
 var players = [];
 var playing = -1;
 var questions = [];
 
-var board = document.body.appendChild(createDom('div', {id: 'board'}));
+(function () {
+	function createScoreRow(index, name) {
+		return createDom('tr', {}, [
+			createDom('td', {}, createDom('span', {className: 'player' + index}, '👤')),
+			createDom('td', {id: 'name' + index}, createDom('input', {size: 10, value: name || ''})),
+			createDom('td', {id: 'money' + index, className: 'money'}),
+			createDom('td', {id: 'playLink' + index}),
+		]);
+	}
 
-var scoreTable = board.appendChild(createDom('table', {id: 'score'}));
-var defaultNames = ['Jakub', 'Kryštof', 'Prokop'];
-for (var i = 0; i < maxPlayers; i++) {
-	scoreTable.appendChild(createScoreRow(i, defaultNames[i]));
-}
-document.getElementById('playLink' + (maxPlayers - 1)).appendChild(createDom('span', {id: 'playLink'}, [
-	createDom('button', {}, translate('Play')), ' [Space]',
-]));
+	var board = document.body.appendChild(createDom('div', {id: 'board'}));
 
-board.appendChild(createDom('button', {id: 'restart'}, translate('Restart')));
-board.appendChild(createDom('div', {className: 'buttons'}, [
-	createDom('button', {className: 'confirm'}, translate('Confirm')), ' [Enter]',
-	createDom('button', {className: 'cancel', disabled: true}, translate('Cancel')), ' [Esc]',
-]));
-board.appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
-board.appendChild(createDom('div', {id: 'message'}));
+	var scoreTable = board.appendChild(createDom('table', {id: 'score'}));
+	var defaultNames = ['Jakub', 'Kryštof', 'Prokop'];
+	for (var i = 0; i < maxPlayers; i++) {
+		scoreTable.appendChild(createScoreRow(i, defaultNames[i]));
+	}
+	document.getElementById('playLink' + (maxPlayers - 1)).appendChild(createDom('span', {id: 'playLink'}, [
+		createDom('button', {}, translate('Play')), ' [Space]',
+	]));
 
-for (var i = 0, field; field = fields[i]; i++) {
-	field.index = i;
-	var pos = position(i);
-	field.div = createDom('div', {
-		className: 'field',
-		style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
-		innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
-	});
-	board.appendChild(field.div);
-}
+	board.appendChild(createDom('button', {id: 'restart'}, translate('Restart')));
+	board.appendChild(createDom('div', {className: 'buttons'}, [
+		createDom('button', {className: 'confirm'}, translate('Confirm')), ' [Enter]',
+		createDom('button', {className: 'cancel', disabled: true}, translate('Cancel')), ' [Esc]',
+	]));
+	board.appendChild(createDom('div', {id: 'dice'}, createDom('span', {id: 'dice1'})));
+	board.appendChild(createDom('div', {id: 'message'}));
+
+	for (var i = 0, field; field = fields[i]; i++) {
+		field.index = i;
+		var pos = position(i);
+		field.div = createDom('div', {
+			className: 'field',
+			style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+			innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
+		});
+		board.appendChild(field.div);
+	}
+})();
