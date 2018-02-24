@@ -2,7 +2,8 @@
 	var currentCard;
 	var hand = {};
 
-	var conn = new WebSocket('ws://192.168.0.100:3255');
+	var server = (window.URL ? new URL(document.location).searchParams.get('server') : null);
+	var conn = new WebSocket('ws://' + (server || '192.168.0.100:3255'));
 	conn.onmessage = function (e) {
 		var msg = JSON.parse(e.data);
 		document.getElementById('message').innerHTML = msg.message;
