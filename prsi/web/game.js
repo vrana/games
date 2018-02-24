@@ -3,7 +3,7 @@
 	var hand = {};
 
 	var server = (window.URL ? new URL(document.location).searchParams.get('server') : null);
-	var conn = new WebSocket('ws://' + (server || '192.168.0.100:3255'));
+	var conn = new WebSocket('ws://' + (server || location.hostname || '192.168.0.100') + ':3255');
 	var playing;
 	conn.onmessage = function (e) {
 		var msg = JSON.parse(e.data);
