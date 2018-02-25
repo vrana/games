@@ -132,4 +132,8 @@
 			conn.send(JSON.stringify({name: name}));
 		}
 	};
+	
+	conn.onclose = function (event) {
+		document.getElementById('message').innerHTML = 'Server not connected.';
+	};
 })();
