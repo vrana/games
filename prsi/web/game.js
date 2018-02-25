@@ -34,20 +34,20 @@
 		if (msg.cards) {
 			for (var i = 0; i < msg.cards.length; i++) {
 				var card = msg.cards[i];
-				var img = createDom('img', {src: 'cards/card' + card + '.png', card: card, onclick: cardClick});
+				var img = createDom('img', {src: 'cards/card' + card + '.jpg', card: card, onclick: cardClick});
 				document.getElementById('hand').appendChild(img);
 				hand[card] = img;
 			}
 		}
 		if ('upcard' in msg && msg.upcard != 32) {
 			var transform = 'transform: rotate(' + Math.round(Math.random() * 14 - 7) + 'deg);';
-			document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/card' + msg.upcard + '.png', style: transform}));
+			document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/card' + msg.upcard + '.jpg', style: transform}));
 			if (msg.upcard in hand) {
 				hand[msg.upcard].parentElement.removeChild(hand[msg.upcard]);
 				delete hand[msg.upcard];
 			}
 			if ('suit' in msg) {
-				document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/suit' + msg.suit + '.png', className: 'suit', style: transform}));
+				document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/suit' + msg.suit + '.jpg', className: 'suit', style: transform}));
 			}
 		}
 		if ('action' in msg) {
@@ -72,7 +72,7 @@
 		var td = document.getElementById('players').rows[row].cells[2];
 		td.innerHTML = '';
 		for (var j = 0; j < count; j++) {
-			td.appendChild(createDom('img', {'src': 'cards/card32.png'}));
+			td.appendChild(createDom('img', {'src': 'cards/card32.jpg'}));
 		}
 	}
 

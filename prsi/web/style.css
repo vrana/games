@@ -1,12 +1,14 @@
 body { background: white; color: black; }
+img { width: 121px; height: 202px; }
 #deck { position: relative; float: left; margin: 2em; }
-#topdeck { position: absolute; top: -2px; left: -2px; cursor: pointer; }
+#topdeck { cursor: pointer; }
 #upcard { position: relative; }
 #upcard img { position: absolute; margin: 2em; }
 #upcard .suit { background-color: white; border: 1px solid gray; border-radius: 50%; }
-#players { position: absolute; top: 2em; left: 300px; }
+#players { position: absolute; top: 2em; left: 400px; }
 #players img { width: 13px; height: 21px; margin-right: 2px; }
 #hand { clear: left; }
 #hand img { cursor: pointer; margin: 2px; }
 #suits { display: none; }
 #suits img { cursor: pointer; margin: 0 10px; }
+#suits img, #upcard .suit { width: 53px; height: 53px; }
