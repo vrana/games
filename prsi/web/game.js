@@ -95,8 +95,8 @@
 		send({card: currentCard, suit: event.target.suit});
 	}
 	
-	function send(data) {
-		document.getElementById('message').innerHTML = 'Sending';
+	function send(card) {
+		document.getElementById('message').innerHTML = 'Sending...';
 		conn.send(JSON.stringify(data));
 	}
 
