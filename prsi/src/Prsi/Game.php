@@ -135,6 +135,7 @@ class Game {
 			if (!count($hand)) {
 				$data['sound'] = "vyhral-jsem";
 			}
+			array_unshift($this->deck, $this->upcard);
 			$this->upcard = $upcard;
 		}
 		$this->hands[$from] = $hand;
