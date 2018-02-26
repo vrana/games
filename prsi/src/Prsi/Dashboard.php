@@ -25,7 +25,7 @@ class Dashboard implements MessageComponentInterface {
 	
 	function onMessage(ConnectionInterface $from, $msg) {
 		$game = $this->clients[$from];
-		$game->play($from, $msg);
+		$game->play($from, json_decode($msg, true));
 	}
 
 	function onClose(ConnectionInterface $conn) {
