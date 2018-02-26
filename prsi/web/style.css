@@ -4,6 +4,8 @@ body { background: white; color: black; }
 #upcard { position: relative; }
 #upcard img { position: absolute; margin: 2em; }
 #upcard .suit { background-color: white; border: 1px solid gray; border-radius: 50%; }
+#players { position: absolute; top: 2em; left: 300px; }
+#players img { width: 13px; height: 21px; margin-right: 2px; }
 #hand { clear: left; }
 #hand img { cursor: pointer; margin: 2px; }
 #suits { display: none; }

@@ -11,6 +11,19 @@
 			document.getElementById('upcard').innerHTML = '';
 			document.getElementById('hand').innerHTML = '';
 			document.getElementById('suits').style.display = 'none';
+			var players = document.getElementById('players').tBodies[0];
+			players.innerHTML = '';
+			for (var i = 1; i < msg.start; i++) {
+				var imgs = [];
+				for (var j = 0; j < 4; j++) {
+					imgs.push(createDom('img', {'src': 'cards/card32.png'}));
+				}
+				players.appendChild(createDom('tr', {}, [
+					createDom('td'),
+					createDom('td', {}, 'Player ' + (i + 1)),
+					createDom('td', {}, imgs)
+				]));
+			}
 		}
 		if (msg.sound && window.Audio) {
 			var audio = new Audio('sounds/' + msg.sound + '.mp3');
