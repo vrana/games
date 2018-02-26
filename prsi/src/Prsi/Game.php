@@ -38,7 +38,8 @@ class Game {
 				'cards' => array_keys($this->hands[$player]),
 				'upcard' => $this->upcard,
 				'action' => ($playing == $player ? $this->getAction() : ''),
-				'start' => true,
+				'start' => count($this->players),
+				'playing' => (count($this->players) - $i) % count($this->players),
 			);
 			if ($this->getRank($this->upcard) == self::RANK_QUEEN) {
 				$data['suit'] = $this->getSuit($this->upcard);
@@ -119,8 +120,9 @@ class Game {
 		$this->hands[$from] = $hand;
 		
 		$nextPlayer = $this->nextPlayer();
-		foreach ($this->players as $player) {
+		foreach ($this->players as $i => $player) {
 			$data['action'] = ($player == $nextPlayer ? $this->getAction() : '');
+			$data['playing'] = (key($this->playing) - $i + count($this->players)) % count($this->players);
 			Client::send($player, ($from == $player && !count($this->hands[$player]) ? "You won." : ($player == $nextPlayer ? "You play." : "")), $data);
 		}
 		if (!count($this->hands[$from])) {

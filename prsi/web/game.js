@@ -4,6 +4,7 @@
 
 	var server = (window.URL ? new URL(document.location).searchParams.get('server') : null);
 	var conn = new WebSocket('ws://' + (server || '192.168.0.100:3255'));
+	var playing;
 	conn.onmessage = function (e) {
 		var msg = JSON.parse(e.data);
 		document.getElementById('message').innerHTML = msg.message;
@@ -11,6 +12,7 @@
 			document.getElementById('upcard').innerHTML = '';
 			document.getElementById('hand').innerHTML = '';
 			document.getElementById('suits').style.display = 'none';
+			playing = 0;
 			var players = document.getElementById('players').tBodies[0];
 			players.innerHTML = '';
 			for (var i = 1; i < msg.start; i++) {
@@ -50,6 +52,11 @@
 		}
 		if ('action' in msg) {
 			document.getElementById('action').innerHTML = (msg.action ? msg.action : '&nbsp;');
+		}
+		if ('playing' in msg) {
+			document.getElementById('players').rows[playing].firstChild.textContent = '';
+			playing = msg['playing'];
+			document.getElementById('players').rows[playing].firstChild.textContent = '➡';
 		}
 	};
 
