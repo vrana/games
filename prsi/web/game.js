@@ -19,30 +19,20 @@
 		if (msg.cards) {
 			for (var i = 0; i < msg.cards.length; i++) {
 				var card = msg.cards[i];
-				var img = document.createElement('img');
-				img.src = 'cards/card' + card + '.png';
-				img.card = card;
-				img.onclick = cardClick;
+				var img = createDom('img', {src: 'cards/card' + card + '.png', card: card, onclick: cardClick});
 				document.getElementById('hand').appendChild(img);
 				hand[card] = img;
 			}
 		}
 		if ('upcard' in msg && msg.upcard != 32) {
-			var img = document.createElement('img');
-			img.src = 'cards/card' + msg.upcard + '.png';
-			var transform = 'rotate(' + Math.round(Math.random() * 14 - 7) + 'deg)';
-			img.style.transform = transform;
-			document.getElementById('upcard').appendChild(img);
+			var transform = 'transform: rotate(' + Math.round(Math.random() * 14 - 7) + 'deg);';
+			document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/card' + msg.upcard + '.png', style: transform}));
 			if (msg.upcard in hand) {
 				hand[msg.upcard].parentElement.removeChild(hand[msg.upcard]);
 				delete hand[msg.upcard];
 			}
 			if ('suit' in msg) {
-				var img = document.createElement('img');
-				img.src = 'cards/suit' + msg.suit + '.png';
-				img.className = 'suit';
-				img.style.transform = transform;
-				document.getElementById('upcard').appendChild(img);
+				document.getElementById('upcard').appendChild(createDom('img', {src: 'cards/suit' + msg.suit + '.png', className: 'suit', style: transform}));
 			}
 		}
 		if ('action' in msg) {
@@ -74,6 +64,18 @@
 		conn.send(JSON.stringify(data));
 	}
 
+	function createDom(tag, attributes, content) {
+		var el = document.createElement(tag);
+		for (var key in attributes || {}) {
+			el[key] = attributes[key];
+		}
+		var contents = (content instanceof Array ? content : [content]);
+		for (var i = 0; content = contents[i]; i++) {
+			el.appendChild(typeof content == 'string' ? document.createTextNode(content) : content);
+		}
+		return el;
+	}
+	
 	document.getElementById('topdeck').card = 32;
 	document.getElementById('topdeck').onclick = cardClick;
 	var imgs = document.getElementById('suits').getElementsByTagName('img');
