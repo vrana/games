@@ -56,7 +56,7 @@
 			document.getElementById('suits').style.display = 'block';
 		} else {
 			document.getElementById('suits').style.display = 'none';
-			send(currentCard);
+			send({'card': currentCard});
 		}
 	}
 
@@ -66,12 +66,12 @@
 
 	function suitClick(event) {
 		document.getElementById('suits').style.display = 'none';
-		send(currentCard + event.target.suit);
+		send({'card': currentCard, 'suit': event.target.suit});
 	}
 	
-	function send(card) {
+	function send(data) {
 		document.getElementById('message').innerHTML = 'Sending';
-		conn.send(card);
+		conn.send(JSON.stringify(data));
 	}
 
 	document.getElementById('topdeck').card = 32;

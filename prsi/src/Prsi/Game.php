@@ -58,12 +58,12 @@ class Game {
 	}
 	
 	function play(ConnectionInterface $from, $msg) {
+		$input = json_decode($msg, true);
 		if ($from != current($this->playing)) {
 			Client::send($from, "Not your turn.");
 			return;
 		}
-		$card = trim($msg, "\r\nabcd");
-		$suit = trim($msg, "\r\n0123456789");
+		$card = $input['card'];
 		$data = array('upcard' => $card);
 		
 		$hand = $this->hands[$from];
@@ -95,11 +95,11 @@ class Game {
 			}
 			$upcard = $card;
 			if ($this->getRank($card) == self::RANK_QUEEN) {
-				if (!$suit) {
+				if (empty($input['suit'])) {
 					Client::send($from, "Choose suit.");
 					return;
 				}
-				$data['suit'] = ord($suit) - ord('a');
+				$data['suit'] = ord($input['suit']) - ord('a');
 				$data['sound'] = "suit-$data[suit]";
 				$upcard = 8 * $data['suit'] + $card % 8;
 			} elseif ($this->getSuit($this->upcard) != $this->getSuit($card) && $this->getRank($this->upcard) != $this->getRank($card)) {
