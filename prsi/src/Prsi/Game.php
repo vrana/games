@@ -8,7 +8,6 @@ class Game {
 	const RANK_ACE = 7;
 	
 	public $players;
-	public $names;
 	private $deck;
 	private $hands;
 	private $playing;
@@ -34,8 +33,13 @@ class Game {
 		}
 		$this->upcard = array_pop($this->deck);
 		$this->toDraw = ($this->getRank($this->upcard) == self::RANK_SEVEN ? 2 : ($this->getRank($this->upcard) == self::RANK_ACE ? 0 : 1));
-		$names = $this->names;
 		foreach ($this->players as $i => $player) {
+			$names = array();
+			foreach ($this->playing as $j => $player2) {
+				if ($player != $player2 && !empty($this->players[$player2])) {
+					$names[($j - $i + count($this->players)) % count($this->players)] = $this->players[$player2];
+				}
+			}
 			$data = array(
 				'cards' => array_keys($this->hands[$player]),
 				'upcard' => $this->upcard,
@@ -44,7 +48,6 @@ class Game {
 				'playing' => (count($this->players) - $i) % count($this->players),
 				'names' => $names,
 			);
-			$names[] = array_shift($names);
 			if ($this->getRank($this->upcard) == self::RANK_QUEEN) {
 				$data['suit'] = $this->getSuit($this->upcard);
 				$data['sound'] = "suit-$data[suit]";
@@ -61,6 +64,19 @@ class Game {
 	}
 	
 	function play(ConnectionInterface $from, $msg) {
+		if (isset($msg['name'])) {
+			$name = iconv_substr($msg['name'], 0, 20, 'utf-8');
+			$this->players->attach($from, $name);
+			$index = array_search($from, iterator_to_array($this->players));
+			foreach ($this->players as $i => $player) {
+				if ($from != $player) {
+					Client::send($player, null, array('names' => array(
+						($index - $i + count($this->players)) % count($this->players) => $name
+					)));
+				}
+			}
+			return;
+		}
 		if ($from != current($this->playing)) {
 			Client::send($from, "Not your turn.");
 			return;
@@ -77,7 +93,7 @@ class Game {
 				$cards[] = $drawn;
 			}
 			if ($cards) {
-				Client::send($from, "", array('cards' => $cards));
+				Client::send($from, null, array('cards' => $cards));
 			}
 			$data['sound'] = ($this->toDraw ? 'lizu' : 'stojim');
 			$this->toDraw = 1;

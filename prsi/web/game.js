@@ -7,7 +7,9 @@
 	var playing;
 	conn.onmessage = function (e) {
 		var msg = JSON.parse(e.data);
-		document.getElementById('message').innerHTML = msg.message;
+		if (msg.message) {
+			document.getElementById('message').innerHTML = msg.message;
+		}
 		if (msg.start) {
 			document.getElementById('upcard').innerHTML = '';
 			document.getElementById('hand').innerHTML = '';
@@ -61,12 +63,7 @@
 		}
 		if ('names' in msg) {
 			for (var key in msg.names) {
-				var name = msg.names[key];
-				if (key == 0) {
-					document.getElementById('name').value = name;
-				} else {
-					document.getElementById('players').rows[key].cells[1].textContent = name;
-				}
+				document.getElementById('players').rows[key].cells[1].textContent = msg.names[key];
 			}
 		}
 	};
@@ -85,7 +82,7 @@
 			document.getElementById('suits').style.display = 'block';
 		} else {
 			document.getElementById('suits').style.display = 'none';
-			send({'card': currentCard});
+			send({card: currentCard});
 		}
 	}
 
@@ -95,7 +92,7 @@
 
 	function suitClick(event) {
 		document.getElementById('suits').style.display = 'none';
-		send({'card': currentCard, 'suit': event.target.suit});
+		send({card: currentCard, suit: event.target.suit});
 	}
 	
 	function send(data) {
@@ -122,4 +119,17 @@
 		imgs[i].suit = String.fromCharCode('a'.charCodeAt(0) + i);
 		imgs[i].onclick = suitClick;
 	}
+	
+	document.getElementById('name').value = sessionStorage.getItem('name') || localStorage.getItem('name');
+	document.getElementById('name').onchange = function () {
+		sessionStorage.setItem('name', this.value);
+		localStorage.setItem('name', this.value);
+		conn.send(JSON.stringify({name: this.value}));
+	};
+	conn.onopen = function () {
+		var name = sessionStorage.getItem('name') || localStorage.getItem('name');
+		if (name) {
+			conn.send(JSON.stringify({name: name}));
+		}
+	};
 })();
