@@ -12,6 +12,7 @@
 			document.getElementById('upcard').innerHTML = '';
 			document.getElementById('hand').innerHTML = '';
 			document.getElementById('suits').style.display = 'none';
+			hand = {};
 			playing = 0;
 			var players = document.getElementById('players').tBodies[0];
 			players.innerHTML = '';
