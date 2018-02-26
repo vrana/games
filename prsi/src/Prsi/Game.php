@@ -41,12 +41,10 @@ class Game {
 				'start' => true,
 			);
 			if ($this->getRank($this->upcard) == self::RANK_QUEEN) {
-				$data['sound'] = 'suit-' . $this->getSuit($this->upcard);
+				$data['suit'] = $this->getSuit($this->upcard);
+				$data['sound'] = "suit-$data[suit]";
 			} elseif ($this->toDraw != 1) {
 				$data['sound'] = "beres-$this->toDraw";
-			}
-			if ($this->getRank($this->upcard) == self::RANK_QUEEN) {
-				$data['suit'] = $this->getSuit($this->upcard);
 			}
 			Client::send($player, ($i ? "" : "You play."), $data);
 		}
