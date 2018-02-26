@@ -8,6 +8,7 @@ class Game {
 	const RANK_ACE = 7;
 	
 	public $players;
+	public $names;
 	private $deck;
 	private $hands;
 	private $playing;
@@ -33,6 +34,7 @@ class Game {
 		}
 		$this->upcard = array_pop($this->deck);
 		$this->toDraw = ($this->getRank($this->upcard) == self::RANK_SEVEN ? 2 : ($this->getRank($this->upcard) == self::RANK_ACE ? 0 : 1));
+		$names = $this->names;
 		foreach ($this->players as $i => $player) {
 			$data = array(
 				'cards' => array_keys($this->hands[$player]),
@@ -40,7 +42,9 @@ class Game {
 				'action' => ($playing == $player ? $this->getAction() : ''),
 				'start' => count($this->players),
 				'playing' => (count($this->players) - $i) % count($this->players),
+				'names' => $names,
 			);
+			$names[] = array_shift($names);
 			if ($this->getRank($this->upcard) == self::RANK_QUEEN) {
 				$data['suit'] = $this->getSuit($this->upcard);
 				$data['sound'] = "suit-$data[suit]";

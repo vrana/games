@@ -18,7 +18,7 @@
 			for (var i = 1; i < msg.start; i++) {
 				players.appendChild(createDom('tr', {}, [
 					createDom('td'),
-					createDom('td', {}, 'Player ' + (i + 1)),
+					createDom('td'),
 					createDom('td')
 				]));
 				renderCount(i, 4);
@@ -57,6 +57,17 @@
 			document.getElementById('players').rows[playing].firstChild.textContent = '';
 			playing = msg['playing'];
 			document.getElementById('players').rows[playing].firstChild.textContent = '➡';
+		}
+		if ('names' in msg) {
+			var players = document.getElementById('players');
+			for (var key in msg.names) {
+				var name = msg.names[key];
+				if (key == 0) {
+					players.rows[key].cells[1].firstChild.value = name;
+				} else {
+					players.rows[key].cells[1].textContent = name;
+				}
+			}
 		}
 	};
 	
