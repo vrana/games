@@ -123,6 +123,7 @@ class Game {
 		foreach ($this->players as $i => $player) {
 			$data['action'] = ($player == $nextPlayer ? $this->getAction() : '');
 			$data['playing'] = (key($this->playing) - $i + count($this->players)) % count($this->players);
+			$data['count'] = count($hand);
 			Client::send($player, ($from == $player && !count($this->hands[$player]) ? "You won." : ($player == $nextPlayer ? "You play." : "")), $data);
 		}
 		if (!count($this->hands[$from])) {

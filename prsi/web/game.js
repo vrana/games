@@ -16,15 +16,12 @@
 			var players = document.getElementById('players').tBodies[0];
 			players.innerHTML = '';
 			for (var i = 1; i < msg.start; i++) {
-				var imgs = [];
-				for (var j = 0; j < 4; j++) {
-					imgs.push(createDom('img', {'src': 'cards/card32.png'}));
-				}
 				players.appendChild(createDom('tr', {}, [
 					createDom('td'),
 					createDom('td', {}, 'Player ' + (i + 1)),
-					createDom('td', {}, imgs)
+					createDom('td')
 				]));
+				renderCount(i, 4);
 			}
 		}
 		if (msg.sound && window.Audio) {
@@ -53,12 +50,23 @@
 		if ('action' in msg) {
 			document.getElementById('action').innerHTML = (msg.action ? msg.action : '&nbsp;');
 		}
+		if ('count' in msg && playing) {
+			renderCount(playing, msg.count);
+		}
 		if ('playing' in msg) {
 			document.getElementById('players').rows[playing].firstChild.textContent = '';
 			playing = msg['playing'];
 			document.getElementById('players').rows[playing].firstChild.textContent = '➡';
 		}
 	};
+	
+	function renderCount(row, count) {
+		var td = document.getElementById('players').rows[row].cells[2];
+		td.innerHTML = '';
+		for (var j = 0; j < count; j++) {
+			td.appendChild(createDom('img', {'src': 'cards/card32.png'}));
+		}
+	}
 
 	function cardClick(event) {
 		currentCard = event.target.card;
