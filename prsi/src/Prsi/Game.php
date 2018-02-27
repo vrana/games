@@ -58,6 +58,21 @@ class Game {
 		}
 	}
 	
+	private function sound($action) {
+		$name = $this->friendlyUrl($this->players[current($this->playing)]);
+		return ($name != "" && file_exists(__DIR__ . "/../../web/sounds/$name/$action.mp3") ? "$name/" : "") . $action;
+	}
+	
+	private function friendlyUrl($name) {
+		$return = $name;
+		$return = preg_replace('~[^\\pL0-9_]+~u', '-', $return);
+		$return = trim($return, '-');
+		$return = iconv('utf-8', 'us-ascii//TRANSLIT', $return);
+		$return = strtolower($return);
+		$return = preg_replace('~[^-a-z0-9_]+~', '', $return);
+		return $return;
+	}
+	
 	private function getAction() {
 		$toDraw = min($this->toDraw, count($this->deck));
 		return ($toDraw == 0 ? 'pass' : 'draw' . ($toDraw != 1 ? " $this->toDraw" : ""));
@@ -95,7 +110,7 @@ class Game {
 			if ($cards) {
 				Client::send($from, null, array('cards' => $cards));
 			}
-			$data['sound'] = ($this->toDraw ? 'draw' : 'pass');
+			$data['sound'] = $this->sound(($this->toDraw ? 'draw' : 'pass'));
 			$this->toDraw = 1;
 		} else {
 			if (!isset($this->hands[$from][$card])) {
@@ -118,7 +133,7 @@ class Game {
 					return;
 				}
 				$data['suit'] = ord($msg['suit']) - ord('a');
-				$data['sound'] = "suit-$data[suit]";
+				$data['sound'] = $this->sound("suit-$data[suit]");
 				$upcard = 8 * $data['suit'] + $card % 8;
 			} elseif ($this->getSuit($this->upcard) != $this->getSuit($card) && $this->getRank($this->upcard) != $this->getRank($card)) {
 				Client::send($from, "You can play only a card with the same suit or rank.");
@@ -126,14 +141,14 @@ class Game {
 			}
 			if ($this->getRank($card) == self::RANK_SEVEN) {
 				$this->toDraw = ($this->toDraw == 1 ? 2 : $this->toDraw + 2);
-				$data['sound'] = "draw-$this->toDraw";
+				$data['sound'] = $this->sound("draw-$this->toDraw");
 			} elseif ($this->getRank($card) == self::RANK_ACE) {
 				$this->toDraw = 0;
-				$data['sound'] = "draw-0";
+				$data['sound'] = $this->sound("draw-0");
 			}
 			unset($hand[$card]);
 			if (!count($hand)) {
-				$data['sound'] = "i-win";
+				$data['sound'] = $this->sound("i-win");
 			}
 			array_unshift($this->deck, $this->upcard);
 			$this->upcard = $upcard;
