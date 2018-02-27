@@ -52,7 +52,7 @@ class Game {
 				$data['suit'] = $this->getSuit($this->upcard);
 				$data['sound'] = "suit-$data[suit]";
 			} elseif ($this->toDraw != 1) {
-				$data['sound'] = "beres-$this->toDraw";
+				$data['sound'] = "draw-$this->toDraw";
 			}
 			Client::send($player, ($i ? "" : "You play."), $data);
 		}
@@ -95,7 +95,7 @@ class Game {
 			if ($cards) {
 				Client::send($from, null, array('cards' => $cards));
 			}
-			$data['sound'] = ($this->toDraw ? 'lizu' : 'stojim');
+			$data['sound'] = ($this->toDraw ? 'draw' : 'pass');
 			$this->toDraw = 1;
 		} else {
 			if (!isset($this->hands[$from][$card])) {
@@ -126,14 +126,14 @@ class Game {
 			}
 			if ($this->getRank($card) == self::RANK_SEVEN) {
 				$this->toDraw = ($this->toDraw == 1 ? 2 : $this->toDraw + 2);
-				$data['sound'] = "beres-$this->toDraw";
+				$data['sound'] = "draw-$this->toDraw";
 			} elseif ($this->getRank($card) == self::RANK_ACE) {
 				$this->toDraw = 0;
-				$data['sound'] = "beres-0";
+				$data['sound'] = "draw-0";
 			}
 			unset($hand[$card]);
 			if (!count($hand)) {
-				$data['sound'] = "vyhral-jsem";
+				$data['sound'] = "i-win";
 			}
 			array_unshift($this->deck, $this->upcard);
 			$this->upcard = $upcard;
