@@ -87,7 +87,9 @@ Place.prototype.updateEarns = function () {
 
 Place.prototype.offerBetting = function (event) {
 	var player = players[getNextPlayerIndex()];
-	var bet = Math.min(this.getEarns() / 10 - this.betted, player.money > 0 ? player.money : 100);
+	var bet = Math.min(
+		Math.max(0, this.getEarns() / 10 + (player.lastBet || 0)) - this.betted,
+		player.money > 0 ? player.money : 100);
 	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + bet + '>';
 	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.bet.bind(this));
 	event.cancelBubble = true;
@@ -103,6 +105,7 @@ Place.prototype.bet = function (player) {
 	if (!player.tryPaying(price, this.owner)) {
 		return false;
 	}
-	this.betted = this.betted + price;
+	this.betted += price;
+	player.lastBet = this.betted - this.getEarns() / 10;
 	this.updateEarns();
 };

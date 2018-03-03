@@ -17,6 +17,7 @@ function load(state) {
 			players[i].position = player.position || 0;
 			players[i].jailed = player.jailed;
 			players[i].paused = player.paused;
+			players[i].lastBet = player.lastBet;
 			players[i].moveFigure();
 			players[i].refreshStats();
 		}
@@ -57,7 +58,7 @@ function save() {
 	for (var i = 0; i < maxPlayers; i++) {
 		var player = players[i];
 		if (player) {
-			state.players[i] = { name: player.name, money: player.money, position: player.position, jailed: player.jailed, paused: player.paused };
+			state.players[i] = { name: player.name, money: player.money, lastBet: player.lastBet, position: player.position, jailed: player.jailed, paused: player.paused };
 		}
 	}
 	
