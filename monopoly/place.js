@@ -70,18 +70,22 @@ Place.prototype.getEarns = function () {
 	return this.amounts[jailed && this.bettable ? 0 : this.upgrades];
 };
 
-Place.prototype.updateEarns = function () {
+Place.prototype.updateEarns = function (autoBet) {
 	this.div.querySelector('.earns').textContent = this.getEarns() - 10 * this.betted;
 	var player = players[getNextPlayerIndex()];
 	if (this.bettable && this.upgrades >= 3 && this.owner != player && player.canBet()) {
 		var distance = (this.index + fields.length - player.position) % fields.length;
+		var closeBet = (distance > 0 && distance <= 6);
 		var betLink = createDom('a', {
 			href: '',
-			className: (distance > 0 && distance <= 6 ? 'closeBet' : ''),
+			className: (closeBet ? 'closeBet' : ''),
 			onclick: this.offerBetting.bind(this)
 		}, translate('bet'));
 		this.div.querySelector('.earns').appendChild(document.createTextNode(' - '));
 		this.div.querySelector('.earns').appendChild(betLink);
+		if (autoBet && closeBet && player.lastBet != undefined && player.money > 0) {
+			this.bet(player, Math.min(player.money, this.getEarns() / 10 + player.lastBet));
+		}
 	}
 };
 
@@ -91,21 +95,25 @@ Place.prototype.offerBetting = function (event) {
 		Math.max(0, this.getEarns() / 10 + (player.lastBet || 0)) - this.betted,
 		player.money > 0 ? player.money : 100);
 	var input = '<input class=price type=number step=100 min=' + (-this.betted) + ' max=' + player.money + ' value=' + bet + '>';
-	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.bet.bind(this));
+	ask(translate('bet {$amount} on {$name}?', {amount: input, name: this.name}), player, this.tryBetting.bind(this));
 	event.cancelBubble = true;
 	return false;
 };
 
-Place.prototype.bet = function (player) {
+Place.prototype.tryBetting = function (player) {
 	var price = +last(document.getElementsByClassName('price')).value;
 	if (!price || price < -this.betted) {
 		say(translate('input a valid amount.'), player);
 		return false;
 	}
+	player.lastBet = this.betted + price - this.getEarns() / 10;
+	return this.bet(player, price);
+};
+
+Place.prototype.bet = function (player, price) {
 	if (!player.tryPaying(price, this.owner)) {
 		return false;
 	}
 	this.betted += price;
-	player.lastBet = this.betted - this.getEarns() / 10;
 	this.updateEarns();
 };

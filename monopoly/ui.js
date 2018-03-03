@@ -80,9 +80,9 @@ function play() {
 	}
 	
 	for (var i = 0, field; field = fields[i]; i++) {
-		if (field.betted) {
+		if (field.bettable) {
 			field.betted = 0;
-			field.updateEarns();
+			field.updateEarns(true);
 		}
 	}
 }
