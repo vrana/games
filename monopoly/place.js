@@ -106,7 +106,7 @@ Place.prototype.tryBetting = function (player) {
 		say(translate('input a valid amount.'), player);
 		return false;
 	}
-	player.lastBet = this.betted + price - this.getEarns() / 10;
+	player.lastBet = (price == -this.betted ? undefined : this.betted + price - this.getEarns() / 10);
 	return this.bet(player, price);
 };
 
