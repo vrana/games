@@ -138,6 +138,11 @@ window.onkeydown = function (event) {
 	}
 };
 
+window.onresize = function () {
+	document.body.style.zoom = (100 * Math.min(innerWidth / 1438, innerHeight / 756)) + '%';
+};
+window.onresize();
+
 document.querySelector('#playLink button').onclick = playAndSave;
 document.querySelector('.confirm').onclick = doConfirm;
 document.querySelector('.cancel').onclick = cancel;
