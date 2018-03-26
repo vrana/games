@@ -12,16 +12,16 @@ document.getElementById('field').onclick = function (event) {
 };
 
 function find5(td, dx, dy) {
-	return findLength(td, dx, dy) + findLength(td, -dx, -dy) >= 4;
+	return findLength(td, dx, dy) + 1 + findLength(td, -dx, -dy) >= 5;
 }
 
 function findLength(td, dx, dy) {
 	var tr = td.parentNode;
-	var tbody = tr.parentNode;
+	var rows = tr.parentNode.rows;
 	var x = indexOf(tr.cells, td) + dx;
-	var y = indexOf(tbody.rows, tr) + dy;
+	var y = indexOf(rows, tr) + dy;
 	var result = 0;
-	while (tbody.rows[y] && tbody.rows[y].cells[x] && tbody.rows[y].cells[x].textContent == td.textContent) {
+	while (rows[y] && rows[y].cells[x] && rows[y].cells[x].textContent == td.textContent) {
 		result++;
 		x += dx;
 		y += dy;
