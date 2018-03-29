@@ -121,6 +121,9 @@ var Keys = {
 };
 
 window.onkeydown = function (event) {
+	if (event.altKey || event.ctrlKey || event.shiftKey || event.metaKey) {
+		return;
+	}
 	switch (event.keyCode) {
 		case Keys.SPACE:
 			if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement)) {
