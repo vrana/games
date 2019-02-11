@@ -23,7 +23,7 @@ document.querySelector('#play').onclick = function () {
 };
 
 document.querySelector('#dices').onclick = function (event) {
-	if (event.target.tagName == 'A') {
+	if (round != 3 && event.target.tagName == 'A') {
 		event.target.classList.toggle('unpinned');
 	}
 }
