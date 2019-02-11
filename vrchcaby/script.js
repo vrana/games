@@ -111,6 +111,8 @@ function roll() {
 	var picked = document.querySelector('.picked');
 	if (round == 3 || picked && !unpinned.length) {
 		if (round < 3) {
+			round = 3;
+			setUnpinned(picked);
 			compute();
 		}
 		play();
