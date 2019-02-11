@@ -4,10 +4,10 @@ td, th { border: 1px solid gray; }
 th:nth-child(2) { text-align: left; }
 th:last-child { text-align: right; }
 td { min-width: 30px; text-align: right; }
-a { cursor: pointer; }
+a { cursor: pointer; display: inline-block; }
 #dices { font-size: 30px; padding: 50px; }
 .hidden { display: none; }
 .unpinned { color: silver; }
 .playing td { cursor: pointer; background-color: silver; }
 .playing td.played { cursor: default; background-color: white; }
-.playing td.picked { background-color: yellow; }
+.picked { background-color: yellow !important; }
