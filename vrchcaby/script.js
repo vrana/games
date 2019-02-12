@@ -1,20 +1,31 @@
 var playing;
 var round;
 
+var storage = JSON.parse(localStorage.getItem('vrchcaby'));
+if (storage && storage.names) {
+	var tbody = document.querySelector('tbody');
+	for (var i = 0; i < tbody.rows.length; i++) {
+		tbody.rows[i].cells[1].firstChild.value = storage.names[i] || '';
+	}
+}
+
 function rand(max) {
 	return Math.floor(Math.random() * max);
 }
 
 document.querySelector('#play').onclick = function () {
 	var tbody = document.querySelector('tbody');
+	var names = [];
 	for (var i = tbody.rows.length - 1; i >= 0; i--) {
 		var name = tbody.rows[i].cells[1].firstChild.value;
 		if (!name) {
 			tbody.rows[i].remove();
 		} else {
 			tbody.rows[i].cells[1].textContent = name;
+			names[i] = name;
 		}
 	}
+	localStorage.setItem('vrchcaby', JSON.stringify({names: names}));
 	playing = rand(tbody.rows.length);
 	document.querySelector('tbody').rows[playing].cells[0].textContent = '➜';
 	document.querySelector('table').rows[0].cells[0].textContent = '';
