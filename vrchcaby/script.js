@@ -69,8 +69,8 @@ function setUnpinned(td) {
 				dices[i].classList.toggle('unpinned', diceValue(dices[i]) != kind);
 			}
 			return;
-		case 'MŘ': return setUnpinnedSet(new Set([1, 2, 3, 4, 5]));
-		case 'VŘ': return setUnpinnedSet(new Set([2, 3, 4, 5, 6]));
+		case '1–5': return setUnpinnedSet(new Set([1, 2, 3, 4, 5]));
+		case '2–6': return setUnpinnedSet(new Set([2, 3, 4, 5, 6]));
 		case '3+2': return setUnpinnedMin(3);
 		case '4+1': return setUnpinnedMin(4);
 	}
