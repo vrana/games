@@ -180,7 +180,7 @@ function end() {
 	}
 	for (var i = 0; i < rows.length; i++) {
 		if (max == rows[i].cells[rows[i].cells.length - 1].textContent) {
-			document.querySelector('tbody').rows[i].cells[0].textContent = '➜';
+			document.querySelector('tbody').rows[i].cells[0].textContent = '🏆';
 		}
 	}
 }
