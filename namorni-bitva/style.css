@@ -1,0 +1,7 @@
+#me, #you { position: absolute; top: 1em; }
+#you { left: 20em; cursor: pointer; }
+.field { border-collapse: collapse; user-select: none; }
+.field td { border: 1px solid silver; width: 1.25em; height: 1.25em; text-align: center; }
+.boat { background-color: yellow; }
+.hit { background-color: red; }
+.water { background-color: cyan; }
