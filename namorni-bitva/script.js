@@ -72,7 +72,7 @@ for (let j=0; j < meField.length; j++) {
 
 document.querySelector('#you').onclick = function (event) {
 	var target = event.target;
-	if (target.tagName != 'TD' || target.className) {
+	if (target.tagName != 'TD' || getComputedStyle(target).cursor != 'pointer') {
 		return;
 	}
 	let y = index(target.parentNode);
@@ -88,7 +88,9 @@ document.querySelector('#you').onclick = function (event) {
 function shoot(field, x, y, id) {
 	if (field[y][x]) {
 		setFieldAndClassName(field, id, x, y, 'hit');
-		maybeSink(field, id, x, y, [x + "x" + y]);
+		if (isSunken(field, x, y)) {
+			sink(field, id, x, y);
+		}
 		for (let row of field) {
 			for (let cell of row) {
 				if (cell == 1) {
@@ -113,23 +115,34 @@ function shoot(field, x, y, id) {
 	}
 }
 
-function maybeSink(field, id, x, y, checked) {
+function isSunken(field, x, y, checked = {}) {
+	if (checked[x + 'x' + y]) {
+		return true;
+	}
+	checked[x + 'x' + y] = true;
 	for (let [i, j] of [[1,0], [-1,0], [0,1], [0,-1]]) {
-		let s = (x+i) + "x" + (y+j);
-		if (checked.indexOf(s) == -1 && (
-				get(field, x+i, y+j) == 1
-				|| (get(field, x+i, y+j) == 'hit' && !maybeSink(field, id, x+i, y+j, checked.concat(s))))) {
+		if (get(field, x+i, y+j) == 1
+				|| (get(field, x+i, y+j) == 'hit' && !isSunken(field, x+i, y+j, checked))) {
 			return false;
 		}
 	}
+	return true;
+}
+
+function sink(field, id, x, y, checked = {}) {
+	if (checked[x + 'x' + y]) {
+		return;
+	}
+	checked[x + 'x' + y] = true;
 	for (let j=-1; j <= 1; j++) {
 		for (let i=-1; i <= 1; i++) {
 			if (get(field, x+i, y+j) == undefined) {
 				setFieldAndClassName(field, id, x+i, y+j, 'water');
+			} else if (get(field, x+i, y+j) == 'hit') {
+				sink(field, id, x+i, y+j, checked);
 			}
 		}
 	}
-	return true;
 }
 
 function setFieldAndClassName(field, id, x, y, className) {
