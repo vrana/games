@@ -1,6 +1,8 @@
-#me, #you { position: absolute; top: 1em; }
-#you { left: 20em; cursor: pointer; }
-#you .water, #you .hit { cursor: default; }
+#me, #you, #status { position: absolute; top: 1em; }
+#you { left: 20em; }
+#status { top: 16em; }
+.clickable { cursor: pointer; }
+.clickable .water, .clickable .hit { cursor: default; }
 .field { border-collapse: collapse; user-select: none; }
 .field td { border: 1px solid silver; width: 1.25em; height: 1.25em; text-align: center; }
 .boat { background-color: yellow; }

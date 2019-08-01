@@ -89,6 +89,16 @@ function shoot(field, x, y, id) {
 	if (field[y][x]) {
 		setFieldAndClassName(field, id, x, y, 'hit');
 		maybeSink(field, id, x, y, [x + "x" + y]);
+		for (let row of field) {
+			for (let cell of row) {
+				if (cell == 1) {
+					return;
+				}
+			}
+		}
+		document.getElementById('status').textContent = 'End of game.';
+		document.querySelector('#you').onclick = function () {};
+		document.querySelector('#you').classList.remove('clickable');
 	} else {
 		setFieldAndClassName(field, id, x, y, 'water');
 		for (let i=1; i < field.length; i++) {
