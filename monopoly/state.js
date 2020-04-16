@@ -92,10 +92,33 @@ function loadFromStorage() {
 
 
 function saveToStorage() {
-	localStorage.setItem(location.pathname, JSON.stringify(save()));
+	var saved = save();
+	var question = questions[0] || {};
+	undoQueue.push({
+		state: saved,
+		question: question.primary ? question : undefined,
+	});
+	localStorage.setItem(location.pathname, JSON.stringify(saved));
 }
 
 
 function clearStorage() {
 	localStorage.removeItem(location.pathname);
 }
+
+
+function undo() {
+	if (undoQueue.length <= 1) {
+		say(translate('No more state.'));
+		return;
+	}
+	undoQueue.pop();
+	var state = last(undoQueue);
+	load(state.state);
+	if (state.question) {
+		ask(state.question.message, state.question.player, state.question.callback);
+	}
+}
+
+var undoQueue = [];
+var questions = [];

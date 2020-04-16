@@ -201,7 +201,6 @@ function clearDice() {
 var maxPlayers = 6;
 var players = [];
 var playing = -1;
-var questions = [];
 
 (function () {
 	function createScoreRow(index, name) {
@@ -224,7 +223,10 @@ var questions = [];
 		createDom('button', {}, translate('Play')), ' [Space]',
 	]));
 
-	board.appendChild(createDom('button', {id: 'restart'}, translate('Restart')));
+	board.appendChild(createDom('div', {className: 'restart'}, [
+		createDom('button', {id: 'undo'}, translate('Undo')),
+		createDom('button', {id: 'restart'}, translate('Restart')),
+	]));
 	board.appendChild(createDom('div', {className: 'buttons'}, [
 		createDom('button', {className: 'confirm'}, translate('Confirm')), ' [Enter]',
 		createDom('button', {className: 'cancel', disabled: true}, translate('Cancel')), ' [Esc]',

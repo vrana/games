@@ -149,6 +149,10 @@ window.onresize();
 document.querySelector('#playLink button').onclick = playAndSave;
 document.querySelector('.confirm').onclick = doConfirm;
 document.querySelector('.cancel').onclick = cancel;
+document.querySelector('#undo').onclick = function () {
+	document.activeElement.blur();
+	undo();
+}
 
 document.querySelector('#restart').onclick = function () {
 	if (confirm(translate('Are you sure?'))) {
