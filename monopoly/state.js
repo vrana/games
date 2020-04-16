@@ -115,6 +115,7 @@ function undo() {
 	undoQueue.pop();
 	var state = last(undoQueue);
 	load(state.state);
+	// Do not save to storage so that loadFromStorage() can be used as redo.
 	if (state.question) {
 		ask(state.question.message, state.question.player, state.question.callback);
 	}
