@@ -117,7 +117,9 @@ function cancel() {
 var Keys = {
 	ENTER: 13,
 	SPACE: 32,
-	ESC: 27
+	ESC: 27,
+	PROGRAM_UP: 402, // LG TV
+	PROGRAM_DOWN: 403
 };
 
 window.onkeydown = function (event) {
@@ -126,11 +128,13 @@ window.onkeydown = function (event) {
 	}
 	switch (event.keyCode) {
 		case Keys.SPACE:
+		case Keys.PROGRAM_DOWN:
 			if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement)) {
 				playAndSave();
 			}
 			break;
 		case Keys.ENTER:
+		case Keys.PROGRAM_UP:
 			if (!(event.target instanceof HTMLButtonElement)) {
 				doConfirm();
 			}
