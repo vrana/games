@@ -138,7 +138,14 @@ function sell() {
 function createDom(tag, attributes, content) {
 	var el = document.createElement(tag);
 	for (var key in attributes || {}) {
-		el[key] = attributes[key];
+		var val = attributes[key];
+		if (typeof val == 'object') {
+			for (var key2 in val) {
+				el[key][key2] = val[key2];
+			}
+		} else {
+			el[key] = val;
+		}
 	}
 	var contents = (content instanceof Array ? content : [content]);
 	for (var i = 0; content = contents[i]; i++) {
@@ -237,11 +244,17 @@ var playing = -1;
 	for (var i = 0, field; field = fields[i]; i++) {
 		field.index = i;
 		var pos = position(i);
+		var style = {top: pos.top + 'px', left: pos.left + 'px'};
+		if (field.color) {
+			style.borderTopColor = field.color;
+		}
 		field.div = createDom('div', {
 			className: 'field',
-			style: (field.color ? 'border-top-color: ' + field.color + '; ' : '') + 'top:' + pos.top + 'px; left: ' + pos.left + 'px;',
+			style: style,
 			innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
 		});
+		field.div.style.top = pos.top + 'px';
+		field.div.style.left = pos.left + 'px';
 		board.appendChild(field.div);
 	}
 })();
