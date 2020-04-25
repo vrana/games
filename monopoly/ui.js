@@ -150,6 +150,13 @@ window.onresize = function () {
 };
 window.onresize();
 
+window.onwheel = function (event) {
+	var activeElement = document.activeElement;
+	if (event.deltaY && activeElement && activeElement.type == 'number') {
+		activeElement[event.deltaY > 0 ? 'stepDown' : 'stepUp']();
+	}
+};
+
 document.querySelector('#playLink button').onclick = playAndSave;
 document.querySelector('.confirm').onclick = doConfirm;
 document.querySelector('.cancel').onclick = cancel;
