@@ -1,16 +1,20 @@
-function load(state) {
-	for (var i = 0; i < maxPlayers; i++) {
-		var player = players[i];
-		if (player) {
-			player.figure.parentNode.removeChild(player.figure);
+function load(state, withoutPlayers) {
+	if (!withoutPlayers) {
+		for (var i = 0; i < maxPlayers; i++) {
+			var player = players[i];
+			if (player) {
+				player.figure.parentNode.removeChild(player.figure);
+			}
 		}
+		players = [];
 	}
 	
-	players = [];
 	for (var i = 0; i < maxPlayers; i++) {
 		var player = state.players && state.players[i];
 		if (player) {
-			players[i] = new Player(player.name, i);
+			if (!withoutPlayers) {
+				players[i] = new Player(player.name, i);
+			}
 			if (player.money !== undefined) {
 				players[i].money = player.money;
 			}
@@ -114,7 +118,7 @@ function undo() {
 	}
 	undoQueue.pop();
 	var state = last(undoQueue);
-	load(state.state);
+	load(state.state, /* withoutPlayers= */ true);
 	// Do not save to storage so that loadFromStorage() can be used as redo.
 	if (state.question) {
 		say(state.question.message, state.question.player);
