@@ -33,6 +33,7 @@
 		for (var i = 0; i < length; i++) {
 			points.push(createPoint(x - length + i + 1, y, 'point ' + className));
 		}
+		updateScore(className, points.length);
 		return points;
 	}
 	
@@ -197,6 +198,11 @@
 		}
 		putPoint(point, snake.x, snake.y);
 		snake.points.push(point);
+		updateScore(snake.className, snake.points.length);
+	}
+	
+	function updateScore(className, score) {
+		document.querySelector('.score' + (className ? '.' + className : '')).textContent = score;
 	}
 	
 	function loop() {
