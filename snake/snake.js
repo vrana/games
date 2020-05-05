@@ -178,13 +178,15 @@
 		}
 		
 		var ate = 0;
-		for (var i = 0, food; food = foods[i]; i++) {
+		for (var i = 0; i < foods.length; i++) {
+			var food = foods[i];
 			if (food && collides(food, snake.x, snake.y, 2)) {
 				if (!food.fromDead) {
 					putPoint(food, randomX(), randomY());
 					ate += 2;
 				} else {
 					removePoint(food);
+					foods[i] = undefined;
 					ate++;
 				}
 			}
