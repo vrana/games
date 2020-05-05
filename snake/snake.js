@@ -155,7 +155,7 @@
 		
 		if (!snake.invincible) {
 			for (var i = 0; i < snakes.length; i++) {
-				if (snake != snakes[i]) {
+				if (snake != snakes[i] && !snakes[i].invincible) {
 					for (var j = 0; j < snakes[i].points.length; j++) {
 						if (collides(snakes[i].points[j], snake.x, snake.y, 1)) {
 							die(snake);
