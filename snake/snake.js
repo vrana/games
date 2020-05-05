@@ -164,15 +164,11 @@
 			}
 		}
 		
-		if (snake.speed > 1 && snake.points.length > 1 && step % 5 == 0) {
+		if (snake.speed > 1 && snake.points.length > 1 && step % 10 == 0) {
 			var food = snake.points.shift();
-			if (step % 10 == 0) {
-				food.fromDead = true;
-				food.point.className = 'food';
-				foods.push(food);
-			} else {
-				removePoint(food);
-			}
+			food.fromDead = true;
+			food.point.className = 'food';
+			foods.push(food);
 		}
 		
 		var ate = 0;
