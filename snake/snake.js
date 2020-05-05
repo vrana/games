@@ -2,9 +2,9 @@
 	var board = document.getElementById('board');
 	var maxX;
 	var maxY;
-	var time = Date.now();
 	var step = 0;
-	var speed = 10;
+	var speed = 20;
+	var time = Date.now() - 1000 / speed;
 
 	window.onresize = function () {
 		maxX = board.clientWidth / 5;
@@ -212,6 +212,6 @@
 		step++;
 		var oldTime = time;
 		time = Date.now();
-		window.setTimeout(loop, 1000 / speed + oldTime - time);
+		window.setTimeout(loop, 2000 / speed + oldTime - time);
 	}
 })();
