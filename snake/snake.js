@@ -4,7 +4,7 @@
 	var maxY;
 	var step = 0;
 	var speed = 20;
-	var time = Date.now() - 1000 / speed;
+	var time;
 
 	window.onresize = function () {
 		maxX = board.clientWidth / 5;
@@ -69,8 +69,6 @@
 		foods.push(point);
 	}
 
-	loop();
-	
 	function createPoint(x, y, className) {
 		var point = {point: document.createElement('div')};
 		point.point.className = className;
@@ -207,6 +205,7 @@
 		document.querySelector('.score' + (className ? '.' + className : '')).textContent = score;
 	}
 	
+	var timeout;
 	function loop() {
 		for (var i = 0, snake; snake = snakes[i]; i++) {
 			moveSnake(snake);
@@ -214,6 +213,19 @@
 		step++;
 		var oldTime = time;
 		time = Date.now();
-		window.setTimeout(loop, 2000 / speed + oldTime - time);
+		timeout = window.setTimeout(loop, 2000 / speed + oldTime - time);
+	}
+	
+	window.onblur = function () {
+		window.clearTimeout(timeout);
+	};
+	
+	window.onfocus = function () {
+		time = Date.now() - 1000 / speed;
+		loop();
+	};
+	
+	if (document.hasFocus()) {
+		window.onfocus();
 	}
 })();
