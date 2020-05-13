@@ -119,8 +119,8 @@
 	function die(snake) {
 		for (var i = 0, point; point = snake.points[i]; i++) {
 			if (i % 10 == 0) {
-				point.point.className = 'food';
 				point.fromDead = true;
+				point.point.className = 'food fromDead';
 				foods.push(point);
 			} else {
 				removePoint(point);
@@ -167,7 +167,7 @@
 		if (snake.speed > 1 && snake.points.length > 1 && step % 10 == 0) {
 			var food = snake.points.shift();
 			food.fromDead = true;
-			food.point.className = 'food';
+			food.point.className = 'food fromDead';
 			foods.push(food);
 		}
 		
