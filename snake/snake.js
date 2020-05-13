@@ -38,11 +38,11 @@
 	}
 	
 	function randomX() {
-		return Math.round(Math.random() * maxX);
+		return Math.floor(Math.random() * maxX);
 	}
 	
 	function randomY() {
-		return Math.round(Math.random() * maxY);
+		return Math.floor(Math.random() * maxY);
 	}
 	
 	var Keys = {
