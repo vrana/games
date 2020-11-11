@@ -1,6 +1,7 @@
 #game { cursor: default; }
 #game td { padding: 5px; }
 #game #dice { padding: 0; font-size: 27px; text-align: center; border: 1px solid white; }
+#game p { margin: 0; }
 #game div { background: white; width: 20px; height: 20px; margin: auto auto; border: 1px solid; border-radius: 50%; }
 #game .red { background: #DA4631; }
 #game .green { background: #019F5A; }

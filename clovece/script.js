@@ -1,7 +1,6 @@
 // TODO: detect game end
 // TODO: sounds
 // TODO: keyboard
-// TODO: rolling dice animation
 
 var players = [ 'yellow', 'green', 'blue', 'red' ]; // It's possible to remove players that are not playing.
 var playing = -1;
@@ -80,8 +79,9 @@ for (var player in homes) {
 }
 
 var rolled;
-var dice = game.rows[5].cells[5];
-dice.id = 'dice';
+var dice = document.createElement('p');
+game.rows[5].cells[5].id = 'dice';
+game.rows[5].cells[5].appendChild(dice);
 play(true);
 
 function move(position) {
@@ -124,7 +124,7 @@ function isOnPlan() {
 function play(nextPlayer) {
 	if (nextPlayer) {
 		playing = (playing + 1) % players.length;
-		dice.className = players[playing];
+		document.getElementById('dice').className = players[playing];
 	}
 	for (var i = 0; i < 3; i++) { // Play three times if not on plan.
 		rolled = Math.floor(6 * Math.random()) + 1;
@@ -133,6 +133,7 @@ function play(nextPlayer) {
 		}
 	}
 	dice.textContent = String.fromCharCode('⚀'.charCodeAt(0) + rolled - 1);
+	dice.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg)';
 }
 
 function findField(element) {
