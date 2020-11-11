@@ -1,8 +1,7 @@
-// TODO: detect game end
 // TODO: sounds
 // TODO: keyboard
 
-var players = [ 'yellow', 'green', 'blue', 'red' ]; // It's possible to remove players that are not playing.
+var players = [ 'yellow' ]; // It's possible to remove players that are not playing.
 var playing = -1;
 
 // x, y
@@ -115,15 +114,27 @@ function moveFromHome(home) {
 
 function isOnPlan() {
 	return plan.some(function (field) {
-		if (getClass(field) == players[playing]) {
-			return true;
-		}
+		return (getClass(field) == players[playing]);
+	});
+}
+
+function isFinished() {
+	return targets[players[playing]].every(function (field) {
+		return getClass(field);
 	});
 }
 
 function play(nextPlayer) {
 	if (nextPlayer) {
-		playing = (playing + 1) % players.length;
+		if (playing == -1 || !isFinished()) {
+			playing++;
+		} else if (players.length == 1) {
+			alert('Done.');
+			return;
+		} else {
+			players.splice(playing, 1);
+		}
+		playing %= players.length;
 		document.getElementById('dice').className = players[playing];
 	}
 	for (var i = 0; i < 3; i++) { // Play three times if not on plan.
