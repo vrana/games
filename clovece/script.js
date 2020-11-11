@@ -132,7 +132,7 @@ function play(nextPlayer) {
 			break;
 		}
 	}
-	dice.innerHTML = '&#x268' + (rolled - 1) + ';';
+	dice.textContent = String.fromCharCode('⚀'.charCodeAt(0) + rolled - 1);
 }
 
 function findField(element) {
