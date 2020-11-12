@@ -1,7 +1,7 @@
 // TODO: sounds
 // TODO: keyboard
 
-var players = [ 'yellow' ]; // It's possible to remove players that are not playing.
+var players = [ 'yellow', 'green', 'blue', 'red' ]; // It's possible to remove players that are not playing.
 var playing = -1;
 
 // x, y
