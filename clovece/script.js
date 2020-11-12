@@ -1,7 +1,8 @@
 // TODO: sounds
 // TODO: keyboard
 
-var players = [ 'yellow', 'green', 'blue', 'red' ]; // It's possible to remove players that are not playing.
+var params = (new URL(document.location)).searchParams;
+var players = (params.get('players') || 'yellow,green,blue,red').split(',');
 var playing = -1;
 
 // x, y
