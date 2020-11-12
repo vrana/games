@@ -3,7 +3,7 @@
 
 var params = (new URL(document.location)).searchParams;
 var players = (params.get('players') || 'yellow,green,blue,red').split(',');
-var playing = -1;
+var playing = Math.floor(Math.random() * players.length);
 
 // x, y
 var plan = [
@@ -127,7 +127,7 @@ function isFinished() {
 
 function play(nextPlayer) {
 	if (nextPlayer) {
-		if (playing == -1 || !isFinished()) {
+		if (!isFinished()) {
 			playing++;
 		} else if (players.length == 1) {
 			alert('Done.');
