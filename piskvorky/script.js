@@ -2,7 +2,7 @@ var playing = '❌';
 var lastPlay = {};
 
 document.getElementById('field').onclick = function (event) {
-	if (event.target.tagName == 'TD' && !event.target.textContent) {
+	if (event.target.tagName == 'TD' && !event.target.textContent.trim()) {
 		event.target.textContent = playing;
 		lastPlay.className = '';
 		lastPlay = event.target;
