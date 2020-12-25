@@ -1,9 +1,13 @@
 var playing = '❌';
+var lastPlay = {};
 
 document.getElementById('field').onclick = function (event) {
 	if (event.target.tagName == 'TD' && !event.target.textContent) {
 		event.target.textContent = playing;
-		if (find5(event.target, 0, 1) || find5(event.target, 1, 1) || find5(event.target, 1, 0) || find5(event.target, 1, -1)) {
+		lastPlay.className = '';
+		lastPlay = event.target;
+		lastPlay.className = 'lastPlay';
+		if (find5(lastPlay, 0, 1) || find5(lastPlay, 1, 1) || find5(lastPlay, 1, 0) || find5(lastPlay, 1, -1)) {
 			document.getElementById('status').textContent = playing + ' won.';
 			document.getElementById('field').onclick = function () {};
 		}

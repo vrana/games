@@ -1,2 +1,3 @@
 #field { border-collapse: collapse; user-select: none; }
 #field td { border: 1px solid silver; width: 1.3em; height: 1.3em; text-align: center; }
+.lastPlay { background-color: azure; }
