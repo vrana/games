@@ -1,4 +1,4 @@
-var playing = 'x';
+var playing = '❌';
 
 document.getElementById('field').onclick = function (event) {
 	if (event.target.tagName == 'TD' && !event.target.textContent) {
@@ -7,7 +7,7 @@ document.getElementById('field').onclick = function (event) {
 			document.getElementById('status').textContent = playing + ' won.';
 			document.getElementById('field').onclick = function () {};
 		}
-		playing = (playing == 'x' ? 'o' : 'x');
+		playing = (playing == '❌' ? '◯' : '❌');
 	}
 };
 
