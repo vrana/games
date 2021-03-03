@@ -74,9 +74,9 @@ var fields = (function () {
 
 	return [
 		start,
-		new Place('Fantome', 'orange', 1200, [40, 200, 600, 1800, 3200, 5000], 1000),
+		new Place('Fantome', 'orange', 1200, [80, 400, 1200, 3600, 6400, 10000], 1000),
 		finance,
-		new Place('Gavora', 'orange', 1200, [40, 200, 600, 1800, 3200, 5000], 1000),
+		new Place('Gavora', 'orange', 1200, [80, 400, 1200, 3600, 6400, 10000], 1000),
 		new Tax('Veterinární vyšetření', -500),
 		new Rail('1. trenér'),
 		new Place('Lady Anne', 'maroon', 2000, [120, 600, 1800, 5400, 8000, 11000], 1000),
