@@ -13,8 +13,8 @@ runTests([
 		buy.call(fields[1], players[0]);
 		assertEquals(30000 - 1200, players[0].money);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 + 40, players[0].money);
-		assertEquals(30000 - 40, players[1].money);
+		assertEquals(30000 - 1200 + 80, players[0].money);
+		assertEquals(30000 - 80, players[1].money);
 	},
 
 	function startEarns() {
@@ -33,13 +33,13 @@ runTests([
 		fields[1].upgrade(1, players[0]);
 		assertEquals(30000 - 1200 - 1000, players[0].money);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 200, players[0].money);
-		assertEquals(30000 - 200, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 400, players[0].money);
+		assertEquals(30000 - 400, players[1].money);
 		fields[1].upgrade(3, players[0]);
-		assertEquals(30000 - 1200 - 1000 + 200 - 3000, players[0].money);
+		assertEquals(30000 - 1200 - 1000 + 400 - 3000, players[0].money);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 200 - 3000 + 3200, players[0].money);
-		assertEquals(30000 - 200 - 3200, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 400 - 3000 + 6400, players[0].money);
+		assertEquals(30000 - 400 - 6400, players[1].money);
 	},
 	
 	function railEarns() {
@@ -78,12 +78,12 @@ runTests([
 		fields[1].upgrade(1, players[0]);
 		goTo(10, players[0]);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 40, players[0].money);
-		assertEquals(30000 - 40, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 80, players[0].money);
+		assertEquals(30000 - 80, players[1].money);
 		moveForward(1, players[0]);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 40 + 200, players[0].money);
-		assertEquals(30000 - 40 - 200, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 80 + 400, players[0].money);
+		assertEquals(30000 - 80 - 400, players[1].money);
 	},
 	
 	function dopingEarnsLess() {
@@ -92,12 +92,12 @@ runTests([
 		fields[1].upgrade(1, players[0]);
 		goTo(30, players[0]);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 40, players[0].money);
-		assertEquals(30000 - 40, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 80, players[0].money);
+		assertEquals(30000 - 80, players[1].money);
 		moveForward(1, players[0]);
 		fields[1].visit(players[1]);
-		assertEquals(30000 - 1200 - 1000 + 40 + 200, players[0].money);
-		assertEquals(30000 - 40 - 200, players[1].money);
+		assertEquals(30000 - 1200 - 1000 + 80 + 400, players[0].money);
+		assertEquals(30000 - 80 - 400, players[1].money);
 	},
 	
 	function parkingDoesNothing() {
