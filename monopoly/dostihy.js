@@ -58,7 +58,11 @@ var fields = (function () {
 	]);
 
 
+	// TODO: Save to stats.
+	var jailedStats = [{}, {}];
+
 	function jailed(paused, player) {
+		jailedStats[paused][player.index] = (jailedStats[paused][player.index] || 0) + 1;
 		if (paused) {
 			player.paused = paused;
 		} else {
@@ -69,6 +73,16 @@ var fields = (function () {
 				field.updateEarns();
 			}
 		}
+	}
+
+	function displayJailedStats(paused) {
+		var message = [];
+		for (var i = 0; i < players.length; i++) {
+			if (players[i]) {
+				message.push(players[i].name + ': ' + (jailedStats[paused][i] || 0));
+			}
+		}
+		say(translate('Visits') + ': ' + message.join(', '));
 	}
 
 
@@ -83,7 +97,7 @@ var fields = (function () {
 		chance,
 		new Place('Pasek', 'maroon', 2000, [120, 600, 1800, 5400, 8000, 11000], 1000),
 		new Place('Koran', 'maroon', 2400, [160, 800, 2000, 6000, 9000, 12000], 1000),
-		{name: 'Distanc', visit: jailed.bind(this, 0)},
+		{name: 'Distanc', visit: jailed.bind(this, 0), onclick: displayJailedStats.bind(this, 0)},
 		new Place('Neklan', 'cyan', 2800, [200, 1000, 3000, 9000, 12500, 15000], 2000),
 		new Service('Přeprava'),
 		new Place('Portlancl', 'cyan', 2800, [200, 1000, 3000, 9000, 12500, 15000], 2000),
@@ -103,7 +117,7 @@ var fields = (function () {
 		new Place('Furioso', 'yellow', 5200, [440, 2200, 6600, 16000, 19500, 23000], 3000),
 		new Service('Stáje'),
 		new Place('Genius', 'yellow', 5600, [480, 2400, 7200, 17000, 20500, 24000], 3000),
-		{name: 'Podezření z dopingu', visit: jailed.bind(this, 1)},
+		{name: 'Podezření z dopingu', visit: jailed.bind(this, 1), onclick: displayJailedStats.bind(this, 1)},
 		new Place('Shagga', 'green', 6000, [500, 2600, 7800, 18000, 22000, 25500], 4000),
 		new Place('Dahoman', 'green', 6000, [500, 2600, 7800, 18000, 22000, 25500], 4000),
 		finance,

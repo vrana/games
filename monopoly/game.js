@@ -66,7 +66,7 @@ function changeOwner(owner) {
 		this.div.onclick = offerSelling.bind(this);
 	} else {
 		this.div.classList.remove('owned');
-		this.div.onclick = undefined;
+		this.div.onclick = this.onclick;
 	}
 	if (this.updateEarns) {
 		this.updateEarns();
@@ -252,6 +252,7 @@ var playing = -1;
 			className: 'field',
 			style: style,
 			innerHTML: field.name + (field.price ? ' (' + field.price + ')' : '') + '<br><span class=earns>' + (field.getEarns ? field.getEarns() : field.earns || '') + '</span>',
+			onclick: field.onclick,
 		});
 		field.div.style.top = pos.top + 'px';
 		field.div.style.left = pos.left + 'px';
