@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Debug keyCode</title>
+<meta name="viewport" content="initial-scale=1">
+<body>
+
+<div id="key"></div>
+
+<script>
+onkeydown = function (event) {
+	document.getElementById('key').textContent = event.keyCode;
+};
+</script>
