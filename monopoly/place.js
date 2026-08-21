@@ -12,7 +12,7 @@ Place.prototype.visit = function (player) {
 	if (!this.owner) {
 		offerBuying.call(this, player);
 	} else if (this.owner != player) {
-		player.pay(this.getEarns(), this.owner);
+		player.pay(this.getEarns(player), this.owner);
 		if (this.betted) {
 			this.owner.pay(10 * this.betted, player);
 		}
@@ -65,14 +65,15 @@ Place.prototype.upgrade = function (upgrades, player) {
 	this.updateEarns();
 };
 
-Place.prototype.getEarns = function () {
+Place.prototype.getEarns = function (player) {
 	var jailed = (this.owner && (this.owner.position == 10 || this.owner.position == 30));
-	return this.amounts[jailed && this.bettable ? 0 : this.upgrades];
+	var indebted = (player && player.money < 0);
+	return this.amounts[(jailed || indebted) && this.bettable ? 0 : this.upgrades];
 };
 
-Place.prototype.updateEarns = function (autoBet) {
-	this.div.querySelector('.earns').textContent = this.getEarns() - 10 * this.betted;
+Place.prototype.updateEarns = function (autoBet, visitor) {
 	var player = players[getNextPlayerIndex()];
+	this.div.querySelector('.earns').textContent = this.getEarns(visitor || player) - 10 * this.betted;
 	if (this.bettable && this.upgrades >= 3 && this.owner != player && player.canBet()) {
 		var distance = (this.index + fields.length - player.position) % fields.length;
 		var closeBet = (distance > 0 && distance <= 6);

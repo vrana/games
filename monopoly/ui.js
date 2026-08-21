@@ -45,8 +45,8 @@ function play() {
 	document.querySelector('.cancel').disabled = true;
 	document.getElementById('message').textContent = '';
 	
-	changePlaying(getNextPlayerIndex());
-	var player = players[playing];
+	var player = players[getNextPlayerIndex()];
+	changePlaying(player.index, player);
 	
 	if (player.paused) {
 		clearDice();

@@ -100,6 +100,21 @@ runTests([
 		assertEquals(30000 - 80 - 400, players[1].money);
 	},
 	
+	function debtEarnsLess() {
+		buy.call(fields[1], players[0]);
+		fields[3].owner = players[0];
+		fields[1].upgrade(1, players[0]);
+		players[1].pay(31000);
+		assertEquals(-1000, players[1].money);
+		fields[1].visit(players[1]);
+		assertEquals(30000 - 1200 - 1000 + 80, players[0].money);
+		assertEquals(-1000 - 80, players[1].money);
+		players[1].pay(-2000);
+		fields[1].visit(players[1]);
+		assertEquals(30000 - 1200 - 1000 + 80 + 400, players[0].money);
+		assertEquals(-1000 - 80 + 2000 - 400, players[1].money);
+	},
+	
 	function parkingDoesNothing() {
 		goTo(20, players[0]);
 		assertEquals(30000, players[0].money);

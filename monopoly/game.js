@@ -20,12 +20,12 @@ function translate(msg, variables) {
 	});
 }
 
-function changePlaying(value) {
+function changePlaying(value, visitor) {
 	playing = value;
 	document.getElementById('playLink' + getNextPlayerIndex()).appendChild(document.getElementById('playLink'));
 	for (var i = 0, field; field = fields[i]; i++) {
 		if (field.bettable) {
-			field.updateEarns();
+			field.updateEarns(false, visitor);
 		}
 	}
 }
