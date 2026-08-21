@@ -42,13 +42,5 @@ Player.prototype.refreshStats = function () {
 };
 
 Player.prototype.canBet = function () {
-	if (this.jailed || this.paused) {
-		return false;
-	}
-	for (var i = 0, field; field = fields[i]; i++) {
-		if (field.owner == this && field.upgrades >= 3) {
-			return true;
-		}
-	}
-	return false;
+	return !this.jailed && !this.paused;
 };
