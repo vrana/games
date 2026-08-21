@@ -36,6 +36,7 @@ function play() {
 				document.getElementById('name' + i).textContent = players[i] ? players[i].name : '';
 			}
 			changePlaying(starting - 1);
+			document.getElementById('message').textContent = '';
 		}
 		return;
 	}
@@ -173,3 +174,7 @@ document.querySelector('#restart').onclick = function () {
 };
 
 loadFromStorage();
+
+if (!players.length && window.houseRules) {
+	sayHouseRules();
+}

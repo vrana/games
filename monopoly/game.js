@@ -171,6 +171,15 @@ function say(message, player) {
 	p.scrollIntoView();
 }
 
+function sayHouseRules() {
+	var items = [];
+	for (var i = 0; i < houseRules.length; i++) {
+		items.push(createDom('li', {}, translate(houseRules[i])));
+	}
+	say('<b>' + translate('House rules (not enforced):') + '</b>');
+	document.getElementById('message').appendChild(createDom('ul', {className: 'houseRules'}, items));
+}
+
 function ask(message, player, callback) {
 	var question = '<b>' + message + '</b>';
 	if (!questions.length || last(questions).message != question) {

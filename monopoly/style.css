@@ -23,6 +23,7 @@ a { text-decoration: none; color: blue; }
 .price { width: 60px; }
 .upgrades { text-align: right; }
 .money { text-align: right; }
+.houseRules { display: inline-block; margin: 0; text-align: left; }
 .buttons { top: 150px; left: 500px; width: 408px; text-align: center; }
 .restart { position: absolute; top: 100px; left: 1135px; }
 #board { position: static; margin: 0; }

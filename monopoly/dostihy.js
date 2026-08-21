@@ -129,3 +129,11 @@ var fields = (function () {
 		new Place('Napoli', 'navy', 8000, [1000, 4000, 12000, 28000, 34000, 40000], 4000),
 	];
 })();
+
+
+var houseRules = [
+	'The game ends when a player reaches 100000.',
+	'You can own at most 2 of trenér, přeprava and stáje combined.',
+	'You can buy at most 2 dostihy at once.',
+	'You can buy the 3rd dostih only if every player has a horse with 2 dostihy.',
+];
