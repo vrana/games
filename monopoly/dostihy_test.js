@@ -115,6 +115,14 @@ runTests([
 		assertEquals(-1000 - 80 + 2000 - 400, players[1].money);
 	},
 	
+	function debtCannotBet() {
+		assertEquals(true, players[0].canBet());
+		players[0].pay(30100);
+		assertEquals(false, players[0].canBet());
+		players[0].pay(-1000);
+		assertEquals(true, players[0].canBet());
+	},
+	
 	function parkingDoesNothing() {
 		goTo(20, players[0]);
 		assertEquals(30000, players[0].money);

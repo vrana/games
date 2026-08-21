@@ -42,5 +42,5 @@ Player.prototype.refreshStats = function () {
 };
 
 Player.prototype.canBet = function () {
-	return !this.jailed && !this.paused;
+	return !this.jailed && !this.paused && this.money >= 0;
 };
